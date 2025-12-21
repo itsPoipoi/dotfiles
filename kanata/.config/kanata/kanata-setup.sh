@@ -17,29 +17,13 @@ sudo udevadm control --reload-rules && sudo udevadm trigger
 sudo modprobe uinput
 
 # Import config
-sudo curl -sL https://raw.githubusercontent.com/itsPoipoi/linux-setup/refs/heads/main/kanata/config.kbd --create-dirs -o /etc/kanata/config.kbd
+sudo curl -sL https://raw.githubusercontent.com/itsPoipoi/dotfiles/refs/heads/main/kanata/.config/kanata/kanata-setup.sh --create-dirs -o /etc/kanata/config.kbd
 sudo chmod -R a+rx /etc/kanata
 
 # Setup systemd daemon service
-curl -sL https://raw.githubusercontent.com/itsPoipoi/linux-setup/refs/heads/main/kanata/kanata.service --create-dirs -o ~/.config/systemd/user/kanata.service
+curl -sL https://raw.githubusercontent.com/itsPoipoi/dotfiles/refs/heads/main/kanata/.config/kanata/kanata.service --create-dirs -o ~/.config/systemd/user/kanata.service
 systemctl --user daemon-reload
 systemctl --user enable kanata.service
 systemctl --user start kanata.service
 
-echo "${GREEN}Kanata setup complete. A reboot is required. ${RED}Reboot now?"
-echo "${RED}(Y)es, (N)o:"
-read -n 1 -r user_input  # -n 1 reads a single character, -r treats backslashes literally
-echo 
-case $user_input in
-  [yY])
-    echo "${GREEN}Rebooting in a few seconds..."
-    sleep 4
-    sudo shutdown -r now
-    ;;
-  [nN])
-    echo "${GREEN}Kanata will be active after next reboot."
-    ;;
-  *)
-    echo "Invalid choice."
-    ;;
-esac
+echo "${GREEN}Kanata setup complete. ${RED}A reboot is required for Kanata to start."

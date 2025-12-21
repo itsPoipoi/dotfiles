@@ -4,43 +4,35 @@ RED=$'\e[0;31m'
 YELLOW=$'\e[0;33m'
 NC=$'\e[0m'
 
-# Install Nala for all following installs
-sudo apt-get install nala -y
-sudo add-apt-repository ppa:neovim-ppa/unstable -y
-sudo nala upgrade -y
-
-# Install zsh in case it's not already installed
-sudo nala install zsh -y
+# Install deps & full upgrade
+sudo pacman -Syu
+sudo pacman -S --noconfirm --needed base-devel gcc make git ripgrep fd unzip neovim trash-cli bat fastfetch stow zsh
+cd
+git clone https://aur.archlinux.org/yay-bin.git
+cd yay-bin
+makepkg -si
+cd
+yay -Syu
 
 # Change default shell to zsh
 if [ ! "{{$SHELL}}" = "{{/usr/bin/zsh}}" ]; then
-  echo "${YELLOW}Change default shell to zsh ?${NC} "
-  select yn in "Yes" "No"; do
-	  case $yn in
-	  	Yes ) chsh -s $(which zsh); break;;
- 		  No ) break;;
-	  esac
-  done
-fi
+    echo "${YELLOW}Change default shell to zsh ?${NC} "
+    echo "${RED}(Y)es, (N)o:"
+    read -n 1 -r user_input
+    echo 
+    case $user_input in
+        [yY])
+            echo "${GREEN}Making zsh the default shell."
+            chsh -s $(which zsh)
+            ;;
+        [nN])
+            echo "${GREEN}Bash remains the default shell."
+            ;;
+        *)
+            echo "${RED}Invalid choice."
+            ;;
+    esac
 
-# Import .zshrc
-curl -sL https://raw.githubusercontent.com/itsPoipoi/linux-setup/main/.zshrc -o ~/.zshrc
-echo "${YELLOW}.zshrc imported.${NC}"
-
-# Install git, trash, neovim, batcat, unzip, fontconfig, etc
-sudo nala install git trash-cli neovim bat unzip fontconfig make gcc ripgrep xclip -y
-
-# Install Nerd Font
-if [ ! -f ~/.local/share/fonts/FiraCodeNerdFont-Medium.ttf ]; then
-	echo "${GREEN}Installing FiraCode Nerd Font...${NC}"
-	curl -sL https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/FiraCode.zip --create-dirs -o ~/.local/share/fonts/FiraCode.zip
-	unzip -oq ~/.local/share/fonts/FiraCode.zip  -d ~/.local/share/fonts/
-	\rm ~/.local/share/fonts/FiraCode.zip
-	fc-cache -f ~/.local/share/fonts/
-	echo "${RED}Font installed. Remember to select FiraCode font!${NC}"
- 	else echo "${GREEN}FiraCode Nerd Font is already installed. Skipping.${NC}"
- fi
- 
 # Install Homebrew & dependencies
 if [ ! -f /home/linuxbrew/.linuxbrew/bin/brew ]; then
   echo "${YELLOW}Installing Homebrew...${NC}"
@@ -73,26 +65,59 @@ if [ ! -f /home/linuxbrew/.linuxbrew/bin/tree-sitter ]; then
   else echo "${YELLOW}Treesitter is already installed. Skipping.${NC}"
 fi
 
-# Install Fastfetch
-if [ ! -f /usr/bin/fastfetch ]; then
-  FASTFETCH_URL=$(curl -s https://api.github.com/repos/fastfetch-cli/fastfetch/releases/latest | grep "browser_download_url.*linux-amd64.deb" | cut -d '"' -f 4)
-  curl -sL $FASTFETCH_URL -o /tmp/fastfetch_latest_amd64.deb
-  sudo nala install /tmp/fastfetch_latest_amd64.deb -y
-  else sudo nala install fastfetch -y
+if [! -f ~/.ssh/id_rsa.pub ]; then
+    echo "${YELLOW}SSH key not found. Generate one now?${NC} "
+    echo "${RED}(Y)es, (N)o:"
+    read -n 1 -r user_input
+    echo 
+    case $user_input in
+        [yY])
+           ssh-keygen -t rsa -b 4096 -C "poipoigit@gmail.com" 
+            ;;
+        [nN])
+            echo "${GREEN}Generate one manually."
+            ;;
+        *)
+            echo "${RED}Invalid choice."
+            ;;
+    esac
 fi
 
-# Import Fastfetch config
-if [ ! -f ~/.config/fastfetch/config.jsonc ]; then
-	curl -sL https://raw.githubusercontent.com/itsPoipoi/linux-setup/main/config.jsonc --create-dirs -o ~/.config/fastfetch/config.jsonc
-else
-	echo "${GREEN}Fastfetch config already exists. Overwrite it?${NC} "
-	select yn in "Yes" "No"; do
-		case $yn in
-			Yes ) echo "${YELLOW}Overwriting config.${NC}"; curl -sL https://raw.githubusercontent.com/itsPoipoi/linux-setup/main/config.jsonc -o ~/.config/fastfetch/config.jsonc; break;;
- 			No ) break;;
-		esac
- 	done
-fi
+echo "${YELLOW}Run Kanata install script?${NC} "
+echo "${RED}(Y)es, (N)o:"
+read -n 1 -r user_input
+echo 
+case $user_input in
+    [yY])
+        /bin/bash ~/dotfiles/kanata/.config/kanata/kanata-setup.sh
+        ;;
+    [nN])
+        echo "${GREEN}Run ${RED}~/dotfiles/kanata/.config/kanata/kanata-setup.sh ${GREEN}manually."
+        ;;
+    *)
+        echo "${RED}Invalid choice."
+        ;;
+esac
+
+echo "${YELLOW}Run stow install script and reload Hyprland if it's installed?${NC} "
+echo "${RED}(Y)es, (N)o:"
+read -n 1 -r user_input
+echo 
+case $user_input in
+    [yY])
+        cd ~/dotfiles/
+        /bin/bash stow.sh
+        cd
+        ;;
+    [nN])
+        echo "${GREEN}Run ${RED}~/dotfiles/stow.sh ${GREEN}manually."
+        ;;
+    *)
+        echo "${RED}Invalid choice."
+        ;;
+esac
 
 # Complete message
+sleep 1
+echo
 echo "${GREEN}Setup complete! Profile reloading!${NC}"; zsh
