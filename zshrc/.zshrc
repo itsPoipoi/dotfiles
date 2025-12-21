@@ -381,6 +381,7 @@ alias bios="sudo grub-reboot 2 && reboot"
 alias ff="fastfetch"
 alias zi="__zoxide_zi"
 alias pacman="sudo pacman"
+alias pm="sudo pacman"
 alias pyu="sudo pacman -Syu"
 alias yyu="yay -Syu"
 alias byu="brew upgrade"
@@ -388,5 +389,3 @@ alias fyu="pyu && yyu && byu"
 alias ezrc='nvim ~/.zshrc'
 alias evrc='nvim ~/.config/nvim/init.lua'
 alias src="source ~/.zshrc"
-
-export PATH=$PATH:/home/poipoi/.spicetify
