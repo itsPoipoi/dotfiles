@@ -72,7 +72,7 @@ fi
 
 if [ ! -f ~/.ssh/id_rsa.pub ]; then
     echo "${YELLOW}SSH key not found. Generate one now?${NC} "
-    echo "${RED}(Y)es, (N)o:"
+    echo "${RED}(Y)es, (N)o:${NC}"
     read -n 1 -r user_input
     echo 
     case $user_input in
@@ -89,7 +89,7 @@ if [ ! -f ~/.ssh/id_rsa.pub ]; then
 fi
 
 echo "${YELLOW}Run Kanata install script?${NC} "
-echo "${RED}(Y)es, (N)o:"
+echo "${RED}(Y)es, (N)o:${NC}"
 read -n 1 -r user_input
 echo 
 case $user_input in
@@ -105,7 +105,7 @@ case $user_input in
 esac
 
 echo "${YELLOW}Run stow install script and reload Hyprland if it's installed?${NC} "
-echo "${RED}(Y)es, (N)o:"
+echo "${RED}(Y)es, (N)o:${NC}"
 read -n 1 -r user_input
 echo 
 case $user_input in
