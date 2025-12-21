@@ -5,11 +5,11 @@
 )
 
 (defalias
-  escctrl (tap-hold 150 150 esc lctl)
+  escctrl (tap-hold-press 0 200 esc lctl)
 )
 
 (defcfg
-  process-unmapped-keys no
+  process-unmapped-keys yes
 )
 
 (deflayer base
