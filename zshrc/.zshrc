@@ -37,6 +37,7 @@ zinit light zsh-users/zsh-autosuggestions
 zinit light zdharma-continuum/fast-syntax-highlighting
 zinit light MichaelAquilina/zsh-you-should-use
 zinit light fdellwing/zsh-bat
+zinit light Freed-Wu/zsh-help
 
 # Add in snippets
 zinit snippet OMZP::git
@@ -362,7 +363,7 @@ alias ungz='tar -xvzf'
 
 # Alias's to modified commands
 alias grep="rg"
-alias cat="batcat"
+alias cat="bat"
 alias cp='cp -i'
 alias mv='mv -i'
 alias rm='trash -v'
@@ -381,6 +382,9 @@ alias ff="fastfetch"
 alias zi="__zoxide_zi"
 alias pacman="sudo pacman"
 alias pyu="sudo pacman -Syu"
+alias yyu="yay -Syu"
+alias byu="brew upgrade"
+alias fyu="pyu && yyu && byu"
 alias ezrc='nvim ~/.zshrc'
 alias evrc='nvim ~/.config/nvim/init.lua'
 alias src="source ~/.zshrc"
