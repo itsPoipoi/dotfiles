@@ -7,11 +7,15 @@ NC=$'\e[0m'
 # Install deps & full upgrade
 sudo pacman -Syu
 sudo pacman -S --noconfirm --needed base-devel gcc make git ripgrep fd unzip neovim trash-cli bat fastfetch stow zsh
-cd
-git clone https://aur.archlinux.org/yay-bin.git
-cd yay-bin
-makepkg -si
-cd
+
+if [ ! -f /usr/bin/yay ]; then
+    cd
+    git clone https://aur.archlinux.org/yay-bin.git
+    cd yay-bin
+    makepkg -si
+    cd
+fi
+
 yay -Syu
 
 # Change default shell to zsh
