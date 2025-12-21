@@ -19,3 +19,10 @@ cd ~/dotfiles/
 git submodule update --init --recursive
 ```
 </details>
+
+<details><summary>Standalone</summary>
+
+```sh
+git clone https://github.com/itsPoipoi/neovim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
+```
+</details>
