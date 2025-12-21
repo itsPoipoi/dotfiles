@@ -6,4 +6,16 @@ git clone --recurse-submodules https://github.com/itsPoipoi/dotfiles.git $HOME/d
 ```
 </details>
 
-[My Neovim](https://github.com/itsPoipoi/neovim)
+```sh
+sh ~/dotfiles/setup.sh
+```
+</details>
+
+[My Neovim](https://github.com/itsPoipoi/neovim)(Included here}
+
+
+```sh
+cd ~/dotfiles/
+git submodule update --init --recursive
+```
+</details>
