@@ -388,3 +388,5 @@ alias fyu="pyu && yyu && byu"
 alias ezrc='nvim ~/.zshrc'
 alias evrc='nvim ~/.config/nvim/init.lua'
 alias src="source ~/.zshrc"
+
+export PATH=$PATH:/home/poipoi/.spicetify
