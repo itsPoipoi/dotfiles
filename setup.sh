@@ -70,7 +70,7 @@ if [ ! -f /home/linuxbrew/.linuxbrew/bin/tree-sitter ]; then
   else echo "${YELLOW}Treesitter is already installed. Skipping.${NC}"
 fi
 
-if [! -f ~/.ssh/id_rsa.pub ]; then
+if [ ! -f ~/.ssh/id_rsa.pub ]; then
     echo "${YELLOW}SSH key not found. Generate one now?${NC} "
     echo "${RED}(Y)es, (N)o:"
     read -n 1 -r user_input
