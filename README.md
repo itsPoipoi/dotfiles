@@ -11,7 +11,7 @@ sh ~/dotfiles/setup.sh
 ```
 </details>
 
-[My Neovim](https://github.com/itsPoipoi/neovim)(Included here}
+### [My Neovim](https://github.com/itsPoipoi/neovim) (Included here}
 
 
 ```sh
