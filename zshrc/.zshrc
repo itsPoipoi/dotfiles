@@ -374,7 +374,7 @@ alias curl="curl -#"
 
 # Personal Alias's
 alias sht="sudo shutdown -P now"
-alias rbt="sudo shutdown -r now"
+alias rbt="reboot"
 alias wrbt="sudo grub-reboot 1 && reboot"
 alias bios="sudo grub-reboot 2 && reboot"
 alias ff="fastfetch"
