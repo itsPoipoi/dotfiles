@@ -10,7 +10,6 @@
 
 (defcfg
   process-unmapped-keys no
-  linux-x11-repeat-delay-rate 250,35
 )
 
 (deflayer base
