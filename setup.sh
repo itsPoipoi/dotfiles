@@ -32,6 +32,7 @@ if [ ! "{{$SHELL}}" = "{{/usr/bin/zsh}}" ]; then
             echo "${RED}Invalid choice."
             ;;
     esac
+fi
 
 # Install Homebrew & dependencies
 if [ ! -f /home/linuxbrew/.linuxbrew/bin/brew ]; then
