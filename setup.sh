@@ -26,7 +26,7 @@ fi
 # Change default shell to zsh
 if [ ! "{{$SHELL}}" = "{{/usr/bin/zsh}}" ]; then
     echo "${YELLOW}Change default shell to zsh ?${NC} "
-    echo "${RED}(Y)es, (N)o:"
+    echo "${RED}Press ${GREEN}Y ${RED}to accept / Any other key to refuse:"
     read -n 1 -r user_input
     echo 
     case $user_input in
@@ -34,11 +34,8 @@ if [ ! "{{$SHELL}}" = "{{/usr/bin/zsh}}" ]; then
             echo "${GREEN}Making zsh the default shell."
             chsh -s $(which zsh)
             ;;
-        [nN])
-            echo "${GREEN}Bash remains the default shell."
-            ;;
         *)
-            echo "${RED}Invalid choice."
+            echo "${GREEN}Bash remains the default shell."
             ;;
     esac
 fi
@@ -77,24 +74,21 @@ fi
 
 if [ ! -f ~/.ssh/id_rsa.pub ]; then
     echo "${YELLOW}SSH key not found. Generate one now?${NC} "
-    echo "${RED}(Y)es, (N)o:${NC}"
+    echo "${RED}Press ${GREEN}Y ${RED}to accept / Any other key to refuse:${NC}"
     read -n 1 -r user_input
     echo 
     case $user_input in
         [yY])
            ssh-keygen -t rsa -b 4096 -C "poipoigit@gmail.com" 
             ;;
-        [nN])
-            echo "${GREEN}Run ${RED}sshkey ${GREEN}manually."
-            ;;
         *)
-            echo "${RED}Invalid choice."
+            echo "${GREEN}Run ${RED}sshkey ${GREEN}manually."
             ;;
     esac
 fi
 
 echo "${YELLOW}Set Git global config?${NC} "
-echo "${RED}(Y)es, (N)o:${NC}"
+echo "${RED}Press ${GREEN}Y ${RED}to accept / Any other key to refuse:${NC}"
 read -n 1 -r user_input
 echo 
 case $user_input in
@@ -102,48 +96,39 @@ case $user_input in
         git config --global user.name "itsPoipoi"
         git config --global user.email "poipoigit@gmail.com"
         ;;
-    [nN])
-        echo "${GREEN}Run ${RED}gconf ${GREEN}manually."
-        ;;
     *)
-        echo "${RED}Invalid choice."
+        echo "${GREEN}Run ${RED}gconf ${GREEN}manually."
         ;;
 esac
 
 echo "${YELLOW}Set Ergol as x11 keymap (for sddm)?${NC} "
-echo "${RED}(Y)es, (N)o:${NC}"
+echo "${RED}Press ${GREEN}Y ${RED}to accept / Any other key to refuse:${NC}"
 read -n 1 -r user_input
 echo 
 case $user_input in
     [yY])
         sudo localectl set-x11-keymap fr pc105 ergol
         ;;
-    [nN])
-        echo "${GREEN}Run ${RED}sxerg ${GREEN}manually."
-        ;;
     *)
-        echo "${RED}Invalid choice."
+        echo "${GREEN}Run ${RED}sxerg ${GREEN}manually."
         ;;
 esac
 
 echo "${YELLOW}Run Kanata install script?${NC} "
-echo "${RED}(Y)es, (N)o:${NC}"
+echo "${RED}Press ${GREEN}Y ${RED}to accept / Any other key to refuse:${NC}"
 read -n 1 -r user_input
 echo 
 case $user_input in
     [yY])
         /bin/bash ~/dotfiles/kanata/.config/kanata/kanata-setup.sh
         ;;
-    [nN])
-        echo "${GREEN}Run ${RED}~/dotfiles/kanata/.config/kanata/kanata-setup.sh ${GREEN}manually."
-        ;;
     *)
-        echo "${RED}Invalid choice."
+        echo "${GREEN}Run ${RED}~/dotfiles/kanata/.config/kanata/kanata-setup.sh ${GREEN}manually."
         ;;
 esac
 
 echo "${YELLOW}Run stow install script and reload Hyprland if it's installed?${NC} "
-echo "${RED}(Y)es, (N)o:${NC}"
+echo "${RED}Press ${GREEN}Y ${RED}to accept / Any other key to refuse:${NC}"
 read -n 1 -r user_input
 echo 
 case $user_input in
@@ -152,11 +137,8 @@ case $user_input in
         /bin/bash stow.sh
         cd
         ;;
-    [nN])
-        echo "${GREEN}Run ${RED}~/dotfiles/stow.sh ${GREEN}manually."
-        ;;
     *)
-        echo "${RED}Invalid choice."
+        echo "${GREEN}Run ${RED}~/dotfiles/stow.sh ${GREEN}manually."
         ;;
 esac
 
