@@ -80,13 +80,46 @@ if [ ! -f ~/.ssh/id_rsa.pub ]; then
            ssh-keygen -t rsa -b 4096 -C "poipoigit@gmail.com" 
             ;;
         [nN])
-            echo "${GREEN}Generate one manually."
+            echo "${GREEN}Run ${RED}sshkey ${GREEN}manually."
             ;;
         *)
             echo "${RED}Invalid choice."
             ;;
     esac
 fi
+
+echo "${YELLOW}Set Git global config?${NC} "
+echo "${RED}(Y)es, (N)o:${NC}"
+read -n 1 -r user_input
+echo 
+case $user_input in
+    [yY])
+        git config --global user.name "itsPoipoi"
+        git config --global user.email "poipoigit@gmail.com"
+        ;;
+    [nN])
+        echo "${GREEN}Run ${RED}gconf ${GREEN}manually."
+        ;;
+    *)
+        echo "${RED}Invalid choice."
+        ;;
+esac
+
+echo "${YELLOW}Set Ergol as x11 keymap (for sddm)?${NC} "
+echo "${RED}(Y)es, (N)o:${NC}"
+read -n 1 -r user_input
+echo 
+case $user_input in
+    [yY])
+        sudo localectl set-x11-keymap fr pc105 ergol
+        ;;
+    [nN])
+        echo "${GREEN}Run ${RED}sxerg ${GREEN}manually."
+        ;;
+    *)
+        echo "${RED}Invalid choice."
+        ;;
+esac
 
 echo "${YELLOW}Run Kanata install script?${NC} "
 echo "${RED}(Y)es, (N)o:${NC}"

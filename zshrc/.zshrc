@@ -233,13 +233,8 @@ function whatsmyip ()
 	echo -n "External IP: "
 	curl -s ifconfig.me
 }
-
-# Pull this zshrc from Github
-pullrc() {
-	echo "${GREEN}Pulling .zshrc from Github"
-	\curl -sL https://raw.githubusercontent.com/itsPoipoi/linux-setup/main/.zshrc -o ~/.zshrc
-	echo "${YELLOW}RC ready to reload!"
-}
+# SSH keygen
+alias sshkey="ssh-keygen -t rsa -b 4096 -C 'poipoigit@gmail.com'"
 
 # Quick git config
 gitconfig() {
@@ -249,8 +244,8 @@ gitconfig() {
 }
 alias gconf="gitconfig"
 
-# Run .zshrc setup script from Git
-alias psetup='/bin/bash -c "$(curl -sSfL https://raw.githubusercontent.com/itsPoipoi/linux-setup/main/setup.sh)"'
+# Set Ergol as x11 keymap
+alias {setx11ergol,sxerg}=sudo localectl set-x11-keymap fr pc105 ergol
 
 # Automatically do an ls after each zoxide: Only directories
 zz ()
@@ -385,7 +380,7 @@ alias pm="sudo pacman"
 alias pyu="sudo pacman -Syu"
 alias yyu="yay -Syu"
 alias byu="brew upgrade"
-alias fyu="pyu && yyu && byu"
+alias fyu="sudo pacman -Syu; yay -Syu; brew upgrade"
 alias ezrc='nvim ~/.zshrc'
 alias evrc='nvim ~/.config/nvim/init.lua'
-alias src="source ~/.zshrc"
+alias src="clear; source ~/.zshrc"
