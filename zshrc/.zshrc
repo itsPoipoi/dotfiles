@@ -381,6 +381,7 @@ alias pyu="sudo pacman -Syu"
 alias yyu="yay -Syu"
 alias byu="brew upgrade"
 alias fyu="sudo pacman -Syu; yay -Syu; brew upgrade"
+alias arm="pacman -Rns $(pacman -Qdtq); yay -Rns $(yay -Qdtq)"
 alias ezrc='nvim ~/.zshrc'
 alias evrc='nvim ~/.config/nvim/init.lua'
 alias src="clear; source ~/.zshrc"
