@@ -161,6 +161,5 @@ case $user_input in
 esac
 
 # Complete message
-sleep 1
 echo
-echo "${GREEN}Setup complete! Profile reloading!${NC}"; zsh
+echo "${GREEN}Setup complete! Profile reloading!${NC}"; sleep 2; clear; zsh
