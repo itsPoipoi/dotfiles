@@ -21,6 +21,7 @@ popd
 
 # Reload Hyprland
 if [ -f /usr/bin/hyprctl ]; then
+    echo "stow hypr"
 	stow -D hypr
 	stow --adopt hypr
 	hyprctl reload
