@@ -5,7 +5,7 @@ YELLOW=$'\e[0;33m'
 NC=$'\e[0m'
 
 # Install deps & full upgrade
-sudo pacman -Syu
+sudo pacman -Syu --noconfirm
 sudo pacman -S --noconfirm --needed base-devel gcc make git ripgrep fd unzip neovim trash-cli bat fastfetch stow man-db less zsh
 
 if [ ! -f /usr/bin/yay ]; then
@@ -16,9 +16,9 @@ if [ ! -f /usr/bin/yay ]; then
     cd
 fi
 
-yay -Syu
+yay -Syu --noconfirm
 
-# Reload Hyprland
+# Install hyprshade
 if [ -f /usr/bin/hyprctl ]; then
     yay -S --noconfirm hyprshade
 fi
@@ -143,6 +143,5 @@ case $user_input in
 esac
 
 # Complete message
-sleep 1
 echo
-echo "${GREEN}Setup complete! Profile reloading!${NC}"; zsh
+echo "${GREEN}Setup complete! Profile reloading!${NC}"; sleep 2; clear; zsh
