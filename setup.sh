@@ -19,7 +19,7 @@ fi
 
 # Install hyprshade
 if [ -f /usr/bin/hyprctl ]; then
-    paru -S --needed --noconfirm hyprshade
+    paru -S --needed --noconfirm hyprshade-git
 fi
 
 # Change default shell to zsh
