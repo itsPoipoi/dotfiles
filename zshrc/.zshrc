@@ -152,7 +152,7 @@ ftext() {
 	# add rg args as $2+
 	# -. for hidden files
 	# --max-depth 1 for non-recursive
-	rg -iHn $2 $3 $4 $5 --color=always "$1" . | less -r
+	rg -iHn $2 $3 $4 $5 --color=always "$1" . | less -R
 }
 
 # Copy file with a progress bar
@@ -366,11 +366,11 @@ alias bios="sudo grub-reboot 2 && reboot"
 alias ff="fastfetch"
 alias zi="__zoxide_zi"
 alias {pacman,pm}="sudo pacman"
+alias yay="paru"
 alias pyu="sudo pacman -Syu"
-alias yyu="yay -Syu"
 alias byu="brew upgrade"
-alias fyu="sudo pacman -Syu; yay -Syu; brew upgrade"
-alias arm="pacman -Rns $(pacman -Qdtq); yay -Rns $(yay -Qdtq)"
+alias fyu="paru; brew upgrade"
+alias arm="pacman -Rns $(pacman -Qdtq); paru -Rns $(paru -Qdtq)"
 alias ezrc='nvim ~/.zshrc'
 alias evrc='nvim ~/.config/nvim/init.lua'
 alias src="clear; source ~/.zshrc"

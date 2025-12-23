@@ -8,19 +8,18 @@ NC=$'\e[0m'
 sudo pacman -Syu --noconfirm
 sudo pacman -S --noconfirm --needed base-devel gcc make git ripgrep fd unzip neovim trash-cli bat fastfetch stow man-db less zsh
 
-if [ ! -f /usr/bin/yay ]; then
+if [ ! -f /usr/bin/paru ]; then
     cd
-    git clone https://aur.archlinux.org/yay-bin.git
-    cd yay-bin
+    git clone https://aur.archlinux.org/paru.git
+    cd paru
     makepkg -si
     cd
+    rm -rf ~/paru/
 fi
-
-yay -Syu --noconfirm
 
 # Install hyprshade
 if [ -f /usr/bin/hyprctl ]; then
-    yay -S --noconfirm hyprshade
+    paru -S --noconfirm hyprshade
 fi
 
 # Change default shell to zsh
