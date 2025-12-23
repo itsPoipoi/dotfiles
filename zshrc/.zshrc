@@ -5,9 +5,7 @@ YELLOW=$'\e[0;33m'
 NC=$'\e[0m'
 
 # Path Exports
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-export HOMEBREW_NO_ANALYTICS=1; export HOMEBREW_NO_ENV_HINTS=1
-export PATH=$PATH:"$HOME/.local/bin:$HOME/.cargo/bin:/var/lib/flatpak/exports/bin:/.local/share/flatpak/exports/bin:$HOME/.spicetify"
+export PATH=$PATH:"$HOME/.local/bin:$HOME/.cargo/bin:$HOME/.spicetify"
 
 # Set the directory we want to store zinit and plugins
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
@@ -54,23 +52,6 @@ ZVM_VI_SURROUND_BINDKEY=s-prefix
 ZVM_SYSTEM_CLIPBOARD_ENABLED=true
 ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
 
-# Keybindings
-set -o ignoreeof
-set -o vi
-function lazykeys {
-    bindkey -M viins "^W" forward-word
-    bindkey -M viins "^B" backward-kill-word
-    bindkey '^[[Z' autosuggest-accept # shift-tab
-    bindkey -s '^F' 'zi\n'
-    bindkey -M vicmd '^L' ffclear
-    bindkey -M viins '^L' ffclear
-}
-# Load keybinds after zvm keybinds
-zvm_after_init_commands+=(lazykeys)
-
-# Fastfetch on clear
-function ffclear { clear; fastfetch; zle redisplay; }
-zle -N ffclear
 
 # History
 HISTSIZE=5000
@@ -106,6 +87,27 @@ function zvm_after_init() {
     eval "$(zoxide init zsh)"
 }
 zvm_after_init_commands+=(zvm_after_init)
+
+# Keybindings
+set -o ignoreeof
+set -o vi
+function lazykeys {
+    bindkey -M viins "^W" forward-word
+    bindkey -M viins "^B" backward-kill-word
+    bindkey '^[[Z' autosuggest-accept # shift-tab
+    bindkey -M vicmd -s '^F' '\nzi\n'
+    bindkey -M viins -s '^F' 'zi\n'
+    bindkey -M vicmd -s '^Y' '\ny\n'
+    bindkey -M viins -s '^Y' 'y\n'
+    bindkey -M vicmd '^L' ffclear
+    bindkey -M viins '^L' ffclear
+}
+# Load keybinds after zvm keybinds
+zvm_after_init_commands+=(lazykeys)
+
+# Fastfetch on clear
+function ffclear { clear; fastfetch; zle redisplay; }
+zle -N ffclear
 
 #######################################################
 # SPECIAL FUNCTIONS
@@ -250,6 +252,15 @@ alias gconf="gitconfig"
 # Set Ergol as x11 keymap
 alias {setx11ergol,sxerg}=sudo localectl set-x11-keymap fr pc105 ergol
 
+# Yazi
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	IFS= read -r -d '' cwd < "$tmp"
+	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+	rm -f -- "$tmp"
+}
+
 # Automatically do an ls after each zoxide: Only directories
 zz ()
 {
@@ -369,8 +380,6 @@ alias kssh="kitten ssh"
 alias {pacman,pm}="sudo pacman"
 alias yay="paru"
 alias pyu="sudo pacman -Syu"
-alias byu="brew upgrade"
-alias fyu="paru; brew upgrade"
 alias arm="pacman -Rns $(pacman -Qdtq); paru -Rns $(paru -Qdtq)"
 alias ezrc='nvim ~/.zshrc'
 alias evrc='nvim ~/.config/nvim/init.lua'

@@ -6,7 +6,7 @@ NC=$'\e[0m'
 
 # Install deps & full upgrade
 sudo pacman -Syu --noconfirm
-sudo pacman -S --noconfirm --needed base-devel gcc make git ripgrep fd unzip neovim trash-cli bat fastfetch stow man-db less zsh
+sudo pacman -S --noconfirm --needed base-devel gcc make yazi ffmpeg 7zip jq poppler fzf zoxide eza tree-sitter-cli resvg imagemagick git ripgrep fd unzip neovim trash-cli bat fastfetch stow man-db less zsh
 
 if [ ! -f /usr/bin/paru ]; then
     cd
@@ -37,38 +37,6 @@ if [ ! "{{$SHELL}}" = "{{/usr/bin/zsh}}" ]; then
             echo "${GREEN}Bash remains the default shell."
             ;;
     esac
-fi
-
-# Install Homebrew & dependencies
-if [ ! -f /home/linuxbrew/.linuxbrew/bin/brew ]; then
-  echo "${YELLOW}Installing Homebrew...${NC}"
-  NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  else echo "${YELLOW}Homebrew is already installed. Skipping.${NC}"
-fi
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-
-# Install fzf
-if [ ! -f /home/linuxbrew/.linuxbrew/bin/fzf ]; then
-  brew install -q fzf
-  else echo "${GREEN}Fzf is already installed. Skipping.${NC}"
-fi
-
-# Install eza
-if [ ! -f /home/linuxbrew/.linuxbrew/bin/eza ]; then
-  brew install -q eza
-  else echo "${YELLOW}Eza is already installed. Skipping.${NC}"
-fi
-
-# Install zoxide
-if [ ! -f ~/.local/bin/zoxide ]; then
-  /bin/bash -c "$(curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh)"
-  else echo "${GREEN}Zoxide is already installed. Skipping.${NC}"
-fi
-
-# Install treesitter
-if [ ! -f /home/linuxbrew/.linuxbrew/bin/tree-sitter ]; then
-  brew install -q tree-sitter-cli
-  else echo "${YELLOW}Treesitter is already installed. Skipping.${NC}"
 fi
 
 if [ ! -f ~/.ssh/id_rsa.pub ]; then
