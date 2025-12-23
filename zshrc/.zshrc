@@ -6,10 +6,8 @@ NC=$'\e[0m'
 
 # Path Exports
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-export HOMEBREW_NO_ANALYTICS=1
-export HOMEBREW_NO_ENV_HINTS=1
-export PATH=$PATH:"$HOME/.spicetify"
-export PATH=$PATH:"$HOME/.local/bin:$HOME/.cargo/bin:/var/lib/flatpak/exports/bin:/.local/share/flatpak/exports/bin"
+export HOMEBREW_NO_ANALYTICS=1; export HOMEBREW_NO_ENV_HINTS=1
+export PATH=$PATH:"$HOME/.local/bin:$HOME/.cargo/bin:/var/lib/flatpak/exports/bin:/.local/share/flatpak/exports/bin:$HOME/.spicetify"
 
 # Set the directory we want to store zinit and plugins
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
@@ -50,6 +48,12 @@ zinit cdreplay -q
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+# Zsh vim config 
+ZVM_READKEY_ENGINE=$ZVM_READKEY_ENGINE_ZLE
+ZVM_VI_SURROUND_BINDKEY=s-prefix
+ZVM_SYSTEM_CLIPBOARD_ENABLED=true
+ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
+
 # Keybindings
 set -o ignoreeof
 set -o vi
@@ -61,10 +65,8 @@ function lazykeys {
     bindkey -M vicmd '^L' ffclear
     bindkey -M viins '^L' ffclear
 }
+# Load keybinds after zvm keybinds
 zvm_after_init_commands+=(lazykeys)
-# zvm_after_lazy_keybindings_commands=(lazykeys)
-
-ZVM_SYSTEM_CLIPBOARD_ENABLED=true
 
 # Fastfetch on clear
 function ffclear { clear; fastfetch; zle redisplay; }
@@ -238,6 +240,7 @@ alias sshkey="ssh-keygen -t rsa -b 4096 -C 'poipoigit@gmail.com'"
 
 # Quick git config
 gitconfig() {
+    git config --global pull.rebase false
 	git config --global user.name "itsPoipoi"
 	git config --global user.email "poipoigit@gmail.com"
 	echo "${YELLOW}GitHub name & email are now set globally."
@@ -280,21 +283,12 @@ zze ()
 #######################################################
 # GENERAL ALIAS'S
 #######################################################
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
 
-# To temporarily bypass an alias, we precede the command with a \
-# EG: the ls command is aliased, but to use the normal ls command you would type \ls
-
-# Add an "alert" alias for long running commands.  Use like so:
+# Add an "alert" alias 
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 # Change directory aliases
-alias cd..='cd ..'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
@@ -326,9 +320,6 @@ alias treemin="eza -Ta --icons -L 2 --group-directories-first"		# Tree into 1 su
 alias treed="eza -TaD --icons"										# Tree directories all the way, use -L to control depth
 alias treedmin="eza -TaD --icons -L 2"								# Tree directories into 1 subfolder level							# Tree directories into 1 subfolder level
 
-# Search command line history
-alias h="history | rg "
-
 # Search running processes
 alias p="ps aux | rg "
 alias topcpu="/bin/ps -eo pcpu,pid,user,args | sort -k 1 -r | head -10"
@@ -346,7 +337,6 @@ alias openports='netstat -nape --inet'
 alias diskspace="du -S | sort -n -r |more"
 alias folders='du -h --max-depth=1'
 alias folderssort='find . -maxdepth 1 -type d -print0 | xargs -0 du -sk | sort -rn'
-alias mountedinfo='df -hT'
 
 # Alias's for archives
 alias mktar='tar -cvf'
@@ -375,8 +365,7 @@ alias wrbt="sudo grub-reboot 1 && reboot"
 alias bios="sudo grub-reboot 2 && reboot"
 alias ff="fastfetch"
 alias zi="__zoxide_zi"
-alias pacman="sudo pacman"
-alias pm="sudo pacman"
+alias {pacman,pm}="sudo pacman"
 alias pyu="sudo pacman -Syu"
 alias yyu="yay -Syu"
 alias byu="brew upgrade"

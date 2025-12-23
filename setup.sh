@@ -93,6 +93,7 @@ read -n 1 -r user_input
 echo 
 case $user_input in
     [yY])
+        git config pull.rebase false
         git config --global user.name "itsPoipoi"
         git config --global user.email "poipoigit@gmail.com"
         ;;
