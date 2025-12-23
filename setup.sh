@@ -19,7 +19,7 @@ fi
 
 # Install hyprshade
 if [ -f /usr/bin/hyprctl ]; then
-    paru -S --noconfirm hyprshade
+    paru -S --needed --noconfirm hyprshade
 fi
 
 # Change default shell to zsh
@@ -92,7 +92,7 @@ read -n 1 -r user_input
 echo 
 case $user_input in
     [yY])
-        git config pull.rebase false
+        git config --global pull.rebase false
         git config --global user.name "itsPoipoi"
         git config --global user.email "poipoigit@gmail.com"
         ;;
