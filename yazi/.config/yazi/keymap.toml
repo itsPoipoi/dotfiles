@@ -39,8 +39,8 @@ keymap = [
 	{ on = "<Left>",  run = "leave", desc = "Back to the parent directory" },
 	{ on = "<Right>", run = "enter", desc = "Enter the child directory" },
 
-	{ on = "<A-b>", run = "back",    desc = "Back to previous directory" },
-	{ on = "<A-w>", run = "forward", desc = "Forward to next directory" },
+	{ on = "<A-#>", run = "back",    desc = "Back to previous directory" },
+	{ on = "<A-%>", run = "forward", desc = "Forward to next directory" },
 
 	# Toggle
 	{ on = "<Space>", run = [ "toggle", "arrow next" ], desc = "Toggle the current selection state" },
