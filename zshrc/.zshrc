@@ -380,7 +380,6 @@ alias kssh="kitten ssh"
 alias {pacman,pm}="sudo pacman"
 alias yay="paru"
 alias pyu="sudo pacman -Syu"
-alias arm="pacman -Rns $(pacman -Qdtq); paru -Rns $(paru -Qdtq)"
 alias ezrc='nvim ~/.zshrc'
 alias evrc='nvim ~/.config/nvim/init.lua'
 alias src="clear; source ~/.zshrc"
