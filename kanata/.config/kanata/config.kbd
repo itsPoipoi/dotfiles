@@ -1,11 +1,12 @@
 ;; Caps to escape/control configuration for Kanata
 
 (defsrc
-  caps
+  caps spc
 )
 
 (defalias
   escctrl (tap-hold-press 0 200 esc lctl)
+  spcaltgr (tap-hold-press 0 200 spc ralt)
 )
 
 (defcfg
@@ -13,5 +14,5 @@
 )
 
 (deflayer base
-  @escctrl
+  @escctrl @spcaltgr
 )

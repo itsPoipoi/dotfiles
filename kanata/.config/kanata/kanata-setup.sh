@@ -2,8 +2,7 @@
 GREEN=$'\e[0;32m'
 RED=$'\e[0;31m'
 
-# Install Kanata using Brew
-brew install kanata
+paru -S --needed --noconfirm kanata-bin
 
 # Setup input access
 sudo groupdel uinput
