@@ -325,11 +325,11 @@ alias la='eza -alhrs accessed --icons --group-directories-first'	# sort by acces
 alias lt='eza -alhrs created --icons --group-directories-first'	# sort by date
 alias lr='eza -alR --icons --group-directories-first'	# recursive ls
 
-# Alias's for eza trees
-alias tree="eza -Ta --icons --group-directories-first"				# Tree all the way, use -L to control depth
-alias treemin="eza -Ta --icons -L 2 --group-directories-first"		# Tree into 1 subfolder level
-alias treed="eza -TaD --icons"										# Tree directories all the way, use -L to control depth
-alias treedmin="eza -TaD --icons -L 2"								# Tree directories into 1 subfolder level							# Tree directories into 1 subfolder level
+# # Alias's for eza trees
+# alias tree="eza -Ta --icons --group-directories-first"				# Tree all the way, use -L to control depth
+# alias treemin="eza -Ta --icons -L 2 --group-directories-first"		# Tree into 1 subfolder level
+# alias treed="eza -TaD --icons"										# Tree directories all the way, use -L to control depth
+# alias treedmin="eza -TaD --icons -L 2"								# Tree directories into 1 subfolder level							# Tree directories into 1 subfolder level
 
 # Search running processes
 alias p="ps aux | rg "
@@ -338,16 +338,16 @@ alias topcpu="/bin/ps -eo pcpu,pid,user,args | sort -k 1 -r | head -10"
 # Search files in the current folder
 alias f="find . | rg "
 
-# Count all files (recursively) in the current folder
-alias countfiles="for t in files links directories; do echo \`find . -type \${t:0:1} | wc -l\` \$t; done 2> /dev/null"
+# # Count all files (recursively) in the current folder
+# alias countfiles="for t in files links directories; do echo \`find . -type \${t:0:1} | wc -l\` \$t; done 2> /dev/null"
 
-# Show open ports
-alias openports='netstat -nape --inet'
+# # Show open ports
+# alias openports='netstat -nape --inet'
 
-# Alias's to show disk space and space used in a folder
-alias diskspace="du -S | sort -n -r |more"
-alias folders='du -h --max-depth=1'
-alias folderssort='find . -maxdepth 1 -type d -print0 | xargs -0 du -sk | sort -rn'
+# # Alias's to show disk space and space used in a folder
+# alias diskspace="du -S | sort -n -r |more"
+# alias folders='du -h --max-depth=1'
+# alias folderssort='find . -maxdepth 1 -type d -print0 | xargs -0 du -sk | sort -rn'
 
 # Alias's for archives
 alias mktar='tar -cvf'
@@ -370,7 +370,7 @@ alias vi='nvim'
 alias curl="curl -#"
 
 # Personal Alias's
-alias sht="sudo shutdown -P now"
+alias sht="shutdown now"
 alias rbt="reboot"
 alias wrbt="sudo grub-reboot 1 && reboot"
 alias bios="sudo grub-reboot 2 && reboot"
@@ -378,8 +378,8 @@ alias ff="fastfetch"
 alias zi="__zoxide_zi"
 alias kssh="kitten ssh"
 alias {pacman,pm}="sudo pacman"
-alias yay="paru"
-alias pyu="sudo pacman -Syu"
+# alias pyu="sudo pacman -Syu"
+# alias yyu="yay -Syu"
 alias ezrc='nvim ~/.zshrc'
 alias evrc='nvim ~/.config/nvim/init.lua'
 alias src="clear; source ~/.zshrc"

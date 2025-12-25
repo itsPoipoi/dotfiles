@@ -2,7 +2,7 @@
 GREEN=$'\e[0;32m'
 RED=$'\e[0;31m'
 
-paru -S --needed --noconfirm kanata-bin
+yay -S --needed --noconfirm kanata-bin
 
 # Setup input access
 sudo groupdel uinput
