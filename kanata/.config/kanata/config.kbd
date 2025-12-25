@@ -6,7 +6,7 @@
 
 (defalias
   escctrl (tap-hold-press 0 200 esc lctl)
-  spcaltgr (tap-hold-press 0 250 spc ralt)
+  spcaltgr (tap-hold 0 150 spc ralt)
 )
 
 (defcfg
