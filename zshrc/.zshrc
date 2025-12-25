@@ -101,6 +101,8 @@ function lazykeys {
     bindkey -M viins -s '^Y' 'y\n'
     bindkey -M vicmd '^L' ffclear
     bindkey -M viins '^L' ffclear
+    bindkey -M viins "\e[1;5C" forward-word
+    bindkey -M viins "\e[1;5D" backward-word
 }
 # Load keybinds after zvm keybinds
 zvm_after_init_commands+=(lazykeys)
@@ -145,6 +147,10 @@ extract() {
 		fi
 	done
 }
+
+# Alias's for archives
+mktar() { tar -cvzf "${1%/}.tar.gz" "${1%/}"; }
+alias zip="zip -r"
 
 # Searches for text in all files in the current folder
 ftext() {
@@ -327,11 +333,6 @@ alias diskspace="du -S | sort -n -r |more"
 alias folders='du -h --max-depth=1'
 alias folderssort='find . -maxdepth 1 -type d -print0 | xargs -0 du -sk | sort -rn'
 
-# Alias's for archives
-compress() { tar -cvzf "${1%/}.tar.gz" "${1%/}"; }
-alias decompress="tar -xvzf"
-alias zip="zip -r"
-
 # Alias's to modified commands
 alias grep="rg"
 alias cat="bat"
@@ -352,3 +353,5 @@ alias zi="__zoxide_zi"
 alias kssh="kitten ssh"
 alias ezrc='nvim ~/.zshrc'
 alias src="clear; source ~/.zshrc"
+
+export PATH=$PATH:/home/poipoi/.spicetify

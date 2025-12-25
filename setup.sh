@@ -5,10 +5,9 @@ YELLOW=$'\e[0;33m'
 NC=$'\e[0m'
 
 # Install deps & full upgrade
-sudo pacman -Syu --noconfirm
-sudo pacman -S --noconfirm --needed base-devel gcc make yazi ffmpeg 7zip jq poppler fzf zoxide eza tree-sitter-cli thunar nwg-displays resvg imagemagick git ripgrep fd unzip neovim trash-cli bat fastfetch stow man-db less zsh
+yay -S --noconfirm --needed base-devel gcc make yazi ffmpeg 7zip jq poppler fzf zoxide eza tree-sitter-cli thunar nwg-displays resvg imagemagick git ripgrep fd unzip neovim trash-cli bat fastfetch stow man-db less zsh
 omarchy-install-terminal kitty
-sudo pacman -R --noconfirm omarchy-chromium alacritty ghostty 
+yay -R --noconfirm omarchy-chromium alacritty ghostty nautilus
 
 # Change default shell to zsh
 if [ ! "{{$SHELL}}" = "{{/usr/bin/zsh}}" ]; then
@@ -57,18 +56,18 @@ case $user_input in
         ;;
 esac
 
-# echo "${YELLOW}Set Ergol as x11 keymap (for sddm)?${NC} "
-# echo "${RED}Press ${GREEN}Y ${RED}to accept / Any other key to refuse:${NC}"
-# read -n 1 -r user_input
-# echo 
-# case $user_input in
-#     [yY])
-#         sudo localectl set-x11-keymap fr pc105 ergol
-#         ;;
-#     *)
-#         echo "${GREEN}Run ${RED}sxerg ${GREEN}manually."
-#         ;;
-# esac
+echo "${YELLOW}Set Ergol as x11 keymap (for sddm)?${NC} "
+echo "${RED}Press ${GREEN}Y ${RED}to accept / Any other key to refuse:${NC}"
+read -n 1 -r user_input
+echo 
+case $user_input in
+    [yY])
+        sudo localectl set-x11-keymap fr pc105 ergol
+        ;;
+    *)
+        echo "${GREEN}Run ${RED}sxerg ${GREEN}manually."
+        ;;
+esac
 
 echo "${YELLOW}Run Kanata install script?${NC} "
 echo "${RED}Press ${GREEN}Y ${RED}to accept / Any other key to refuse:${NC}"
@@ -77,6 +76,25 @@ echo
 case $user_input in
     [yY])
         /bin/bash ~/dotfiles/kanata/.config/kanata/kanata-setup.sh
+        ;;
+    *)
+        echo "${GREEN}Run ${RED}~/dotfiles/kanata/.config/kanata/kanata-setup.sh ${GREEN}manually."
+        ;;
+esac
+
+echo "${YELLOW}Setup spicetify? $(RED)(Spotify needs to be logged in once first!)${NC} "
+echo "${RED}Press ${GREEN}Y ${RED}to accept / Any other key to refuse:${NC}"
+read -n 1 -r user_input
+echo 
+case $user_input in
+    [yY])
+        sudo chmod a+wr /opt/spotify
+        sudo chmod a+wr /opt/spotify/Apps -R
+        curl -fsSL https://raw.githubusercontent.com/spicetify/cli/main/install.sh | sh
+        spicetify config spotify_path "/opt/spotify"
+        spicetify config custom_apps new-releases
+        spicetify config custom_apps lyrics-plus
+        spicetify backup apply
         ;;
     *)
         echo "${GREEN}Run ${RED}~/dotfiles/kanata/.config/kanata/kanata-setup.sh ${GREEN}manually."
