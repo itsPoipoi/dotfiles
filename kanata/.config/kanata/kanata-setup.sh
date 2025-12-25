@@ -16,11 +16,11 @@ sudo udevadm control --reload-rules && sudo udevadm trigger
 sudo modprobe uinput
 
 # Import config
-sudo curl -sL https://raw.githubusercontent.com/itsPoipoi/dotfiles/refs/heads/main/kanata/.config/kanata/config.kbd --create-dirs -o /etc/kanata/config.kbd
+sudo curl -sL https://raw.githubusercontent.com/itsPoipoi/dotfiles/refs/heads/omarchy/kanata/.config/kanata/config.kbd --create-dirs -o /etc/kanata/config.kbd
 sudo chmod -R a+rx /etc/kanata
 
 # Setup systemd daemon service
-curl -sL https://raw.githubusercontent.com/itsPoipoi/dotfiles/refs/heads/main/kanata/.config/kanata/kanata.service --create-dirs -o ~/.config/systemd/user/kanata.service
+curl -sL https://raw.githubusercontent.com/itsPoipoi/dotfiles/refs/heads/omarchy/kanata/.config/kanata/kanata.service --create-dirs -o ~/.config/systemd/user/kanata.service
 systemctl --user daemon-reload
 systemctl --user enable kanata.service
 systemctl --user start kanata.service

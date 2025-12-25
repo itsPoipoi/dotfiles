@@ -6,7 +6,7 @@ NC=$'\e[0m'
 
 # Install deps & full upgrade
 sudo pacman -Syu --noconfirm
-sudo pacman -S --noconfirm --needed base-devel gcc make yazi ffmpeg 7zip jq poppler fzf zoxide eza tree-sitter-cli resvg imagemagick git ripgrep fd unzip neovim trash-cli bat fastfetch stow man-db less zsh
+sudo pacman -S --noconfirm --needed base-devel gcc make yazi ffmpeg 7zip jq poppler fzf zoxide eza tree-sitter-cli thunar resvg imagemagick git ripgrep fd unzip neovim trash-cli bat fastfetch stow man-db less zsh
 
 # Change default shell to zsh
 if [ ! "{{$SHELL}}" = "{{/usr/bin/zsh}}" ]; then
@@ -81,20 +81,20 @@ case $user_input in
         ;;
 esac
 
-# echo "${YELLOW}Run stow install script and reload Hyprland if it's installed?${NC} "
-# echo "${RED}Press ${GREEN}Y ${RED}to accept / Any other key to refuse:${NC}"
-# read -n 1 -r user_input
-# echo 
-# case $user_input in
-#     [yY])
-#         cd ~/dotfiles/
-#         /bin/bash stow.sh
-#         cd
-#         ;;
-#     *)
-#         echo "${GREEN}Run ${RED}~/dotfiles/stow.sh ${GREEN}manually."
-#         ;;
-# esac
+echo "${YELLOW}Run stow install script and reload Hyprland if it's installed?${NC} "
+echo "${RED}Press ${GREEN}Y ${RED}to accept / Any other key to refuse:${NC}"
+read -n 1 -r user_input
+echo 
+case $user_input in
+    [yY])
+        cd ~/dotfiles/
+        /bin/bash stow.sh
+        cd
+        ;;
+    *)
+        echo "${GREEN}Run ${RED}~/dotfiles/stow.sh ${GREEN}manually."
+        ;;
+esac
 
 # Complete message
 echo
