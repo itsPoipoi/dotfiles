@@ -249,6 +249,13 @@ gitconfig() {
 }
 alias gconf="gitconfig"
 
+# Fast git push
+gpp() {
+    git add .
+    git commit -m "..."
+    git push
+}
+
 # Set Ergol as x11 keymap
 alias {setx11ergol,sxerg}=sudo localectl set-x11-keymap fr pc105 ergol
 
