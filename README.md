@@ -6,6 +6,13 @@ git clone --recurse-submodules https://github.com/itsPoipoi/dotfiles.git $HOME/d
 ```
 </details>
 
+<details><summary>SSH</summary>
+
+```sh
+git clone --recurse-submodules git@github.com:itsPoipoi/dotfiles.git $HOME/dotfiles
+```
+</details>
+
 ```sh
 sh ~/dotfiles/setup.sh
 ```
