@@ -8,20 +8,6 @@ NC=$'\e[0m'
 sudo pacman -Syu --noconfirm
 sudo pacman -S --noconfirm --needed base-devel gcc make yazi ffmpeg 7zip jq poppler fzf zoxide eza tree-sitter-cli resvg imagemagick git ripgrep fd unzip neovim trash-cli bat fastfetch stow man-db less zsh
 
-if [ ! -f /usr/bin/paru ]; then
-    cd
-    git clone https://aur.archlinux.org/paru.git
-    cd paru
-    makepkg -si
-    cd
-    rm -rf ~/paru/
-fi
-
-# Install hyprshade
-if [ -f /usr/bin/hyprctl ]; then
-    paru -S --needed --noconfirm hyprshade-git
-fi
-
 # Change default shell to zsh
 if [ ! "{{$SHELL}}" = "{{/usr/bin/zsh}}" ]; then
     echo "${YELLOW}Change default shell to zsh ?${NC} "
@@ -69,18 +55,18 @@ case $user_input in
         ;;
 esac
 
-echo "${YELLOW}Set Ergol as x11 keymap (for sddm)?${NC} "
-echo "${RED}Press ${GREEN}Y ${RED}to accept / Any other key to refuse:${NC}"
-read -n 1 -r user_input
-echo 
-case $user_input in
-    [yY])
-        sudo localectl set-x11-keymap fr pc105 ergol
-        ;;
-    *)
-        echo "${GREEN}Run ${RED}sxerg ${GREEN}manually."
-        ;;
-esac
+# echo "${YELLOW}Set Ergol as x11 keymap (for sddm)?${NC} "
+# echo "${RED}Press ${GREEN}Y ${RED}to accept / Any other key to refuse:${NC}"
+# read -n 1 -r user_input
+# echo 
+# case $user_input in
+#     [yY])
+#         sudo localectl set-x11-keymap fr pc105 ergol
+#         ;;
+#     *)
+#         echo "${GREEN}Run ${RED}sxerg ${GREEN}manually."
+#         ;;
+# esac
 
 echo "${YELLOW}Run Kanata install script?${NC} "
 echo "${RED}Press ${GREEN}Y ${RED}to accept / Any other key to refuse:${NC}"
@@ -95,20 +81,20 @@ case $user_input in
         ;;
 esac
 
-echo "${YELLOW}Run stow install script and reload Hyprland if it's installed?${NC} "
-echo "${RED}Press ${GREEN}Y ${RED}to accept / Any other key to refuse:${NC}"
-read -n 1 -r user_input
-echo 
-case $user_input in
-    [yY])
-        cd ~/dotfiles/
-        /bin/bash stow.sh
-        cd
-        ;;
-    *)
-        echo "${GREEN}Run ${RED}~/dotfiles/stow.sh ${GREEN}manually."
-        ;;
-esac
+# echo "${YELLOW}Run stow install script and reload Hyprland if it's installed?${NC} "
+# echo "${RED}Press ${GREEN}Y ${RED}to accept / Any other key to refuse:${NC}"
+# read -n 1 -r user_input
+# echo 
+# case $user_input in
+#     [yY])
+#         cd ~/dotfiles/
+#         /bin/bash stow.sh
+#         cd
+#         ;;
+#     *)
+#         echo "${GREEN}Run ${RED}~/dotfiles/stow.sh ${GREEN}manually."
+#         ;;
+# esac
 
 # Complete message
 echo
