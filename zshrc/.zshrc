@@ -201,25 +201,6 @@ mkdirg() {
 	cd "$1"
 }
 
-# Goes up a specified number of directories  (i.e. up 4)
-up() {
-	local d=""
-	limit=$1
-	for ((i = 1; i <= limit; i++)); do
-		d=$d/..
-	done
-	d=$(echo $d | sed 's/^\///')
-	if [ -z "$d" ]; then
-		d=..
-	fi
-	cd $d
-}
-
-# Returns the last 2 fields of the working directory
-pwdtail() {
-	pwd | awk -F/ '{nlast = NF -1;print $nlast"/"$NF}'
-}
-
 # IP address lookup
 alias whatismyip="whatsmyip"
 function whatsmyip ()
@@ -237,6 +218,7 @@ function whatsmyip ()
 	echo -n "External IP: "
 	curl -s ifconfig.me
 }
+
 # SSH keygen
 alias sshkey="ssh-keygen -t rsa -b 4096 -C 'poipoigit@gmail.com'"
 
@@ -328,15 +310,7 @@ alias ldirs='eza -alhD --icons'   								# long format, directories only
 alias lx='eza -alhfs extension --icons '   						# sort files by extension
 alias lk='eza -alhrs size --icons --group-directories-first'		# sort by size
 alias lc='eza -alhrs changed --icons --group-directories-first'	# sort by change time
-alias la='eza -alhrs accessed --icons --group-directories-first'	# sort by access time
 alias lt='eza -alhrs created --icons --group-directories-first'	# sort by date
-alias lr='eza -alR --icons --group-directories-first'	# recursive ls
-
-# # Alias's for eza trees
-# alias tree="eza -Ta --icons --group-directories-first"				# Tree all the way, use -L to control depth
-# alias treemin="eza -Ta --icons -L 2 --group-directories-first"		# Tree into 1 subfolder level
-# alias treed="eza -TaD --icons"										# Tree directories all the way, use -L to control depth
-# alias treedmin="eza -TaD --icons -L 2"								# Tree directories into 1 subfolder level							# Tree directories into 1 subfolder level
 
 # Search running processes
 alias p="ps aux | rg "
@@ -345,16 +319,13 @@ alias topcpu="/bin/ps -eo pcpu,pid,user,args | sort -k 1 -r | head -10"
 # Search files in the current folder
 alias f="find . | rg "
 
-# # Count all files (recursively) in the current folder
-# alias countfiles="for t in files links directories; do echo \`find . -type \${t:0:1} | wc -l\` \$t; done 2> /dev/null"
+# Show open ports
+alias openports='netstat -nape --inet'
 
-# # Show open ports
-# alias openports='netstat -nape --inet'
-
-# # Alias's to show disk space and space used in a folder
-# alias diskspace="du -S | sort -n -r |more"
-# alias folders='du -h --max-depth=1'
-# alias folderssort='find . -maxdepth 1 -type d -print0 | xargs -0 du -sk | sort -rn'
+# Alias's to show disk space and space used in a folder
+alias diskspace="du -S | sort -n -r |more"
+alias folders='du -h --max-depth=1'
+alias folderssort='find . -maxdepth 1 -type d -print0 | xargs -0 du -sk | sort -rn'
 
 # Alias's for archives
 alias mktar='tar -cvf'
@@ -379,14 +350,8 @@ alias curl="curl -#"
 # Personal Alias's
 alias sht="shutdown now"
 alias rbt="reboot"
-alias wrbt="sudo grub-reboot 1 && reboot"
-alias bios="sudo grub-reboot 2 && reboot"
 alias ff="fastfetch"
 alias zi="__zoxide_zi"
 alias kssh="kitten ssh"
-alias {pacman,pm}="sudo pacman"
-# alias pyu="sudo pacman -Syu"
-# alias yyu="yay -Syu"
 alias ezrc='nvim ~/.zshrc'
-alias evrc='nvim ~/.config/nvim/init.lua'
 alias src="clear; source ~/.zshrc"
