@@ -328,12 +328,9 @@ alias folders='du -h --max-depth=1'
 alias folderssort='find . -maxdepth 1 -type d -print0 | xargs -0 du -sk | sort -rn'
 
 # Alias's for archives
-alias mktar='tar -cvf'
-alias mkbz2='tar -cvjf'
-alias mkgz='tar -cvzf'
-alias untar='tar -xvf'
-alias unbz2='tar -xvjf'
-alias ungz='tar -xvzf'
+compress() { tar -cvzf "${1%/}.tar.gz" "${1%/}"; }
+alias decompress="tar -xvzf"
+alias zip="zip -r"
 
 # Alias's to modified commands
 alias grep="rg"
