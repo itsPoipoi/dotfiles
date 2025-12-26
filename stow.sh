@@ -25,5 +25,4 @@ if [ -f /usr/bin/hyprctl ]; then
 	stow -D hypr
 	stow --adopt hypr
     git restore .
-	hyprctl reload
 fi
