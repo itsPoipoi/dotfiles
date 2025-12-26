@@ -82,7 +82,7 @@ case $user_input in
         ;;
 esac
 
-echo "${YELLOW}Setup spicetify? $(RED)(Spotify needs to be logged in once first!)${NC} "
+echo "${YELLOW}Setup spicetify? ${RED}(Spotify needs to be logged in once first!)${NC} "
 echo "${RED}Press ${GREEN}Y ${RED}to accept / Any other key to refuse:${NC}"
 read -n 1 -r user_input
 echo 
@@ -97,7 +97,7 @@ case $user_input in
         spicetify backup apply
         ;;
     *)
-        echo "${GREEN}Run ${RED}~/dotfiles/kanata/.config/kanata/kanata-setup.sh ${GREEN}manually."
+        echo "${GREEN}Install spicetify manually."
         ;;
 esac
 
