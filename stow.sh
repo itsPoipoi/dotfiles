@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 if [[ -z $STOW_FOLDERS ]]; then
-    STOW_FOLDERS="fastfetch,hypr,kanata,kitty,nvim,yazi,xfce4,zshrc"
+    STOW_FOLDERS="fastfetch,hypr,kanata,kitty,nvim,thunar,yazi,xfce4,zshrc"
 fi
 
 if [[ -z $DOTFILES ]]; then
