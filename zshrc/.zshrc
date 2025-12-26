@@ -34,6 +34,7 @@ zinit light zdharma-continuum/fast-syntax-highlighting
 zinit light MichaelAquilina/zsh-you-should-use
 zinit light fdellwing/zsh-bat
 zinit light Freed-Wu/zsh-help
+zinit light Freed-Wu/fzf-tab-source
 
 # Add in snippets
 zinit snippet OMZP::git
@@ -66,8 +67,12 @@ setopt hist_save_no_dups
 setopt hist_ignore_dups
 setopt hist_find_no_dups
 setopt notify
+setopt globdots
 
 # Completion styling
+zstyle ':fzf-tab:*' switch-group '<' '>'
+zstyle ':fzf-tab:*' fzf-bindings 'ctrl-y:accept' 'ctrl-w:accept'
+zstyle ':fzf-tab:*' fzf-min-height 25
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' menu no
@@ -77,8 +82,6 @@ zstyle ':fzf-tab:complete:z:*' fzf-preview 'eza -1 --group-directories-first --i
 zstyle ':fzf-tab:complete:zz:*' fzf-preview 'eza -aD1 --group-directories-first --icons --color=always $realpath'
 zstyle ':fzf-tab:complete:zza:*' fzf-preview 'eza -a1 --group-directories-first --icons --color=always $realpath'
 zstyle ':fzf-tab:complete:zze:*' fzf-preview 'eza -alh --group-directories-first --icons --color=always $realpath'
-zstyle ':fzf-tab:*' switch-group '<' '>'
-zstyle ':fzf-tab:*' fzf-bindings 'ctrl-y:accept' 'ctrl-w:accept'
 
 # Shell integrations
 # The plugin will auto execute this zvm_after_init function
