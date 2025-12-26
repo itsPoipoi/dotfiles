@@ -7,7 +7,7 @@ NC=$'\e[0m'
 # Install deps & full upgrade
 yay -S --noconfirm --needed base-devel gcc make yazi ffmpeg 7zip jq poppler fzf zoxide eza tree-sitter-cli thunar nwg-displays resvg imagemagick git ripgrep fd unzip neovim trash-cli bat fastfetch stow man-db less zsh
 omarchy-install-terminal kitty
-yay -R --noconfirm omarchy-chromium alacritty ghostty nautilus
+yay -R --noconfirm nautilus
 
 # Change default shell to zsh
 if [ ! "{{$SHELL}}" = "{{/usr/bin/zsh}}" ]; then
