@@ -7,6 +7,7 @@ NC=$'\e[0m'
 # Install deps & full upgrade
 yay -S --noconfirm --needed base-devel gcc make yazi ffmpeg 7zip jq poppler fzf tumbler zoxide glow grc eza tree-sitter-cli pandoc-cli nwg-displays resvg imagemagick git ripgrep fd unzip neovim trash-cli bat fastfetch stow man-db less zsh
 omarchy-install-terminal kitty
+yay -S --noconfirm --needed ntfs-3g dosfstools xfsprogs f2fs-tools udftools
 yay -S --noconfirm --needed thunar thunar-archive-plugin thunar-volman thunar-media-tags-plugin xarchiver
 yay -R --noconfirm nautilus
 
