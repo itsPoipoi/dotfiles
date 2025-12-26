@@ -7,7 +7,7 @@ NC=$'\e[0m'
 # Install deps & full upgrade
 yay -S --noconfirm --needed base-devel gcc make yazi ffmpeg 7zip jq poppler fzf tumbler zoxide glow grc eza tree-sitter-cli pandoc-cli nwg-displays resvg imagemagick git ripgrep fd unzip neovim trash-cli bat fastfetch stow man-db less zsh
 omarchy-install-terminal kitty
-yay -S --noconfirm thunar thunar-archive-plugin thunar-volman thunar-media-tags-plugin xarchiver
+yay -S --noconfirm --needed thunar thunar-archive-plugin thunar-volman thunar-media-tags-plugin xarchiver
 yay -R --noconfirm nautilus
 
 # Change default shell to zsh
@@ -83,8 +83,23 @@ case $user_input in
         ;;
 esac
 
+if [ ! -f /usr/bin/discord ]; then
+    echo "${YELLOW}Setup Discord?${NC} "
+    echo "${RED}Press ${GREEN}Y ${RED}to accept / Any other key to refuse:${NC}"
+    read -n 1 -r user_input
+    echo 
+    case $user_input in
+        [yY])
+            yay -S -needed --noconfirm discord_arch_electron
+            ;;
+        *)
+            echo "${GREEN}Install Discord manually."
+            ;;
+    esac
+fi
+
 if [ ! -f $HOME/.spicetify/spicetify ]; then
-    echo "${YELLOW}Setup spicetify? ${RED}(Spotify needs to be logged in once first!)${NC} "
+    echo "${YELLOW}Setup Spicetify? ${RED}(Spotify needs to be logged in once first!)${NC} "
     echo "${RED}Press ${GREEN}Y ${RED}to accept / Any other key to refuse:${NC}"
     read -n 1 -r user_input
     echo 
@@ -99,7 +114,7 @@ if [ ! -f $HOME/.spicetify/spicetify ]; then
             spicetify backup apply
             ;;
         *)
-            echo "${GREEN}Install spicetify manually."
+            echo "${GREEN}Install Spicetify manually."
             ;;
     esac
 fi
