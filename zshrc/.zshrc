@@ -357,5 +357,3 @@ alias zi="__zoxide_zi"
 alias kssh="kitten ssh"
 alias ezrc='nvim ~/.zshrc'
 alias src="clear; source ~/.zshrc"
-
-export PATH=$PATH:/home/poipoi/.spicetify
