@@ -83,24 +83,26 @@ case $user_input in
         ;;
 esac
 
-echo "${YELLOW}Setup spicetify? ${RED}(Spotify needs to be logged in once first!)${NC} "
-echo "${RED}Press ${GREEN}Y ${RED}to accept / Any other key to refuse:${NC}"
-read -n 1 -r user_input
-echo 
-case $user_input in
-    [yY])
-        sudo chmod a+wr /opt/spotify
-        sudo chmod a+wr /opt/spotify/Apps -R
-        curl -fsSL https://raw.githubusercontent.com/spicetify/cli/main/install.sh | sh
-        spicetify config spotify_path "/opt/spotify"
-        spicetify config custom_apps new-releases
-        spicetify config custom_apps lyrics-plus
-        spicetify backup apply
-        ;;
-    *)
-        echo "${GREEN}Install spicetify manually."
-        ;;
-esac
+if [ ! -f $HOME/.spicetify/spicetify ]; then
+    echo "${YELLOW}Setup spicetify? ${RED}(Spotify needs to be logged in once first!)${NC} "
+    echo "${RED}Press ${GREEN}Y ${RED}to accept / Any other key to refuse:${NC}"
+    read -n 1 -r user_input
+    echo 
+    case $user_input in
+        [yY])
+            sudo chmod a+wr /opt/spotify
+            sudo chmod a+wr /opt/spotify/Apps -R
+            curl -fsSL https://raw.githubusercontent.com/spicetify/cli/main/install.sh | sh
+            spicetify config spotify_path "/opt/spotify"
+            spicetify config custom_apps new-releases
+            spicetify config custom_apps lyrics-plus
+            spicetify backup apply
+            ;;
+        *)
+            echo "${GREEN}Install spicetify manually."
+            ;;
+    esac
+fi
 
 echo "${YELLOW}Run stow install script and reload Hyprland if it's installed?${NC} "
 echo "${RED}Press ${GREEN}Y ${RED}to accept / Any other key to refuse:${NC}"
