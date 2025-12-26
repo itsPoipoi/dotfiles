@@ -90,7 +90,7 @@ if [ ! -f /usr/bin/discord ]; then
     echo 
     case $user_input in
         [yY])
-            yay -S -needed --noconfirm discord_arch_electron
+            yay -S --needed --noconfirm discord_arch_electron
             ;;
         *)
             echo "${GREEN}Install Discord manually."
