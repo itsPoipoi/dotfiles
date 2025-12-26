@@ -112,6 +112,7 @@ if [ ! -f $HOME/.spicetify/spicetify ]; then
             spicetify config custom_apps new-releases
             spicetify config custom_apps lyrics-plus
             spicetify backup apply
+            \rm -f $HOME/dotfiles/install.log
             ;;
         *)
             echo "${GREEN}Install Spicetify manually."
