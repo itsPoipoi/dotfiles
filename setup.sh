@@ -30,6 +30,10 @@ if [ ! "{{$SHELL}}" = "{{/usr/bin/zsh}}" ]; then
     esac
 fi
 
+# Neovim
+echo "${YELLOW}Installing Neovim config...${NC} "
+git clone https://github.com/itsPoipoi/neovim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
+
 if [ ! -f ~/.ssh/id_rsa.pub ]; then
     echo "${YELLOW}SSH key not found. Generate one now?${NC} "
     echo "${RED}Press ${GREEN}Y ${RED}to accept / Any other key to refuse:${NC}"
