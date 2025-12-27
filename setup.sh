@@ -31,21 +31,20 @@ if [ ! "{{$SHELL}}" = "{{/usr/bin/zsh}}" ]; then
 fi
 
 # Install sddm
-if [ ! -f /usr/bin/sddm ]; then
-    echo "${YELLOW}Install sddm?${NC} "
-    echo "${RED}Press ${GREEN}Y ${RED}to accept / Any other key to refuse:"
-    read -n 1 -r user_input
-    echo 
-    case $user_input in
-        [yY])
-            yay -S --noconfirm --needed sddm
-            sudo systemctl enable sddm
-            ;;
-        *)
-            echo "${GREEN}sddm is not installed."
-            ;;
-    esac
-fi
+echo "${YELLOW}Setup sddm?${NC} "
+echo "${RED}Press ${GREEN}Y ${RED}to accept / Any other key to refuse:"
+read -n 1 -r user_input
+echo 
+case $user_input in
+    [yY])
+        yay -S --noconfirm --needed sddm
+        sudo systemctl enable sddm
+        sudo rm -f /etc/sddm.conf.d/autologin.conf
+        ;;
+    *)
+        echo "${GREEN}Skipping sddm setup."
+        ;;
+esac
 
 # Neovim
 echo "${YELLOW}Installing Neovim config...${NC} "
