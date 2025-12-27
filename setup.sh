@@ -41,6 +41,7 @@ case $user_input in
         sudo systemctl enable sddm
         sudo rm -f /etc/sddm.conf.d/autologin.conf
         bash -c "$(curl -fsSL https://raw.githubusercontent.com/keyitdev/sddm-astronaut-theme/master/setup.sh)"
+        \rm -rf $HOME/sddm-astronaut-theme/
         ;;
     *)
         echo "${GREEN}Skipping sddm setup."
@@ -49,6 +50,7 @@ esac
 
 # Neovim
 echo "${YELLOW}Installing Neovim config...${NC} "
+mv $HOME/.config/nvim $HOME/.config/nvim.bak
 git clone https://github.com/itsPoipoi/neovim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
 
 if [ ! -f ~/.ssh/id_rsa.pub ]; then
