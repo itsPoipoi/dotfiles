@@ -30,6 +30,23 @@ if [ ! "{{$SHELL}}" = "{{/usr/bin/zsh}}" ]; then
     esac
 fi
 
+# Install sddm
+if [ ! -f /usr/bin/sddm ]; then
+    echo "${YELLOW}Install sddm?${NC} "
+    echo "${RED}Press ${GREEN}Y ${RED}to accept / Any other key to refuse:"
+    read -n 1 -r user_input
+    echo 
+    case $user_input in
+        [yY])
+            yay -S --noconfirm --needed sddm
+            sudo systemctl enable sddm
+            ;;
+        *)
+            echo "${GREEN}sddm is not installed."
+            ;;
+    esac
+fi
+
 # Neovim
 echo "${YELLOW}Installing Neovim config...${NC} "
 git clone https://github.com/itsPoipoi/neovim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
