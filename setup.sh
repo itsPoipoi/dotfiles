@@ -10,7 +10,7 @@ mkdir -p $HOME/.config/xfce4
 yay -S --noconfirm --needed base-devel gcc make yazi ffmpeg 7zip jq poppler fzf tumbler zoxide glow grc eza tree-sitter-cli pandoc-cli nwg-displays resvg imagemagick git ripgrep fd unzip neovim trash-cli bat fastfetch stow man-db less zsh
 omarchy-install-terminal kitty
 yay -S --noconfirm --needed ntfs-3g dosfstools xfsprogs f2fs-tools udftools
-yay -S --noconfirm --needed thunar thunar-archive-plugin thunar-volman thunar-media-tags-plugin xarchiver
+yay -S --noconfirm --needed thunar thunar-archive-plugin thunar-media-tags-plugin xarchiver
 yay -R --noconfirm nautilus
 
 # Change default shell to zsh
@@ -30,28 +30,59 @@ if [ ! "{{$SHELL}}" = "{{/usr/bin/zsh}}" ]; then
     esac
 fi
 
+sxerg() {
+    echo "${YELLOW}Set Ergol as x11 keymap (for sddm)?${NC} "
+    echo "${RED}Press ${GREEN}Y ${RED}to accept / Any other key to refuse:${NC}"
+    read -n 1 -r user_input
+    echo 
+    case $user_input in
+        [yY])
+            sudo localectl set-x11-keymap fr pc105 ergol
+            ;;
+        *)
+            echo "${GREEN}X11 keymap was not changed."
+            ;;
+    esac
+}
+
 # Install sddm
-echo "${YELLOW}Setup sddm?${NC} "
-echo "${RED}Press ${GREEN}Y ${RED}to accept / Any other key to refuse:"
-read -n 1 -r user_input
-echo 
-case $user_input in
-    [yY])
-        yay -S --noconfirm --needed sddm
-        sudo systemctl enable sddm
-        sudo rm -f /etc/sddm.conf.d/autologin.conf
-        bash -c "$(curl -fsSL https://raw.githubusercontent.com/keyitdev/sddm-astronaut-theme/master/setup.sh)"
-        \rm -rf $HOME/sddm-astronaut-theme/
-        ;;
-    *)
-        echo "${GREEN}Skipping sddm setup."
-        ;;
-esac
+if [ -f /etc/sddm.conf.d/autologin.conf ]; then
+    echo "${YELLOW}Setup sddm?${NC} "
+    echo "${RED}Press ${GREEN}Y ${RED}to accept / Any other key to refuse:"
+    read -n 1 -r user_input
+    echo 
+    case $user_input in
+        [yY])
+            yay -S --noconfirm --needed sddm
+            sudo systemctl enable sddm
+            sudo rm -f /etc/sddm.conf.d/autologin.conf
+            bash -c "$(curl -fsSL https://raw.githubusercontent.com/keyitdev/sddm-astronaut-theme/master/setup.sh)"
+            \rm -rf $HOME/sddm-astronaut-theme/
+            sxerg
+            ;;
+        *)
+            echo "${GREEN}Skipping sddm setup."
+            ;;
+    esac
+fi
 
 # Neovim
-echo "${YELLOW}Installing Neovim config...${NC} "
-mv $HOME/.config/nvim $HOME/.config/nvim.bak
-git clone https://github.com/itsPoipoi/neovim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
+if [ ! -f ~/.config/nvim/setupcheck ]; then
+    echo "${YELLOW}Import Neovim config?${NC} "
+    echo "${RED}Press ${GREEN}Y ${RED}to accept / Any other key to refuse:${NC}"
+    read -n 1 -r user_input
+    echo 
+    case $user_input in
+        [yY])
+            echo "${YELLOW}Installing Neovim config...${NC} "
+            mv $HOME/.config/nvim $HOME/.config/nvim.bak
+            git clone https://github.com/itsPoipoi/neovim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
+            ;;
+        *)
+            echo "${GREEN}Run ${RED}sshkey ${GREEN}manually."
+            ;;
+    esac
+fi
 
 if [ ! -f ~/.ssh/id_rsa.pub ]; then
     echo "${YELLOW}SSH key not found. Generate one now?${NC} "
@@ -80,19 +111,6 @@ case $user_input in
         ;;
     *)
         echo "${GREEN}Run ${RED}gconf ${GREEN}manually."
-        ;;
-esac
-
-echo "${YELLOW}Set Ergol as x11 keymap (for sddm)?${NC} "
-echo "${RED}Press ${GREEN}Y ${RED}to accept / Any other key to refuse:${NC}"
-read -n 1 -r user_input
-echo 
-case $user_input in
-    [yY])
-        sudo localectl set-x11-keymap fr pc105 ergol
-        ;;
-    *)
-        echo "${GREEN}Run ${RED}sxerg ${GREEN}manually."
         ;;
 esac
 
@@ -163,4 +181,4 @@ esac
 
 # Complete message
 echo
-echo "${GREEN}Setup complete! Profile reloading!${NC}"; sleep 2; clear; zsh
+echo "${GREEN}Setup complete! Profile reloading!${NC}"; sleep 1; clear; zsh

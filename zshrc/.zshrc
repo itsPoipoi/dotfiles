@@ -248,9 +248,6 @@ gpp() {
     git push
 }
 
-# Set Ergol as x11 keymap
-alias {setx11ergol,sxerg}=sudo localectl set-x11-keymap fr pc105 ergol
-
 # Yazi
 function y() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
