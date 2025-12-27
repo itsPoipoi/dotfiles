@@ -40,6 +40,7 @@ case $user_input in
         yay -S --noconfirm --needed sddm
         sudo systemctl enable sddm
         sudo rm -f /etc/sddm.conf.d/autologin.conf
+        bash -c "$(curl -fsSL https://raw.githubusercontent.com/keyitdev/sddm-astronaut-theme/master/setup.sh)"
         ;;
     *)
         echo "${GREEN}Skipping sddm setup."
