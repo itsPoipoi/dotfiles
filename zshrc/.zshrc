@@ -235,8 +235,8 @@ alias sshkey="ssh-keygen -t rsa -b 4096 -C 'poipoigit@gmail.com'"
 # Quick git config
 gitconfig() {
     git config --global pull.rebase false
-	git config --global user.name "itsPoipoi"
-	git config --global user.email "poipoigit@gmail.com"
+	git config --global user.name 'itsPoipoi'
+	git config --global user.email 'poipoigit@gmail.com'
 	echo "${YELLOW}GitHub name & email are now set globally."
 }
 alias gconf="gitconfig"

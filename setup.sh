@@ -37,7 +37,7 @@ if [ ! -f ~/.ssh/id_rsa.pub ]; then
     echo 
     case $user_input in
         [yY])
-           ssh-keygen -t rsa -b 4096 -C "poipoigit@gmail.com" 
+           ssh-keygen -t rsa -b 4096 -C 'poipoigit@gmail.com'
             ;;
         *)
             echo "${GREEN}Run ${RED}sshkey ${GREEN}manually."
@@ -52,8 +52,8 @@ echo
 case $user_input in
     [yY])
         git config --global pull.rebase false
-        git config --global user.name "itsPoipoi"
-        git config --global user.email "poipoigit@gmail.com"
+        git config --global user.name 'itsPoipoi'
+        git config --global user.email 'poipoigit@gmail.com'
         ;;
     *)
         echo "${GREEN}Run ${RED}gconf ${GREEN}manually."
