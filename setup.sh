@@ -75,7 +75,10 @@ if [ ! -f ~/.config/nvim/setupcheck ]; then
     case $user_input in
         [yY])
             echo "${YELLOW}Installing Neovim config...${NC} "
-            mv $HOME/.config/nvim $HOME/.config/nvim.bak
+            mv ~/.config/nvim{,.bak}
+            mv ~/.local/share/nvim{,.bak}
+            mv ~/.local/state/nvim{,.bak}
+            mv ~/.cache/nvim{,.bak}
             git clone https://github.com/itsPoipoi/neovim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
             ;;
         *)
