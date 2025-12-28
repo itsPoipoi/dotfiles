@@ -5,8 +5,8 @@ YELLOW=$'\e[0;33m'
 NC=$'\e[0m'
 
 # Install deps & full upgrade
-mkdir -p $HOME/.config/Thunar
-mkdir -p $HOME/.config/xfce4
+mkdir -p "$HOME/.config/Thunar"
+mkdir -p "$HOME/.config/xfce4"
 yay -S --noconfirm --needed base-devel gcc make yazi ffmpeg 7zip jq poppler fzf tumbler zoxide glow grc eza tree-sitter-cli pandoc-cli nwg-displays resvg imagemagick git ripgrep fd unzip neovim trash-cli bat fastfetch stow man-db less zsh
 omarchy-install-terminal kitty
 yay -S --noconfirm --needed ntfs-3g dosfstools xfsprogs f2fs-tools udftools
@@ -22,7 +22,7 @@ if [ ! "{{$SHELL}}" = "{{/usr/bin/zsh}}" ]; then
   case $user_input in
   [yY])
     echo "${GREEN}Making zsh the default shell."
-    chsh -s $(which zsh)
+    chsh -s "$(which zsh)"
     ;;
   *)
     echo "${GREEN}Bash remains the default shell."
@@ -57,7 +57,7 @@ if [ -f /etc/sddm.conf.d/autologin.conf ]; then
     sudo systemctl enable sddm
     sudo rm -f /etc/sddm.conf.d/autologin.conf
     bash -c "$(curl -fsSL https://raw.githubusercontent.com/keyitdev/sddm-astronaut-theme/master/setup.sh)"
-    \rm -rf $HOME/sddm-astronaut-theme/
+    \rm -rf "$HOME/sddm-astronaut-theme/"
     sxerg
     ;;
   *)
@@ -146,7 +146,7 @@ if [ ! -f /usr/bin/discord ]; then
   esac
 fi
 
-if [ ! -f $HOME/.spicetify/spicetify ]; then
+if [ ! -f "$HOME/.spicetify/spicetify" ]; then
   echo "${YELLOW}Setup Spicetify? ${RED}(Spotify needs to be logged in once first!)${NC} "
   echo "${RED}Press ${GREEN}Y ${RED}to accept / Any other key to refuse:${NC}"
   read -n 1 -r user_input
@@ -160,7 +160,7 @@ if [ ! -f $HOME/.spicetify/spicetify ]; then
     spicetify config custom_apps new-releases
     spicetify config custom_apps lyrics-plus
     spicetify backup apply
-    \rm -f $HOME/dotfiles/install.log
+    \rm -f "$HOME/dotfiles/install.log"
     ;;
   *)
     echo "${GREEN}Install Spicetify manually."

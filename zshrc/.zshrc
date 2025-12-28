@@ -123,10 +123,10 @@ zle -N ffclear
 export EDITOR=nvim
 export VISUAL=nvim
 
-# Fastfetch on Startup
-if [ -f /usr/bin/fastfetch ]; then
-	fastfetch
-fi
+# # Fastfetch on Startup
+# if [ -f /usr/bin/fastfetch ]; then
+# 	fastfetch
+# fi
 
 # Extracts any archive(s) (if unp isn't installed)
 extract() {

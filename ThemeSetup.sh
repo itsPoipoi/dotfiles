@@ -1,20 +1,22 @@
 #!/usr/bin/env sh
-\rm -rf $HOME/.local/share/omarchy/themes/catppuccin-latte/
-\rm -rf $HOME/.local/share/omarchy/themes/everforest/
-\rm -rf $HOME/.local/share/omarchy/themes/flexoki-light/
-\rm -rf $HOME/.local/share/omarchy/themes/gruvbox/
-\rm -rf $HOME/.local/share/omarchy/themes/nord/
-\rm -rf $HOME/.local/share/omarchy/themes/rose-pine/
-\rm -rf $HOME/.local/share/omarchy/themes/kanagawa/
-\rm -rf $HOME/.local/share/omarchy/themes/hackerman/
-\rm -f $HOME/.config/omarchy/themes/catppuccin-latte
-\rm -f $HOME/.config/omarchy/themes/everforest
-\rm -f $HOME/.config/omarchy/themes/flexoki-light
-\rm -f $HOME/.config/omarchy/themes/gruvbox
-\rm -f $HOME/.config/omarchy/themes/nord
-\rm -f $HOME/.config/omarchy/themes/rose-pine
-\rm -f $HOME/.config/omarchy/themes/kanagawa
-\rm -f $HOME/.config/omarchy/themes/hackerman
+\rm -rf "$HOME/.local/share/omarchy/themes/catppuccin-latte/"
+\rm -rf "$HOME/.local/share/omarchy/themes/everforest/"
+\rm -rf "$HOME/.local/share/omarchy/themes/flexoki-light/"
+\rm -rf "$HOME/.local/share/omarchy/themes/gruvbox/"
+\rm -rf "$HOME/.local/share/omarchy/themes/nord/"
+\rm -rf "$HOME/.local/share/omarchy/themes/rose-pine/"
+\rm -rf "$HOME/.local/share/omarchy/themes/kanagawa/"
+\rm -rf "$HOME/.local/share/omarchy/themes/hackerman/"
+\rm -rf "$HOME/.local/share/omarchy/themes/ristretto/"
+\rm -f "$HOME/.config/omarchy/themes/catppuccin-latte"
+\rm -f "$HOME/.config/omarchy/themes/everforest"
+\rm -f "$HOME/.config/omarchy/themes/flexoki-light"
+\rm -f "$HOME/.config/omarchy/themes/gruvbox"
+\rm -f "$HOME/.config/omarchy/themes/nord"
+\rm -f "$HOME/.config/omarchy/themes/rose-pine"
+\rm -f "$HOME/.config/omarchy/themes/kanagawa"
+\rm -f "$HOME/.config/omarchy/themes/hackerman"
+\rm -f "$HOME/.config/omarchy/themes/ristretto"
 omarchy-theme-install https://github.com/JJDizz1L/aetheria.git
 omarchy-theme-install https://github.com/bjarneo/omarchy-aura-theme
 omarchy-theme-install https://github.com/HANCORE-linux/omarchy-blackturq-theme.git
@@ -32,5 +34,5 @@ omarchy-theme-install https://github.com/tahayvr/omarchy-sunset-drive-theme
 omarchy-theme-install https://github.com/Justin-De-Sio/omarchy-tokyoled-theme
 
 # Slay the demon!
-rm -f $HOME/.config/omarchy/themes/demon/backgrounds/*
-cp $HOME/.config/omarchy/themes/matte-black/backgrounds/* $HOME/.config/omarchy/themes/demon/backgrounds/
+rm -f "$HOME/.config/omarchy/themes/demon/backgrounds/*"
+cp "$HOME/.config/omarchy/themes/matte-black/backgrounds/*" "$HOME/.config/omarchy/themes/demon/backgrounds/"
