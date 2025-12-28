@@ -30,3 +30,7 @@ omarchy-theme-install https://github.com/HANCORE-linux/omarchy-sapphire-theme.gi
 omarchy-theme-install https://github.com/motorsss/omarchy-solarizedosaka-theme
 omarchy-theme-install https://github.com/tahayvr/omarchy-sunset-drive-theme
 omarchy-theme-install https://github.com/Justin-De-Sio/omarchy-tokyoled-theme
+
+# Slay the demon!
+rm -f $HOME/.config/omarchy/themes/demon/backgrounds/*
+cp $HOME/.config/omarchy/themes/matte-black/backgrounds/* $HOME/.config/omarchy/themes/demon/backgrounds/

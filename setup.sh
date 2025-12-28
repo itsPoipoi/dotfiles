@@ -123,10 +123,10 @@ read -n 1 -r user_input
 echo 
 case $user_input in
     [yY])
-        /bin/bash ~/dotfiles/kanata/.config/kanata/kanata-setup.sh
+        /bin/bash ~/dotfiles/kanata/kanata-setup.sh
         ;;
     *)
-        echo "${GREEN}Run ${RED}~/dotfiles/kanata/.config/kanata/kanata-setup.sh ${GREEN}manually."
+        echo "${GREEN}Run ${RED}~/dotfiles/kanata/kanata-setup.sh ${GREEN}manually."
         ;;
 esac
 
