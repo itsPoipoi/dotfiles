@@ -4,10 +4,13 @@
 WP_FOLDER=~/Pictures/Wallpapers
 
 # Time in seconds to change wallpaper
-sleep 1200
+sleep 5
 WAIT_TIME=1200
 STARTPID=$(pidof swaybg)
 kill "$STARTPID"
+
+FILE2START=$(find "$WP_FOLDER" -type f -name '*' | shuf -n1)
+swaybg -o DP-1 -i "$FILE2START" -m fill &
 
 while true; do
   PID=$(pidof swaybg | awk '{print $2}')
