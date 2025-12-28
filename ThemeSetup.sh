@@ -19,7 +19,6 @@
 \rm -f "$HOME/.config/omarchy/themes/ristretto"
 omarchy-theme-install https://github.com/JJDizz1L/aetheria.git
 omarchy-theme-install https://github.com/bjarneo/omarchy-aura-theme
-omarchy-theme-install https://github.com/HANCORE-linux/omarchy-blackturq-theme.git
 omarchy-theme-install https://github.com/HANCORE-linux/omarchy-demon-theme.git
 omarchy-theme-install https://github.com/ShehabShaef/omarchy-drac-theme
 omarchy-theme-install https://github.com/catlee/omarchy-dracula-theme
