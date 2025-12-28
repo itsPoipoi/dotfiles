@@ -8,6 +8,8 @@
 \rm -rf "$HOME/.local/share/omarchy/themes/kanagawa/"
 \rm -rf "$HOME/.local/share/omarchy/themes/hackerman/"
 \rm -rf "$HOME/.local/share/omarchy/themes/ristretto/"
+\rm -rf "$HOME/.local/share/omarchy/themes/catppuccin/"
+\rm -rf "$HOME/.local/share/omarchy/themes/ethereal/"
 \rm -f "$HOME/.config/omarchy/themes/catppuccin-latte"
 \rm -f "$HOME/.config/omarchy/themes/everforest"
 \rm -f "$HOME/.config/omarchy/themes/flexoki-light"
@@ -17,18 +19,11 @@
 \rm -f "$HOME/.config/omarchy/themes/kanagawa"
 \rm -f "$HOME/.config/omarchy/themes/hackerman"
 \rm -f "$HOME/.config/omarchy/themes/ristretto"
+\rm -f "$HOME/.config/omarchy/themes/catppuccin"
+\rm -f "$HOME/.config/omarchy/themes/ethereal"
 omarchy-theme-install https://github.com/bjarneo/omarchy-aura-theme
-omarchy-theme-install https://github.com/HANCORE-linux/omarchy-demon-theme.git
 omarchy-theme-install https://github.com/catlee/omarchy-dracula-theme
-omarchy-theme-install https://github.com/dotsilva/omarchy-dotrb-theme
 omarchy-theme-install https://github.com/bjarneo/omarchy-futurism-theme
 omarchy-theme-install https://github.com/monoooki/omarchy-neo-sploosh-theme
 omarchy-theme-install https://github.com/bjarneo/omarchy-pulsar-theme
-omarchy-theme-install https://github.com/HANCORE-linux/omarchy-sapphire-theme.git
-omarchy-theme-install https://github.com/motorsss/omarchy-solarizedosaka-theme
-omarchy-theme-install https://github.com/tahayvr/omarchy-sunset-drive-theme
 omarchy-theme-install https://github.com/Justin-De-Sio/omarchy-tokyoled-theme
-
-# Slay the demon!
-rm -f $HOME/.config/omarchy/themes/demon/backgrounds/*
-cp $HOME/.config/omarchy/themes/matte-black/backgrounds/* $HOME/.config/omarchy/themes/demon/backgrounds/
