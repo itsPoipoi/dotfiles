@@ -20,9 +20,9 @@ while true; do
   swaybg -o DP-3 -i "$FILE" -m fill &
   swaybg -o eDP-1 -i "$FILE" -m fill &
   sleep 0.5
-  kill "$PID"
-  kill "$PID2"
-  kill "$PID3"
+  kill "$PID";
+  kill "$PID2";
+  kill "$PID3";
   sleep "$WAIT_TIME"
   PID=$(pidof swaybg | awk '{print $3}')
   PID2=$(pidof swaybg | awk '{print $4}')
@@ -31,8 +31,8 @@ while true; do
   swaybg -o DP-1 -i "$FILE" -m fill &
   swaybg -o eDP-1 -i "$FILE" -m fill &
   sleep 0.5
-  kill "$PID"
-  kill "$PID2"
-  kill "$PID3"
+  kill "$PID";
+  kill "$PID2";
+  kill "$PID3";
   sleep "$WAIT_TIME"
 done
