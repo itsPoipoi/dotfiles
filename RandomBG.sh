@@ -11,6 +11,7 @@ kill "$STARTPID"
 
 FILE2START=$(find "$WP_FOLDER" -type f -name '*' | shuf -n1)
 swaybg -o DP-1 -i "$FILE2START" -m fill &
+sleep 5
 
 while true; do
   PID=$(pidof swaybg | awk '{print $3}')
