@@ -167,6 +167,19 @@ if [ ! -f $HOME/.spicetify/spicetify ]; then
     esac
 fi
 
+echo "${YELLOW}Setup a selection of Omarchy themes?${NC} "
+echo "${RED}Press ${GREEN}Y ${RED}to accept / Any other key to refuse:${NC}"
+read -n 1 -r user_input
+echo 
+case $user_input in
+    [yY])
+        /bin/bash ~/dotfiles/ThemeSetup.sh
+        ;;
+    *)
+        echo "${GREEN}Run ${RED}~/dotfiles/ThemeSetup.sh ${GREEN}manually."
+        ;;
+esac
+
 echo "${YELLOW}Run stow install script and reload Hyprland if it's installed?${NC} "
 echo "${RED}Press ${GREEN}Y ${RED}to accept / Any other key to refuse:${NC}"
 read -n 1 -r user_input
