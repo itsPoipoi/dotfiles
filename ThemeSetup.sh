@@ -9,7 +9,7 @@
 \rm -rf "$HOME/.local/share/omarchy/themes/hackerman/"
 \rm -rf "$HOME/.local/share/omarchy/themes/ristretto/"
 \rm -rf "$HOME/.local/share/omarchy/themes/catppuccin/"
-\rm -rf "$HOME/.local/share/omarchy/themes/ethereal/"
+# \rm -rf "$HOME/.local/share/omarchy/themes/ethereal/"
 \rm -f "$HOME/.config/omarchy/themes/catppuccin-latte"
 \rm -f "$HOME/.config/omarchy/themes/everforest"
 \rm -f "$HOME/.config/omarchy/themes/flexoki-light"
@@ -20,7 +20,7 @@
 \rm -f "$HOME/.config/omarchy/themes/hackerman"
 \rm -f "$HOME/.config/omarchy/themes/ristretto"
 \rm -f "$HOME/.config/omarchy/themes/catppuccin"
-\rm -f "$HOME/.config/omarchy/themes/ethereal"
+# \rm -f "$HOME/.config/omarchy/themes/ethereal"
 omarchy-theme-install https://github.com/bjarneo/omarchy-aura-theme
 omarchy-theme-install https://github.com/catlee/omarchy-dracula-theme
 omarchy-theme-install https://github.com/bjarneo/omarchy-futurism-theme
