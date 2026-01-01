@@ -41,5 +41,4 @@ omarchy-theme-install https://github.com/somerocketeer/omarchy-nagai-poolside-th
 omarchy-theme-install https://github.com/dotsilva/omarchy-purplewave-theme
 omarchy-theme-install https://github.com/guilhermetk/omarchy-rose-pine-dark
 omarchy-theme-install https://github.com/TyRichards/omarchy-space-monkey-theme/
-omarchy-theme-install https://github.com/rondilley/omarchy-sunset-theme
 omarchy-theme-install https://github.com/motorsss/omarchy-solarizedosaka-theme
