@@ -11,7 +11,7 @@ yay -S --noconfirm --needed base-devel gcc make yazi ffmpeg 7zip jq poppler fzf 
 omarchy-install-terminal kitty
 yay -S --noconfirm --needed ntfs-3g dosfstools xfsprogs f2fs-tools udftools
 yay -S --noconfirm --needed thunar thunar-archive-plugin thunar-media-tags-plugin xarchiver
-yay -R --noconfirm nautilus
+yay -R --noconfirm nautilus typora 1password-cli 1password-beta
 
 # Change default shell to zsh
 if [ ! "{{$SHELL}}" = "{{/usr/bin/zsh}}" ]; then
@@ -167,6 +167,18 @@ if [ ! -f "$HOME/.spicetify/spicetify" ]; then
     ;;
   esac
 fi
+
+echo "${GREEN}Removing undesirable WebApps..."
+omarchy-webapp-remove Basecamp
+omarchy-webapp-remove Figma
+omarchy-webapp-remove Fizzy
+omarchy-webapp-remove GitHub
+omarchy-webapp-remove "Google Contacts"
+omarchy-webapp-remove "Google Photos"
+omarchy-webapp-remove HEY
+omarchy-webapp-remove X
+omarchy-webapp-remove YouTube
+omarchy-webapp-remove Zoom
 
 echo "${YELLOW}Setup a selection of Omarchy themes?${NC} "
 echo "${RED}Press ${GREEN}Y ${RED}to accept / Any other key to refuse:${NC}"
