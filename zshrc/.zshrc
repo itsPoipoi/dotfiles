@@ -324,7 +324,7 @@ alias p="ps aux | rg "
 alias topcpu="/bin/ps -eo pcpu,pid,user,args | sort -k 1 -r | head -10"
 
 # Search files in the current folder
-alias f="find . | rg "
+alias f="fd . | rg "
 
 # Show open ports
 alias openports='netstat -nape --inet'
@@ -332,10 +332,11 @@ alias openports='netstat -nape --inet'
 # Alias's to show disk space and space used in a folder
 alias diskspace="du -S | sort -n -r |more"
 alias folders='du -h --max-depth=1'
-alias folderssort='find . -maxdepth 1 -type d -print0 | xargs -0 du -sk | sort -rn'
+alias folderssort='fd . -maxdepth 1 -type d -print0 | xargs -0 du -sk | sort -rn'
 
 # Alias's to modified commands
 alias grep="rg"
+alias find="fd"
 alias cat="bat"
 alias cp='cp -i'
 alias mv='mv -i'
