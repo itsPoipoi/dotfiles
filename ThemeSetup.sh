@@ -37,7 +37,6 @@ omarchy-theme-install https://github.com/euandeas/omarchy-flexoki-dark-theme.git
 omarchy-theme-install https://github.com/tahayvr/omarchy-gold-rush-theme
 omarchy-theme-install https://github.com/tahayvr/omarchy-vhs80-theme
 omarchy-theme-install https://github.com/bjarneo/omarchy-monokai-theme
-omarchy-theme-install https://github.com/somerocketeer/omarchy-nagai-poolside-theme
 omarchy-theme-install https://github.com/dotsilva/omarchy-purplewave-theme
 omarchy-theme-install https://github.com/guilhermetk/omarchy-rose-pine-dark
 omarchy-theme-install https://github.com/TyRichards/omarchy-space-monkey-theme/
