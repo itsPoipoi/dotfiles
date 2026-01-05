@@ -15,6 +15,9 @@ yay -R --noconfirm nautilus
 yay -R --noconfirm typora
 yay -R --noconfirm 1password-cli
 yay -R --noconfirm 1password-beta
+yay -R --noconfirm fcitx5-qt
+yay -R --noconfirm fcitx5-gtk
+yay -R --noconfirm fcitx5
 
 # Change default shell to zsh
 if [ ! "{{$SHELL}}" = "{{/usr/bin/zsh}}" ]; then
