@@ -100,8 +100,8 @@ function lazykeys {
     bindkey -M viins -s '^F' 'zi\n'
     bindkey -M vicmd -s '^Y' '\ny\n'
     bindkey -M viins -s '^Y' 'y\n'
-    bindkey -M vicmd '^L' ffclear
-    bindkey -M viins '^L' ffclear
+    # bindkey -M vicmd '^L' ffclear
+    # bindkey -M viins '^L' ffclear
     bindkey -M viins "^W" forward-word
     bindkey -M viins "^B" backward-kill-word
     bindkey -M viins "\e[1;5C" forward-word
@@ -112,8 +112,8 @@ function lazykeys {
 zvm_after_init_commands+=(lazykeys)
 
 # Fastfetch on clear
-function ffclear { clear; fastfetch; zle redisplay; }
-zle -N ffclear
+# function ffclear { clear; fastfetch; zle redisplay; }
+# zle -N ffclear
 
 #######################################################
 # SPECIAL FUNCTIONS
