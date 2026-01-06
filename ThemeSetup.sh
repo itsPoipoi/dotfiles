@@ -41,3 +41,8 @@ omarchy-theme-install https://github.com/dotsilva/omarchy-purplewave-theme
 omarchy-theme-install https://github.com/guilhermetk/omarchy-rose-pine-dark
 omarchy-theme-install https://github.com/TyRichards/omarchy-space-monkey-theme/
 omarchy-theme-install https://github.com/motorsss/omarchy-solarizedosaka-theme
+
+# BG Setter
+rm -f "$HOME/.config/omarchy/themes/tokyoled/backgrounds/black.jpg"
+cp "$HOME/Pictures/Wallpapers/24.jpg" "$HOME/.config/omarchy/themes/tokyoled/backgrounds/24.jpg"
+cp "$HOME/Pictures/Wallpapers/65.jpg" "$HOME/.config/omarchy/themes/tokyoled/backgrounds/65.jpg"
