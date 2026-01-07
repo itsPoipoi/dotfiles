@@ -348,8 +348,8 @@ alias vi='nvim'
 alias curl="curl -#"
 
 # Personal Alias's
-alias sht="shutdown now"
-alias rbt="reboot"
+alias sht="omarchy-cmd-shutdown"
+alias rbt="omarchy-cmd-reboot"
 alias ff="fastfetch"
 alias zi="__zoxide_zi"
 alias kssh="kitten ssh"
