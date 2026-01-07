@@ -181,6 +181,7 @@ omarchy-webapp-remove Fizzy
 omarchy-webapp-remove GitHub
 omarchy-webapp-remove "Google Contacts"
 omarchy-webapp-remove "Google Photos"
+omarchy-webapp-remove "Google Maps"
 omarchy-webapp-remove HEY
 omarchy-webapp-remove X
 omarchy-webapp-remove YouTube
