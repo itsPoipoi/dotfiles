@@ -137,13 +137,13 @@ case $user_input in
 esac
 
 if [ ! -f /usr/bin/discord ]; then
-  echo "${YELLOW}Setup Discord?${NC} "
+  echo "${YELLOW}Setup Discord (Vesktop)?${NC} "
   echo "${RED}Press ${GREEN}Y ${RED}to accept / Any other key to refuse:${NC}"
   read -n 1 -r user_input
   echo
   case $user_input in
   [yY])
-    yay -S --needed --noconfirm discord_arch_electron
+    yay -S --needed --noconfirm vesktop-bin
     omarchy-webapp-remove Discord
     ;;
   *)
