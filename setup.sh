@@ -136,7 +136,7 @@ case $user_input in
   ;;
 esac
 
-if [ ! -f /usr/bin/discord ]; then
+if [ ! -f /usr/bin/vesktop ]; then
   echo "${YELLOW}Setup Discord (Vesktop)?${NC} "
   echo "${RED}Press ${GREEN}Y ${RED}to accept / Any other key to refuse:${NC}"
   read -n 1 -r user_input
