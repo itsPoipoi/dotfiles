@@ -11,13 +11,13 @@ yay -S --noconfirm --needed base-devel gcc make yazi ffmpeg 7zip jq poppler fzf 
 omarchy-install-terminal kitty
 yay -S --noconfirm --needed ntfs-3g dosfstools xfsprogs f2fs-tools udftools
 yay -S --noconfirm --needed thunar thunar-archive-plugin thunar-media-tags-plugin xarchiver
-yay -R --noconfirm nautilus
-yay -R --noconfirm typora
-yay -R --noconfirm 1password-cli
-yay -R --noconfirm 1password-beta
-yay -R --noconfirm fcitx5-qt
-yay -R --noconfirm fcitx5-gtk
-yay -R --noconfirm fcitx5
+yay -R --noconfirm nautilus 2>/dev/null
+yay -R --noconfirm typora 2>/dev/null
+yay -R --noconfirm 1password-cli 2>/dev/null
+yay -R --noconfirm 1password-beta 2>/dev/null
+yay -R --noconfirm fcitx5-qt 2>/dev/null
+yay -R --noconfirm fcitx5-gtk 2>/dev/null
+yay -R --noconfirm fcitx5 2>/dev/null
 
 # Change default shell to zsh
 if [ ! "{{$SHELL}}" = "{{/usr/bin/zsh}}" ]; then
