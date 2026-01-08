@@ -8,10 +8,10 @@
 \rm -f "$HOME/.config/omarchy/themes/rose-pine"
 \rm -rf "$HOME/.local/share/omarchy/themes/hackerman/"
 \rm -f "$HOME/.config/omarchy/themes/hackerman"
-# \rm -rf "$HOME/.local/share/omarchy/themes/ristretto/"
-# \rm -f "$HOME/.config/omarchy/themes/ristretto"
-# \rm -rf "$HOME/.local/share/omarchy/themes/kanagawa/"
-# \rm -f "$HOME/.config/omarchy/themes/kanagawa"
+\rm -rf "$HOME/.local/share/omarchy/themes/ristretto/"
+\rm -f "$HOME/.config/omarchy/themes/ristretto"
+\rm -rf "$HOME/.local/share/omarchy/themes/kanagawa/"
+\rm -f "$HOME/.config/omarchy/themes/kanagawa"
 # +rm -rf "$HOME/.local/share/omarchy/themes/nord/"
 # \rm -f "$HOME/.config/omarchy/themes/nord"
 # \rm -rf "$HOME/.local/share/omarchy/themes/gruvbox/"
@@ -39,7 +39,6 @@ omarchy-theme-install https://github.com/tahayvr/omarchy-vhs80-theme
 omarchy-theme-install https://github.com/bjarneo/omarchy-monokai-theme
 omarchy-theme-install https://github.com/dotsilva/omarchy-purplewave-theme
 omarchy-theme-install https://github.com/guilhermetk/omarchy-rose-pine-dark
-omarchy-theme-install https://github.com/TyRichards/omarchy-space-monkey-theme/
 
 # Theme Tweaks
 \rm -f "$HOME/.config/omarchy/themes/tokyoled/backgrounds/black.jpg"
