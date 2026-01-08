@@ -123,6 +123,18 @@ zvm_after_init_commands+=(lazykeys)
 export EDITOR=nvim
 export VISUAL=nvim
 
+# fzf exports
+export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --glob '!.git'"
+export FZF_DEFAULT_OPTS='--cycle --layout=default --height=90% --preview-window=wrap --marker="*"'
+export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window up:3:wrap"
+export FZF_CTRL_T_OPTS="
+  --walker-skip .git,node_modules,target
+  --preview 'bat -n --color=always {}'
+  --bind 'ctrl-/:change-preview-window(down|hidden|)'"
+export FZF_ALT_C_OPTS="
+  --walker-skip .git,node_modules,target
+  --preview 'eza --tree --level=3 --color=always {}'"
+
 # # Fastfetch on Startup
 # if [ -f /usr/bin/fastfetch ]; then
 # 	fastfetch
