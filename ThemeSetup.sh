@@ -42,5 +42,8 @@ omarchy-theme-install https://github.com/guilhermetk/omarchy-rose-pine-dark
 omarchy-theme-install https://github.com/TyRichards/omarchy-space-monkey-theme/
 
 # BG Setter
-rm -f "$HOME/.config/omarchy/themes/tokyoled/backgrounds/black.jpg"
+\rm -f "$HOME/.config/omarchy/themes/tokyoled/backgrounds/black.jpg"
 cp "$HOME/.config/omarchy/themes/ethereal/backgrounds/1.jpg" "$HOME/.config/omarchy/themes/tokyoled/backgrounds/1.jpg"
+\rm -rf "$HOME/.config/omarchy/themes/neo-sploosh/backgrounds/"
+mkdir "$HOME/.config/omarchy/themes/neo-sploosh/backgrounds/"
+cp "$HOME/.config/omarchy/themes/ethereal/backgrounds/1.jpg" "$HOME/.config/omarchy/themes/neo-sploosh/backgrounds/1.jpg"
