@@ -41,9 +41,10 @@ omarchy-theme-install https://github.com/dotsilva/omarchy-purplewave-theme
 omarchy-theme-install https://github.com/guilhermetk/omarchy-rose-pine-dark
 omarchy-theme-install https://github.com/TyRichards/omarchy-space-monkey-theme/
 
-# BG Setter
+# Theme Tweaks
 \rm -f "$HOME/.config/omarchy/themes/tokyoled/backgrounds/black.jpg"
 cp "$HOME/.config/omarchy/themes/ethereal/backgrounds/1.jpg" "$HOME/.config/omarchy/themes/tokyoled/backgrounds/1.jpg"
 \rm -rf "$HOME/.config/omarchy/themes/neo-sploosh/backgrounds/"
 mkdir "$HOME/.config/omarchy/themes/neo-sploosh/backgrounds/"
 cp "$HOME/.config/omarchy/themes/ethereal/backgrounds/1.jpg" "$HOME/.config/omarchy/themes/neo-sploosh/backgrounds/1.jpg"
+\cp "$HOME/.config/omarchy/themes/tokyo-night/neovim.lua" "$HOME/.config/omarchy/themes/tokyoled/neovim.lua"
