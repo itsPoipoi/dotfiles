@@ -364,6 +364,7 @@ alias sht="omarchy-cmd-shutdown"
 alias rbt="omarchy-cmd-reboot"
 alias ff="fastfetch"
 alias zi="__zoxide_zi"
+alias c="opencode"
 alias kssh="kitten ssh"
 alias ezrc='nvim ~/.zshrc'
 alias src="clear; source ~/.zshrc"
