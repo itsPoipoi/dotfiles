@@ -206,9 +206,9 @@ read -n 1 -r user_input
 echo
 case $user_input in
 [yY])
-  cd ~/dotfiles/
+  cd ~/dotfiles/ || exit
   /bin/bash stow.sh
-  cd
+  cd || exit
   ;;
 *)
   echo "${GREEN}Run ${RED}~/dotfiles/stow.sh ${GREEN}manually."
