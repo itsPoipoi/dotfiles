@@ -249,8 +249,9 @@ install_system_deps() {
 }
 
 install_shell_setup() {
+  local skip_confirm="$1"
   if [[ "$SHELL" != "/usr/bin/zsh" ]]; then
-    if confirm_action "Change default shell to zsh?"; then
+    if [[ "$skip_confirm" == "--yes" ]] || confirm_action "Change default shell to zsh?"; then
       echo -e "${GREEN}Making zsh the default shell.${NC}"
       if ! chsh -s "$(which zsh)"; then
         print_error "Failed to change default shell. You may need to run this manually."
@@ -265,8 +266,9 @@ install_shell_setup() {
 }
 
 install_sddm_setup() {
+  local skip_confirm="$1"
   if [[ -f /etc/sddm.conf.d/autologin.conf ]]; then
-    if confirm_action "Setup SDDM?"; then
+    if [[ "$skip_confirm" == "--yes" ]] || confirm_action "Setup SDDM?"; then
       yay -S --noconfirm --needed sddm
       sudo systemctl enable sddm
       sudo rm -f /etc/sddm.conf.d/autologin.conf
@@ -274,7 +276,7 @@ install_sddm_setup() {
       rm -rf "$HOME/sddm-astronaut-theme/"
 
       # Ergol keymap
-      if confirm_action "Set Ergol as X11 keymap for SDDM?"; then
+      if [[ "$skip_confirm" == "--yes" ]] || confirm_action "Set Ergol as X11 keymap for SDDM?"; then
         sudo localectl set-x11-keymap fr pc105 ergol
       fi
     else
@@ -286,8 +288,9 @@ install_sddm_setup() {
 }
 
 install_neovim_config() {
+  local skip_confirm="$1"
   if [[ ! -f ~/.config/nvim/setupcheck ]]; then
-    if confirm_action "Import Neovim config?"; then
+    if [[ "$skip_confirm" == "--yes" ]] || confirm_action "Import Neovim config?"; then
       echo -e "${YELLOW}Installing Neovim config...${NC}"
       mv ~/.config/nvim{,.bak} 2>/dev/null || true
       if ! git clone https://github.com/itsPoipoi/neovim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim; then
@@ -303,8 +306,9 @@ install_neovim_config() {
 }
 
 install_ssh_keys() {
+  local skip_confirm="$1"
   if [[ ! -f ~/.ssh/id_rsa.pub ]]; then
-    if confirm_action "Generate SSH key?"; then
+    if [[ "$skip_confirm" == "--yes" ]] || confirm_action "Generate SSH key?"; then
       if ! ssh-keygen -t rsa -b 4096 -C 'poipoigit@gmail.com'; then
         print_error "Failed to generate SSH key"
         return 1
@@ -318,20 +322,21 @@ install_ssh_keys() {
 }
 
 install_git_config() {
-  if confirm_action "Set Git global config?"; then
+  local skip_confirm="$1"
+  if [[ "$skip_confirm" == "--yes" ]] || confirm_action "Set Git global config?"; then
     echo -e "${YELLOW}Default config:${NC}"
     echo "  Name: itsPoipoi"
     echo "  Email: poipoigit@gmail.com"
     echo "  Pull rebase: false"
 
-    if confirm_action "Use default Git config?" "y"; then
+    if [[ "$skip_confirm" == "--yes" ]] || confirm_action "Use default Git config?" "y"; then
       git config --global pull.rebase false || print_error "Failed to set git pull.rebase"
       git config --global user.name 'itsPoipoi' || print_error "Failed to set git user.name"
       git config --global user.email 'poipoigit@gmail.com' || print_error "Failed to set git user.email"
     else
       read -rp "Enter Git name: " git_name
       read -rp "Enter Git email: " git_email
-      if confirm_action "Enable pull rebase?"; then
+      if [[ "$skip_confirm" == "--yes" ]] || confirm_action "Enable pull rebase?"; then
         git config --global pull.rebase true || print_error "Failed to set git pull.rebase"
       else
         git config --global pull.rebase false || print_error "Failed to set git pull.rebase"
@@ -345,7 +350,8 @@ install_git_config() {
 }
 
 install_kanata_setup() {
-  if confirm_action "Run Kanata install script?"; then
+  local skip_confirm="$1"
+  if [[ "$skip_confirm" == "--yes" ]] || confirm_action "Run Kanata install script?"; then
     /bin/bash ~/dotfiles/kanata/kanata-setup.sh
   else
     echo -e "${GREEN}Skipping Kanata setup.${NC}"
@@ -353,8 +359,9 @@ install_kanata_setup() {
 }
 
 install_vesktop_setup() {
+  local skip_confirm="$1"
   if [[ ! -f /usr/bin/vesktop ]]; then
-    if confirm_action "Setup Discord (Vesktop)?"; then
+    if [[ "$skip_confirm" == "--yes" ]] || confirm_action "Setup Discord (Vesktop)?"; then
       yay -S --needed --noconfirm vesktop-bin
       omarchy-webapp-remove Discord
     else
@@ -366,8 +373,9 @@ install_vesktop_setup() {
 }
 
 install_spicetify_setup() {
+  local skip_confirm="$1"
   if [[ ! -f "$HOME/.spicetify/spicetify" ]]; then
-    if confirm_action "Setup Spicetify? (Spotify needs to be logged in first!)"; then
+    if [[ "$skip_confirm" == "--yes" ]] || confirm_action "Setup Spicetify? (Spotify needs to be logged in first!)"; then
       sudo chmod a+wr /opt/spotify
       sudo chmod a+wr /opt/spotify/Apps -R
       curl -fsSL https://raw.githubusercontent.com/spicetify/cli/main/install.sh | sh
@@ -401,7 +409,8 @@ install_webapps_cleanup() {
 }
 
 install_themes_setup() {
-  if confirm_action "Setup Omarchy themes?"; then
+  local skip_confirm="$1"
+  if [[ "$skip_confirm" == "--yes" ]] || confirm_action "Setup Omarchy themes?"; then
     /bin/bash ~/dotfiles/ThemeSetup.sh
   else
     echo -e "${GREEN}Skipping themes setup.${NC}"
@@ -409,7 +418,8 @@ install_themes_setup() {
 }
 
 install_stow_config() {
-  if confirm_action "Run stow install script and reload Hyprland?"; then
+  local skip_confirm="$1"
+  if [[ "$skip_confirm" == "--yes" ]] || confirm_action "Run stow install script and reload Hyprland?"; then
     cd ~/dotfiles/ || exit
     /bin/bash stow.sh
     cd || exit
@@ -614,24 +624,24 @@ selective_install() {
   done
   echo
 
-  if confirm_action "Proceed with selective install?"; then
-    if confirm_action "Create backup before installing?"; then
-      perform_backup || {
-        echo -e "${RED}Backup failed. Aborting.${NC}"
-        sleep 2
-        show_main_menu
-      }
-    fi
+   if confirm_action "Proceed with selective install?"; then
+     if confirm_action "Create backup before installing?"; then
+       perform_backup || {
+         echo -e "${RED}Backup failed. Aborting.${NC}"
+         sleep 2
+         show_main_menu
+       }
+     fi
 
     for idx in "${selected[@]}"; do
       echo -e "${BLUE}Running: ${MODULE_NAMES[$idx]}${NC}"
-      "install_${MODULES[$idx]}"
+      "install_${MODULES[$idx]}" --yes
     done
 
-    finish_install
-  else
-    show_main_menu
-  fi
+     finish_install
+   else
+     show_main_menu
+   fi
 }
 
 backup_restore_menu() {
