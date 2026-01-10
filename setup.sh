@@ -444,10 +444,11 @@ full_install() {
     print_header
 
     echo -e "${YELLOW}Full Install will run applicable modules (skipping already configured ones):${NC}"
+
+    # Check which modules are applicable and display all with proper numbering
     local applicable_modules=()
     local applicable_names=()
 
-    # Check which modules are applicable
     for i in "${!MODULES[@]}"; do
         local skip_reason=""
         case "${MODULES[$i]}" in
@@ -486,7 +487,7 @@ full_install() {
         if [[ -z "$skip_reason" ]]; then
             applicable_modules+=("${MODULES[$i]}")
             applicable_names+=("${MODULE_NAMES[$i]}")
-            echo "$(( ${#applicable_modules[@]} ))). ${MODULE_NAMES[$i]}"
+            echo -e "$((i+1)). ${MODULE_NAMES[$i]} ${GREEN}(will run)${NC}"
         else
             echo -e "$((i+1)). ${MODULE_NAMES[$i]} ${YELLOW}(skipped: $skip_reason)${NC}"
         fi
