@@ -329,7 +329,7 @@ install_git_config() {
     echo "  Email: poipoigit@gmail.com"
     echo "  Pull rebase: false"
 
-    if [[ "$skip_confirm" == "--yes" ]] || confirm_action "Use default Git config?" "y"; then
+    if confirm_action "Use default Git config?" "y"; then
       git config --global pull.rebase false || print_error "Failed to set git pull.rebase"
       git config --global user.name 'itsPoipoi' || print_error "Failed to set git user.name"
       git config --global user.email 'poipoigit@gmail.com' || print_error "Failed to set git user.email"
@@ -624,24 +624,24 @@ selective_install() {
   done
   echo
 
-   if confirm_action "Proceed with selective install?"; then
-     if confirm_action "Create backup before installing?"; then
-       perform_backup || {
-         echo -e "${RED}Backup failed. Aborting.${NC}"
-         sleep 2
-         show_main_menu
-       }
-     fi
+  if confirm_action "Proceed with selective install?"; then
+    if confirm_action "Create backup before installing?"; then
+      perform_backup || {
+        echo -e "${RED}Backup failed. Aborting.${NC}"
+        sleep 2
+        show_main_menu
+      }
+    fi
 
     for idx in "${selected[@]}"; do
       echo -e "${BLUE}Running: ${MODULE_NAMES[$idx]}${NC}"
       "install_${MODULES[$idx]}" --yes
     done
 
-     finish_install
-   else
-     show_main_menu
-   fi
+    finish_install
+  else
+    show_main_menu
+  fi
 }
 
 backup_restore_menu() {
