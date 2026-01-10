@@ -1,27 +1,23 @@
 #!/usr/bin/env sh
-# Remove existing
-\rm -rf "$HOME/.local/share/omarchy/themes/catppuccin-latte/"
-\rm -f "$HOME/.config/omarchy/themes/catppuccin-latte"
-\rm -rf "$HOME/.local/share/omarchy/themes/flexoki-light/"
-\rm -f "$HOME/.config/omarchy/themes/flexoki-light"
-\rm -rf "$HOME/.local/share/omarchy/themes/rose-pine/"
-\rm -f "$HOME/.config/omarchy/themes/rose-pine"
-\rm -rf "$HOME/.local/share/omarchy/themes/hackerman/"
-\rm -f "$HOME/.config/omarchy/themes/hackerman"
-\rm -rf "$HOME/.local/share/omarchy/themes/ristretto/"
-\rm -f "$HOME/.config/omarchy/themes/ristretto"
-\rm -rf "$HOME/.local/share/omarchy/themes/kanagawa/"
-\rm -f "$HOME/.config/omarchy/themes/kanagawa"
-# +rm -rf "$HOME/.local/share/omarchy/themes/nord/"
-# \rm -f "$HOME/.config/omarchy/themes/nord"
-# \rm -rf "$HOME/.local/share/omarchy/themes/gruvbox/"
-# \rm -f "$HOME/.config/omarchy/themes/gruvbox"
-# \rm -rf "$HOME/.local/share/omarchy/themes/everforest/"
-# \rm -f "$HOME/.config/omarchy/themes/everforest"
-# \rm -rf "$HOME/.local/share/omarchy/themes/catppuccin/"
-# \rm -f "$HOME/.config/omarchy/themes/catppuccin"
-# \rm -rf "$HOME/.local/share/omarchy/themes/ethereal/"
-# \rm -f "$HOME/.config/omarchy/themes/ethereal"
+# Remove existing themes efficiently
+themes_to_remove=(
+    "catppuccin-latte"
+    "flexoki-light" 
+    "rose-pine"
+    "hackerman"
+    "ristretto"
+    "kanagawa"
+#   "nord"
+#   "gruvbox"
+#   "everforest"
+#   "catppuccin"
+#   "ethereal"
+)
+
+for theme in "${themes_to_remove[@]}"; do
+    rm -rf "$HOME/.local/share/omarchy/themes/$theme/"
+    rm -f "$HOME/.config/omarchy/themes/$theme"
+done
 
 # Install new
 omarchy-theme-install https://github.com/Justin-De-Sio/omarchy-tokyoled-theme

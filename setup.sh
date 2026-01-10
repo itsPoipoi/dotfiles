@@ -20,7 +20,7 @@ yay -R --noconfirm fcitx5-gtk 2>/dev/null
 yay -R --noconfirm fcitx5 2>/dev/null
 
 # Change default shell to zsh
-if [ ! "{{$SHELL}}" = "{{/usr/bin/zsh}}" ]; then
+if [ ! "$SHELL" = "/usr/bin/zsh" ]; then
   echo "${YELLOW}Change default shell to zsh ?${NC} "
   echo "${RED}Press ${GREEN}Y ${RED}to accept / Any other key to refuse:"
   read -n 1 -r user_input
