@@ -652,7 +652,7 @@ backup_restore_menu() {
             sleep 3
             show_main_menu
             ;;
-        3|0|q)
+        3|q)
             show_main_menu
             ;;
         *)
