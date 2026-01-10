@@ -7,11 +7,11 @@ yay -S --needed --noconfirm kanata-bin
 # Setup input access
 sudo groupdel uinput
 sudo groupadd --system uinput
-sudo usermod -aG input $USER
-sudo usermod -aG uinput $USER
+sudo usermod -aG input "$USER"
+sudo usermod -aG uinput "$USER"
 sudo touch /etc/udev/rules.d/99-input.rules
 sudo chmod a+w /etc/udev/rules.d/99-input.rules
-sudo echo 'KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"' >> /etc/udev/rules.d/99-input.rules
+sudo echo 'KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"' >>/etc/udev/rules.d/99-input.rules
 sudo udevadm control --reload-rules && sudo udevadm trigger
 sudo modprobe uinput
 
