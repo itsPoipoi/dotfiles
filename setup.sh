@@ -145,7 +145,8 @@ list_backups() {
     echo
 
     local choice
-    read -p "Select backup to restore from: " choice
+    read -n 1 -s choice
+    echo "$choice"
 
     if [[ $choice -ge 1 && $choice -le ${#backups[@]} ]]; then
         echo "${backups[$((choice-1))]}"
