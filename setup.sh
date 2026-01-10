@@ -538,11 +538,21 @@ selective_install() {
     while true; do
         clear
         print_header
-        echo -e "${YELLOW}Select modules to install (space to toggle, enter to proceed, 0/q to go back):${NC}"
+        echo -e "${YELLOW}Select modules to install (press number/letter to toggle, enter to proceed, 0/q to go back):${NC}"
         echo
 
         for i in "${!MODULE_NAMES[@]}"; do
-            echo "$((i+1)). ${module_status[$i]} ${MODULE_NAMES[$i]}"
+            local display_num
+            if [[ $i -lt 9 ]]; then
+                display_num="$((i+1))"
+            else
+                case $i in
+                    9) display_num="a" ;;
+                    10) display_num="b" ;;
+                    11) display_num="c" ;;
+                esac
+            fi
+            echo "$display_num. ${module_status[$i]} ${MODULE_NAMES[$i]}"
         done
         echo
         echo -e "${GREEN}Selected: ${#selected[@]}${NC}"
@@ -556,8 +566,17 @@ selective_install() {
         elif [[ $key == "0" || $key == "q" ]]; then
             show_main_menu
             return
-        elif [[ $key =~ [1-9] ]]; then
-            local index=$((key - 1))
+        elif [[ $key =~ [1-9] || $key =~ [abc] ]]; then
+            local index
+            if [[ $key =~ [1-9] ]]; then
+                index=$((key - 1))
+            else
+                case $key in
+                    a) index=9 ;;
+                    b) index=10 ;;
+                    c) index=11 ;;
+                esac
+            fi
             if [[ $index -ge 0 && $index -lt ${#MODULE_NAMES[@]} ]]; then
                 if [[ "${module_status[$index]}" == "[ ]" ]]; then
                     module_status[$index]="[X]"
