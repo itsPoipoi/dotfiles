@@ -84,11 +84,8 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' menu no
 zstyle ':completion:*:git-checkout:*' sort false
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --group-directories-first --icons --color=always $realpath'
-zstyle ':fzf-tab:complete:z:*' fzf-preview 'eza -1 --group-directories-first --icons --color=always $realpath'
-zstyle ':fzf-tab:complete:zz:*' fzf-preview 'eza -aD1 --group-directories-first --icons --color=always $realpath'
-zstyle ':fzf-tab:complete:zza:*' fzf-preview 'eza -a1 --group-directories-first --icons --color=always $realpath'
-zstyle ':fzf-tab:complete:zze:*' fzf-preview 'eza -alh --group-directories-first --icons --color=always $realpath'
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -aD1 --group-directories-first --icons --color=always $realpath'
+zstyle ':fzf-tab:complete:z:*' fzf-preview 'eza -aD1 --group-directories-first --icons --color=always $realpath'
 
 # Shell integrations
 # The plugin will auto execute this zvm_after_init function
@@ -251,15 +248,6 @@ function whatsmyip ()
 # SSH keygen
 alias sshkey="ssh-keygen -t rsa -b 4096 -C 'poipoigit@gmail.com'"
 
-# Quick git config
-gitconfig() {
-    git config --global pull.rebase false
-	git config --global user.name 'itsPoipoi'
-	git config --global user.email 'poipoigit@gmail.com'
-	echo "${YELLOW}GitHub name & email are now set globally."
-}
-alias gconf="gitconfig"
-
 # Fast git push
 gpp() {
     git add .
@@ -274,36 +262,6 @@ function y() {
 	IFS= read -r -d '' cwd < "$tmp"
 	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
 	rm -f -- "$tmp"
-}
-
-# Automatically do an ls after each zoxide: Only directories
-zz ()
-{
-	if [ -n "$1" ]; then
-		__zoxide_z "$@" && eza -aD --icons
-	else
-		__zoxide_z ~ && eza -aD --icons
-	fi
-}
-
-# Automatically do an ls after each zoxide: All files
-zza ()
-{
-	if [ -n "$1" ]; then
-		__zoxide_z "$@" && eza -a --icons
-	else
-		__zoxide_z ~ && eza -a --icons
-	fi
-}
-
-# Automatically do an ls after each zoxide: All files as list
-zze ()
-{
-	if [ -n "$1" ]; then
-		__zoxide_z "$@" && eza -alh --icons --group-directories-first
-	else
-		__zoxide_z ~ && eza -alh --icons --group-directories-first
-	fi
 }
 
 #######################################################
@@ -341,17 +299,6 @@ alias lt='eza -alhrs created --icons --group-directories-first'	# sort by date
 # Search running processes
 alias p="ps aux | rg "
 alias topcpu="/bin/ps -eo pcpu,pid,user,args | sort -k 1 -r | head -10"
-
-# Search files in the current folder
-alias f="fd . | rg "
-
-# Show open ports
-alias openports='netstat -nape --inet'
-
-# Alias's to show disk space and space used in a folder
-alias diskspace="du -S | sort -n -r |more"
-alias folders='du -h --max-depth=1'
-alias folderssort='fd . -maxdepth 1 -type d -print0 | xargs -0 du -sk | sort -rn'
 
 # Alias's to modified commands
 alias grep="rg"
