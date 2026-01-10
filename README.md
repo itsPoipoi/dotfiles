@@ -8,7 +8,7 @@
 - **🔄 Backup & Restore**: Automatic config backups with easy restoration
 - **🏠 Hyprland WM**: Tiling window manager with custom keybindings and animations
 - **🐱 Kitty Terminal**: GPU-accelerated terminal with themes and plugins
-- **📝 Neovim Editor**: Full IDE setup with LSP, treesitter, and custom plugins
+- **📝 [Neovim Editor](https://github.com/itsPoipoi/neovim)**: Full IDE setup with LSP, treesitter, and custom plugins
 - **🐚 Zsh Shell**: Powerline prompt with zinit plugin manager
 - **🛠️ Developer Tools**: fastfetch, yazi, lazygit, and more productivity tools
 
@@ -65,7 +65,7 @@ Automatically backs up:
 - **Zsh**: Shell with zinit plugin manager
 
 ### Editor & Tools
-- **Neovim**: Full IDE with LSP, debugging, and git integration
+- **[Neovim](https://github.com/itsPoipoi/neovim)**: Full IDE with LSP, debugging, and git integration
 - **fastfetch**: System information display
 - **yazi**: Terminal file manager
 - **lazygit**: Terminal Git UI
