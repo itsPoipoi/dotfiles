@@ -539,7 +539,7 @@ selective_install() {
     while true; do
         clear
         print_header
-        echo -e "${YELLOW}Select modules to install (press number/letter to toggle, enter to proceed, 0/q to go back):${NC}"
+        echo -e "${YELLOW}Select modules to install (press number/letter to toggle, enter to proceed, q to go back):${NC}"
         echo
 
         for i in "${!MODULE_NAMES[@]}"; do
@@ -564,7 +564,7 @@ selective_install() {
 
         if [[ $key == "" ]]; then
             break
-        elif [[ $key == "0" || $key == "q" ]]; then
+        elif [[ $key == "q" ]]; then
             show_main_menu
             return
         elif [[ $key =~ [1-9] || $key =~ [abc] ]]; then
