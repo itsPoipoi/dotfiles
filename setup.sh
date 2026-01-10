@@ -35,12 +35,7 @@ confirm_action() {
   local response
 
   echo -e "${YELLOW}$prompt${NC}"
-  if [[ "$default" == "y" ]]; then
-    echo -e "${RED}Press ${GREEN}Y ${RED}to accept / ${GREEN}N ${RED}to decline [Y/n]:${NC}"
-  else
-    echo -e "${RED}Press ${GREEN}Y ${RED}to accept / ${GREEN}N ${RED}to decline [y/N]:${NC}"
-  fi
-
+  echo -e "${RED}Press ${GREEN}Y ${RED}to accept / ${GREEN}N ${RED}to decline [Y/n]:${NC}"
   read -n 1 -r response
   echo
 
