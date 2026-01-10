@@ -4,7 +4,7 @@
 
 ## ✨ Features
 
-- **🎯 Interactive Installer**: Menu-driven setup with full/ selective install options
+- **🎯 Interactive Installer**: Menu-driven setup with full / selective install options
 - **🔄 Backup & Restore**: Automatic config backups with easy restoration
 - **🏠 Hyprland WM**: Tiling window manager with custom keybindings and animations
 - **🐱 Kitty Terminal**: GPU-accelerated terminal with themes and plugins
@@ -16,12 +16,14 @@
 
 ### Installation
 
+HTTPS:
 ```bash
 git clone https://github.com/itsPoipoi/dotfiles.git ~/dotfiles
 cd ~/dotfiles
 ./setup.sh
 ```
 
+SSH:
 ```bash
  git clone git@github.com:itsPoipoi/dotfiles.git ~/dotfiles
 cd ~/dotfiles
