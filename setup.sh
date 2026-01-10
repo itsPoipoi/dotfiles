@@ -428,7 +428,8 @@ show_main_menu() {
     echo
 
     local choice
-    read -p "Enter your choice [1-4]: " choice
+    read -n 1 -s choice
+    echo "$choice"
 
     case $choice in
         1) full_install ;;
@@ -537,7 +538,7 @@ selective_install() {
     while true; do
         clear
         print_header
-        echo -e "${YELLOW}Select modules to install (space to toggle, enter to proceed):${NC}"
+        echo -e "${YELLOW}Select modules to install (space to toggle, enter to proceed, 0/q to go back):${NC}"
         echo
 
         for i in "${!MODULE_NAMES[@]}"; do
@@ -552,6 +553,9 @@ selective_install() {
 
         if [[ $key == "" ]]; then
             break
+        elif [[ $key == "0" || $key == "q" ]]; then
+            show_main_menu
+            return
         elif [[ $key =~ [1-9] ]]; then
             local index=$((key - 1))
             if [[ $index -ge 0 && $index -lt ${#MODULE_NAMES[@]} ]]; then
@@ -607,7 +611,8 @@ backup_restore_menu() {
     echo
 
     local choice
-    read -p "Enter your choice [1-3]: " choice
+    read -n 1 -s choice
+    echo "$choice"
 
     case $choice in
         1)
@@ -628,7 +633,7 @@ backup_restore_menu() {
             sleep 3
             show_main_menu
             ;;
-        3)
+        3|0|q)
             show_main_menu
             ;;
         *)
