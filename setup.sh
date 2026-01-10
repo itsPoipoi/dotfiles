@@ -95,8 +95,8 @@ backup_files() {
   "stow_config")
     local configs=("fastfetch" "hypr" "kitty" "lazygit" "thunar" "yazi" "xfce4" "zshrc")
     for config in "${configs[@]}"; do
-      if [[ -d ~/.config/"$config" ]]; then
-        cp -r ~/.config/"$config" "$module_dir/" 2>/dev/null || true
+      if [[ -d ~/.config/$config ]]; then
+        cp -r "$HOME/.config/$config" "$module_dir/" 2>/dev/null || true
       fi
     done
     ;;
@@ -147,8 +147,9 @@ list_backups() {
   echo
 
   local choice
-  read -r -n 1 -s choice
+  read -rn 1 -s choice
   echo "$choice"
+
   if [[ $choice -ge 1 && $choice -le ${#backups[@]} ]]; then
     echo "${backups[$((choice - 1))]}"
     return 0
@@ -200,7 +201,7 @@ restore_backup() {
     local configs=("fastfetch" "hypr" "kitty" "lazygit" "thunar" "yazi" "xfce4" "zshrc")
     for config in "${configs[@]}"; do
       if [[ -d "$backup_path/stow_config/$config" ]]; then
-        rm -rf ~/.config/"$config" 2>/dev/null || true
+        rm -rf "$HOME/.config/$config" 2>/dev/null || true
         cp -r "$backup_path/stow_config/$config" ~/.config/ 2>/dev/null || true
       fi
     done
@@ -328,8 +329,8 @@ install_git_config() {
       git config --global user.name 'itsPoipoi' || print_error "Failed to set git user.name"
       git config --global user.email 'poipoigit@gmail.com' || print_error "Failed to set git user.email"
     else
-      read -r -p "Enter Git name: " git_name
-      read -r -p "Enter Git email: " git_email
+      read -rp "Enter Git name: " git_name
+      read -rp "Enter Git email: " git_email
       if confirm_action "Enable pull rebase?"; then
         git config --global pull.rebase true || print_error "Failed to set git pull.rebase"
       else
@@ -430,7 +431,7 @@ show_main_menu() {
   echo
 
   local choice
-  read -r -n 1 -s choice
+  read -rn 1 -s choice
   echo "$choice"
 
   case $choice in
@@ -542,7 +543,7 @@ selective_install() {
   local module_status=()
 
   for i in "${!MODULE_NAMES[@]}"; do
-    module_status["$i"]=" [ ]"
+    module_status[i]="[ ]"
   done
 
   while true; do
@@ -553,7 +554,7 @@ selective_install() {
 
     for i in "${!MODULE_NAMES[@]}"; do
       local display_num
-      if [[ "$i" -lt 9 ]]; then
+      if [[ $i -lt 9 ]]; then
         display_num="$((i + 1))"
       else
         case $i in
@@ -569,7 +570,7 @@ selective_install() {
     echo
 
     local key
-    read -r -n 1 -s key
+    read -rn 1 -s key
 
     if [[ $key == "" ]]; then
       break
@@ -587,12 +588,12 @@ selective_install() {
         c) index=11 ;;
         esac
       fi
-      if [[ "$index" -ge 0 && "$index" -lt "${#MODULE_NAMES[@]}" ]]; then
+      if [[ $index -ge 0 && $index -lt ${#MODULE_NAMES[@]} ]]; then
         if [[ "${module_status[$index]}" == "[ ]" ]]; then
-          module_status["$index"]=" [X]"
+          module_status[index]="[X]"
           selected+=("$index")
         else
-          module_status["$index"]=" [ ]"
+          module_status[index]="[ ]"
           selected=("${selected[@]/$index/}")
         fi
       fi
@@ -644,7 +645,7 @@ backup_restore_menu() {
   echo
 
   local choice
-  read -r -n 1 -s choice
+  read -rn 1 -s choice
   echo "$choice"
 
   case $choice in
@@ -657,8 +658,7 @@ backup_restore_menu() {
     ;;
   2)
     local backup_name
-    backup_name=$(list_backups)
-    if [[ -n "$backup_name" ]]; then
+    if backup_name=$(list_backups); then
       if confirm_action "Restore from backup: $backup_name?"; then
         restore_backup "$backup_name"
       fi
