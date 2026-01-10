@@ -271,7 +271,7 @@ install_sddm_setup() {
       rm -rf "$HOME/sddm-astronaut-theme/"
 
       # Ergol keymap
-      if [[ "$skip_confirm" == "--yes" ]] || confirm_action "Set Ergol as X11 keymap for SDDM?"; then
+      if confirm_action "Set Ergol as X11 keymap for SDDM?"; then
         sudo localectl set-x11-keymap fr pc105 ergol
       fi
     else
