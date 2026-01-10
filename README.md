@@ -25,7 +25,7 @@ cd ~/dotfiles
 
 SSH:
 ```bash
- git clone git@github.com:itsPoipoi/dotfiles.git ~/dotfiles
+git clone git@github.com:itsPoipoi/dotfiles.git ~/dotfiles
 cd ~/dotfiles
 ./setup.sh
 ```
@@ -81,6 +81,8 @@ Automatically backs up:
 ~/dotfiles/
 ├── hypr/          # Hyprland window manager
 ├── kitty/         # Terminal emulator
+├── kanata/        # Keyboard remapper
+├── lazygit/       # Git TUI
 ├── zshrc/         # Zsh configuration
 ├── fastfetch/     # System info tool
 ├── yazi/          # File manager
