@@ -331,7 +331,7 @@ install_git_config() {
     else
       read -rp "Enter Git name: " git_name
       read -rp "Enter Git email: " git_email
-      if [[ "$skip_confirm" == "--yes" ]] || confirm_action "Enable pull rebase?"; then
+      if confirm_action "Enable pull rebase?"; then
         git config --global pull.rebase true || print_error "Failed to set git pull.rebase"
       else
         git config --global pull.rebase false || print_error "Failed to set git pull.rebase"
@@ -368,9 +368,8 @@ install_vesktop_setup() {
 }
 
 install_spicetify_setup() {
-  local skip_confirm="$1"
   if [[ ! -f "$HOME/.spicetify/spicetify" ]]; then
-    if [[ "$skip_confirm" == "--yes" ]] || confirm_action "Setup Spicetify? (Spotify needs to be logged in first!)"; then
+    if confirm_action "Setup Spicetify? (Spotify needs to be logged in first!)"; then
       sudo chmod a+wr /opt/spotify
       sudo chmod a+wr /opt/spotify/Apps -R
       curl -fsSL https://raw.githubusercontent.com/spicetify/cli/main/install.sh | sh
