@@ -79,12 +79,12 @@ Automatically backs up:
 ### File Structure
 ```
 ~/dotfiles/
-├── hypr/          # Hyprland window manager
-├── kitty/         # Terminal emulator
-├── kanata/        # Keyboard remapper
-├── lazygit/       # Git TUI
-├── zshrc/         # Zsh configuration
 ├── fastfetch/     # System info tool
+├── hypr/          # Hyprland window manager
+├── kanata/        # Keyboard remapper
+├── kitty/         # Terminal emulator
+├── lazygit/       # Git TUI
 ├── yazi/          # File manager
+├── zshrc/         # Zsh configuration
 └── setup.sh       # Interactive installer
 ```
