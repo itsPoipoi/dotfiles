@@ -107,13 +107,13 @@ function lazykeys {
     bindkey -M viins -s '^F' 'zi\n'
     bindkey -M vicmd -s '^Y' '\ny\n'
     bindkey -M viins -s '^Y' 'y\n'
-    # bindkey -M vicmd '^L' ffclear
-    # bindkey -M viins '^L' ffclear
     bindkey -M viins "^W" forward-word
     bindkey -M viins "^B" backward-kill-word
     bindkey -M viins "\e[1;5C" forward-word
     bindkey -M viins "\e[1;5D" backward-word
     bindkey -M viins "\e[3;5~" kill-word
+    # bindkey -M vicmd '^L' ffclear
+    # bindkey -M viins '^L' ffclear
 }
 # Load keybinds after zvm keybinds
 zvm_after_init_commands+=(lazykeys)
@@ -121,6 +121,11 @@ zvm_after_init_commands+=(lazykeys)
 # Fastfetch on clear
 # function ffclear { clear; fastfetch; zle redisplay; }
 # zle -N ffclear
+
+# # Fastfetch on startup
+# if [ -f /usr/bin/fastfetch ]; then
+# 	fastfetch
+# fi
 
 #######################################################
 # SPECIAL FUNCTIONS
@@ -141,11 +146,6 @@ export FZF_CTRL_T_OPTS="
 export FZF_ALT_C_OPTS="
   --walker-skip .git,node_modules,target
   --preview 'eza --tree --level=3 --color=always {}'"
-
-# # Fastfetch on Startup
-# if [ -f /usr/bin/fastfetch ]; then
-# 	fastfetch
-# fi
 
 # Extracts any archive(s) (if unp isn't installed)
 extract() {
