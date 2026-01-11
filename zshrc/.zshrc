@@ -134,15 +134,19 @@ export VISUAL=nvim
 
 # fzf exports
 export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --glob '!.git'"
-export FZF_DEFAULT_OPTS='--cycle --layout=default --height=90% --preview-window=wrap --marker="*"'
-export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window up:3:wrap"
-export FZF_CTRL_T_OPTS="
-  --walker-skip .git,node_modules,target
-  --preview 'bat -n --color=always {}'
-  --bind 'ctrl-/:change-preview-window(down|hidden|)'"
+export FZF_ALT_C_COMMAND="fd  --hidden --follow --type d"
+export FZF_CTRL_T_COMMAND="fd  --hidden --follow --type f"
+
+export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:wrap"
+export FZF_DEFAULT_OPTS='--cycle --layout=reverse --height=90% --preview-window=wrap --marker="*"'
 export FZF_ALT_C_OPTS="
   --walker-skip .git,node_modules,target
-  --preview 'eza --tree --level=3 --color=always {}'"
+  --preview 'eza -aTL 2 --group-directories-first --color=always --icons=always {}'
+"
+export FZF_CTRL_T_OPTS="
+  --walker-skip .git,node_modules,target
+  --preview 'bat -n {} --color=always 2>/dev/null'
+"
 
 # Extracts any archive(s) (if unp isn't installed)
 extract() {

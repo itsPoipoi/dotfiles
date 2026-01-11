@@ -1,0 +1,7 @@
+[[plugin.deps]]
+use = "Shallow-Seek/fazif"
+rev = "6e10488"
+hash = "c549ff30fb1d1d97c734010fe82f6295"
+
+[flavor]
+deps = []
