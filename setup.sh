@@ -445,7 +445,7 @@ show_main_menu() {
   4) exit 0 ;;
   *)
     echo -e "${RED}Invalid choice. Please try again.${NC}"
-    sleep 2
+    sleep 1
     show_main_menu
     ;;
   esac
@@ -508,7 +508,7 @@ full_install() {
   if [[ ${#applicable_modules[@]} -eq 0 ]]; then
     echo
     echo -e "${GREEN}All modules are already configured!${NC}"
-    sleep 2
+    sleep 1
     show_main_menu
     return
   fi
@@ -519,7 +519,7 @@ full_install() {
     if confirm_action "Create backup before installing?"; then
       perform_backup || {
         echo -e "${RED}Backup failed. Aborting.${NC}"
-        sleep 2
+        sleep 1
         show_main_menu
       }
     fi
@@ -606,7 +606,7 @@ selective_install() {
 
   if [[ ${#selected[@]} -eq 0 ]]; then
     echo -e "${RED}No modules selected.${NC}"
-    sleep 2
+    sleep 1
     show_main_menu
     return
   fi
@@ -622,7 +622,7 @@ selective_install() {
     if confirm_action "Create backup before installing?"; then
       perform_backup || {
         echo -e "${RED}Backup failed. Aborting.${NC}"
-        sleep 2
+        sleep 1
         show_main_menu
       }
     fi
@@ -657,7 +657,7 @@ backup_restore_menu() {
     if perform_backup; then
       echo -e "${GREEN}Backup completed successfully.${NC}"
     fi
-    sleep 3
+    sleep 1
     show_main_menu
     ;;
   2)
@@ -667,7 +667,7 @@ backup_restore_menu() {
         restore_backup "$backup_name"
       fi
     fi
-    sleep 3
+    sleep 1
     show_main_menu
     ;;
   3 | q)
@@ -675,7 +675,7 @@ backup_restore_menu() {
     ;;
   *)
     echo -e "${RED}Invalid choice.${NC}"
-    sleep 2
+    sleep 0.5
     backup_restore_menu
     ;;
   esac
@@ -687,11 +687,10 @@ finish_install() {
   echo -e "${YELLOW}You may need to reload your shell or restart services.${NC}"
 
   if confirm_action "Reload zsh now?" "y"; then
-    sleep 1
     clear
     zsh
   else
-    echo -e "${GREEN}Please run 'zsh' manually to apply changes.${NC}"
+    echo -e "${GREEN}Please run ${RED}zsh ${GREEN}manually to apply changes.${NC}"
     exit 0
   fi
 }
