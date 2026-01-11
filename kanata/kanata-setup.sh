@@ -20,7 +20,7 @@ sudo curl -sL https://raw.githubusercontent.com/itsPoipoi/dotfiles/refs/heads/om
 sudo chmod -R a+rx /etc/kanata
 
 # Setup systemd daemon service
-curl -sL https://raw.githubusercontent.com/itsPoipoi/dotfiles/refs/heads/omarchy/kanata/.config/kanata/kanata.service --create-dirs -o ~/.config/systemd/user/kanata.service
+curl -sL https://raw.githubusercontent.com/itsPoipoi/dotfiles/refs/heads/omarchy/kanata/kanata.service --create-dirs -o ~/.config/systemd/user/kanata.service
 systemctl --user daemon-reload
 systemctl --user enable kanata.service
 systemctl --user start kanata.service
