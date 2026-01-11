@@ -128,17 +128,19 @@ export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --glob '!.git'"
 export FZF_ALT_C_COMMAND="fd --hidden --follow --type d"
 export FZF_CTRL_T_COMMAND="fd --hidden --follow --type f"
 
-export FZF_DEFAULT_OPTS='--info=inline --cycle --layout=reverse --height=90% --preview-window=wrap --marker="*"'
+export FZF_DEFAULT_OPTS='--style=default --info=inline --cycle --layout=reverse --height=90% --preview-window=wrap --marker="*"'
 export FZF_CTRL_R_OPTS="--prompt='CMD-Hist > ' --preview 'echo {}' --preview-window down:3:wrap"
 export FZF_ALT_C_OPTS="
   --prompt='CWD-Dir > '
   --walker-skip .git,node_modules,target
   --preview 'eza -aTL 2 --group-directories-first --color=always --icons=always {}'
+  --bind 'focus:transform-preview-label:echo {}'
 "
 export FZF_CTRL_T_OPTS="
   --prompt='CWD-File > '
   --walker-skip .git,node_modules,target
   --preview 'bat -n {} --color=always 2>/dev/null'
+  --bind 'focus:transform-preview-label:echo {}'
 "
 
 # Extracts any archive(s) (if unp isn't installed)
