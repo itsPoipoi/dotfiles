@@ -115,15 +115,6 @@ function lazykeys {
 # Load keybinds after zvm keybinds
 zvm_after_init_commands+=(lazykeys)
 
-# Fastfetch on clear
-# function ffclear { clear; fastfetch; zle redisplay; }
-# zle -N ffclear
-
-# # Fastfetch on startup
-# if [ -f /usr/bin/fastfetch ]; then
-# 	fastfetch
-# fi
-
 #######################################################
 # SPECIAL FUNCTIONS
 #######################################################
