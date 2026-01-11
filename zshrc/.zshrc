@@ -125,8 +125,8 @@ export VISUAL=nvim
 
 # fzf exports
 export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --glob '!.git'"
-export FZF_ALT_C_COMMAND="fd  --hidden --follow --type d"
-export FZF_CTRL_T_COMMAND="fd  --hidden --follow --type f"
+export FZF_ALT_C_COMMAND="fd --hidden --follow --type d"
+export FZF_CTRL_T_COMMAND="fd --hidden --follow --type f"
 
 export FZF_DEFAULT_OPTS='--info=inline --cycle --layout=reverse --height=90% --preview-window=wrap --marker="*"'
 export FZF_CTRL_R_OPTS="--prompt='CMD-Hist > ' --preview 'echo {}' --preview-window down:3:wrap"
