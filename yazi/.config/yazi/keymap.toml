@@ -522,10 +522,10 @@ desc = "Find files/directories with fd and fzf"
 [[mgr.prepend_keymap]]
 on = "<C-t>"
 run = "plugin fazif fzffile"
-desc = "Find files/directories with fd and fzf"
+desc = "Find files with fd and fzf"
 
 # Directory finder using fd + fzf
 [[mgr.prepend_keymap]]
 on = "<A-c>"
 run = "plugin fazif fzfdir"
-desc = "Find files/directories with fd and fzf"
+desc = "Find directories with fd and fzf"
