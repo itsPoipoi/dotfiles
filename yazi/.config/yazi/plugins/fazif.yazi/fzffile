@@ -13,7 +13,6 @@ fd . --hidden --follow --type f "$@" | fzf \
 --bind 'ctrl-f:transform:echo "change-prompt(Root-Dir > )+reload(fd . / --hidden --follow --type d)"' \
 --bind 'ctrl-r:transform:echo "change-prompt(Root-File > )+reload(fd . / --hidden --follow --type f)"' \
 --bind 'focus:transform-preview-label:echo {}' \
---bind 'focus:transform-preview-label:echo {}' \
 --preview-window 'right' \
 --preview '
     printf "\033_Ga=d,q=1\033\\"
