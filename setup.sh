@@ -428,7 +428,7 @@ show_main_menu() {
   print_header
 
   echo "Choose an option:"
-  echo "1. Full Automated Install (all modules)"
+  echo "1. Interactive Install (all modules)"
   echo "2. Selective Install (choose modules)"
   echo "3. Backup/Restore"
   echo "4. Exit"
