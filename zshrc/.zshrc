@@ -1,6 +1,4 @@
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
@@ -71,13 +69,13 @@ setopt notify
 setopt globdots
 
 # Completion styling
-zstyle ':fzf-tab:*' switch-group '<' '>'
-zstyle ':fzf-tab:*' fzf-bindings 'ctrl-y:accept' 'ctrl-w:accept'
-zstyle ':fzf-tab:*' fzf-min-height 25
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' menu no
 zstyle ':completion:*:git-checkout:*' sort false
+zstyle ':fzf-tab:*' switch-group '<' '>'
+zstyle ':fzf-tab:*' fzf-bindings 'ctrl-y:accept' 'ctrl-w:accept'
+zstyle ':fzf-tab:*' fzf-min-height 25
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -aD1 --group-directories-first --icons --color=always $realpath'
 zstyle ':fzf-tab:complete:z:*' fzf-preview 'eza -aD1 --group-directories-first --icons --color=always $realpath'
 
@@ -137,7 +135,9 @@ export FZF_CTRL_T_OPTS="
   --bind 'focus:transform-preview-label:echo {}'
 "
 
-# Extracts any archive(s) (if unp isn't installed)
+# Archives
+alias zip="zip -r"
+mktar() { tar -cvzf "${1%/}.tar.gz" "${1%/}"; }
 extract() {
 	for archive in "$@"; do
 		if [ -f "$archive" ]; then
@@ -160,10 +160,6 @@ extract() {
 		fi
 	done
 }
-
-# Alias's for archives
-mktar() { tar -cvzf "${1%/}.tar.gz" "${1%/}"; }
-alias zip="zip -r"
 
 # Searches for text in all files in the current folder
 ftext() {
@@ -293,20 +289,17 @@ alias lt='eza -alhrs created --icons --group-directories-first'	# sort by date
 alias p="ps aux | rg "
 alias topcpu="/bin/ps -eo pcpu,pid,user,args | sort -k 1 -r | head -10"
 
-# Alias's to modified commands
-alias grep="rg"
-alias find="fd"
-alias cat="bat"
+# Modified commands
 alias cp='cp -i'
 alias mv='mv -i'
 alias rm='trash -v'
 alias mkdir='mkdir -p'
 alias ping='ping -c 10'
 alias less='less -R'
-alias vi='nvim'
 alias curl="curl -#"
+alias vi='nvim'
 
-# Personal Alias's
+# Personal
 alias sht="omarchy-cmd-shutdown"
 alias rbt="omarchy-cmd-reboot"
 alias ff="fastfetch"
