@@ -126,8 +126,6 @@ export FZF_ALT_C_OPTS="
   --preview 'eza -aTL 2 --group-directories-first --color=always --icons=always {}'
   --bind 'focus:transform-preview-label:echo {}'
 "
-export FZF_PREVIEW_COLUMNS=$(($(tput cols) / 2)) # half of the terminal width
-export FZF_PREVIEW_LINES=$(tput lines) # full height
 export FZF_CTRL_T_OPTS="
   --prompt='CWD-File > '
   --walker-skip .git,node_modules,target
