@@ -73,9 +73,9 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' menu no
 zstyle ':completion:*:git-checkout:*' sort false
-zstyle ':fzf-tab:*' switch-group '<' '>'
-zstyle ':fzf-tab:*' fzf-bindings 'ctrl-y:accept' 'ctrl-w:accept'
 zstyle ':fzf-tab:*' fzf-min-height 25
+zstyle ':fzf-tab:*' switch-group '<' '>'
+zstyle ':fzf-tab:*' fzf-bindings 'ctrl-y:accept' 'ctrl-w:accept' 'ctrl-u:preview-half-page-up' 'ctrl-d:preview-half-page-down'
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -aD1 --group-directories-first --icons --color=always $realpath'
 zstyle ':fzf-tab:complete:z:*' fzf-preview 'eza -aD1 --group-directories-first --icons --color=always $realpath'
 
@@ -118,7 +118,7 @@ export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --glob '!.git'"
 export FZF_ALT_C_COMMAND="fd --hidden --follow --type d"
 export FZF_CTRL_T_COMMAND="fd --hidden --follow --type f"
 
-export FZF_DEFAULT_OPTS='--style=default --info=inline --cycle --layout=reverse --height=90% --preview-window=wrap --marker="*"'
+export FZF_DEFAULT_OPTS='--style=default --info=inline --cycle --layout=reverse --height=90% --preview-window=wrap --marker="*" --bind ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down'
 export FZF_CTRL_R_OPTS="--prompt='CMD-Hist > ' --preview 'echo {}' --preview-window down:3:wrap"
 export FZF_ALT_C_OPTS="
   --prompt='CWD-Dir > '
