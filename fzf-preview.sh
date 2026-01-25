@@ -20,6 +20,11 @@ fi
 
 type=$(file --brief --dereference --mime -- "$file")
 
+if [[ $type =~ directory ]]; then
+  eza -aTL 2 --group-directories-first --color=always --icons=always "$1"
+  exit
+fi
+
 if [[ ! $type =~ image/ ]]; then
   if [[ $type =~ =binary ]]; then
     file "$1"
