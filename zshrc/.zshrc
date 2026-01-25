@@ -115,23 +115,12 @@ export VISUAL=nvim
 
 # fzf exports
 export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --glob '!.git'"
+export FZF_DEFAULT_OPTS_FILE=$HOME/.fzfopts
 export FZF_ALT_C_COMMAND="fd --hidden --follow --type d"
+export FZF_ALT_C_OPTS=" --multi --prompt='CWD-Dir > ' "
 export FZF_CTRL_T_COMMAND="fd --hidden --follow --type f"
-
-export FZF_DEFAULT_OPTS='--style=default --info=inline --cycle --layout=reverse --height=90% --preview-window=wrap --marker="*" --bind ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down'
+export FZF_CTRL_T_OPTS=" --multi --prompt='CWD-File > ' "
 export FZF_CTRL_R_OPTS="--prompt='CMD-Hist > ' --preview 'echo {}' --preview-window down:3:wrap"
-export FZF_ALT_C_OPTS="
-  --prompt='CWD-Dir > '
-  --walker-skip .git,node_modules,target
-  --preview 'eza -aTL 2 --group-directories-first --color=always --icons=always {}'
-  --bind 'focus:transform-preview-label:echo {}'
-"
-export FZF_CTRL_T_OPTS="
-  --prompt='CWD-File > '
-  --walker-skip .git,node_modules,target
-  --preview '$HOME/dotfiles/fzf-preview.sh {}'
-  --bind 'focus:transform-preview-label:echo {}'
-"
 
 # Archives
 alias zip="zip -r"
