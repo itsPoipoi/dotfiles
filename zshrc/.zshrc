@@ -115,7 +115,7 @@ export VISUAL=nvim
 
 # fzf exports
 export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --glob '!.git'"
-export FZF_DEFAULT_OPTS_FILE=$HOME/.fzfopts
+export FZF_DEFAULT_OPTS_FILE="$HOME/.fzfopts"
 export FZF_ALT_C_COMMAND="fd --hidden --follow --type d"
 export FZF_ALT_C_OPTS=" --multi --prompt='CWD-Dir > ' "
 export FZF_CTRL_T_COMMAND="fd --hidden --follow --type f"
