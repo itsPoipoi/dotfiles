@@ -5,6 +5,7 @@ fd . --hidden --follow "$@" | fzf \
 --multi \
 --layout=reverse \
 --prompt='CWD > ' \
+--walker-skip .git,node_modules,target \
 --bind 'ctrl-a:transform:echo "change-prompt(CWD > )+reload(fd . --hidden --follow)"' \
 --bind 'ctrl-w:transform:echo "change-prompt(Home-File > )+reload(fd . ~ --hidden --follow --type f)"' \
 --bind 'ctrl-e:transform:echo "change-prompt(Home-Dir > )+reload(fd . ~ --hidden --follow --type d)"' \
