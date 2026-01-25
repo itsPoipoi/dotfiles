@@ -209,16 +209,15 @@ function whatsmyip ()
 {
 	# Internal IP Lookup.
 	if [ -e /sbin/ip ]; then
-		echo -n "Internal IP: "
-		/sbin/ip addr show wlan0 | rg "inet " | awk -F: '{print $1}' | awk '{print $2}'
+    echo "Internal IP (LAN): $(/sbin/ip addr show eno1 | rg "inet " | awk -F: '{print $1}' | awk '{print $2}')"
+    echo "Internal IP (WLAN): $(/sbin/ip addr show wlan0 | rg "inet " | awk -F: '{print $1}' | awk '{print $2}')"
 	else
-		echo -n "Internal IP: "
-		/sbin/ifconfig wlan0 | rg "inet " | awk -F: '{print $1} |' | awk '{print $2}'
+    echo "Internal IP (LAN): $(/sbin/ifconfig eno1 | rg "inet " | awk -F: '{print $1}' | awk '{print $2}')"
+    echo "Internal IP (WLAN): $(/sbin/ifconfig wlan0 | rg "inet " | awk -F: '{print $1}' | awk '{print $2}')"
 	fi
 
 	# External IP Lookup
-	echo -n "External IP: "
-	curl -s ifconfig.me
+  echo "External IP: $(curl -s ifconfig.me)"
 }
 
 # SSH keygen
