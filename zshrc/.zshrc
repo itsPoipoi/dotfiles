@@ -205,8 +205,7 @@ mkdirg() {
 
 # IP address lookup
 alias whatismyip="whatsmyip"
-function whatsmyip ()
-{
+function whatsmyip () {
 	# Internal IP Lookup.
 	if [ -e /sbin/ip ]; then
     echo "Internal IP (LAN): $(/sbin/ip addr show eno1 | rg "inet " | awk -F: '{print $1}' | awk '{print $2}')"
