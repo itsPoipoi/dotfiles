@@ -1,6 +1,7 @@
 #!/usr/bin/env zsh
 
 fd . --hidden --follow --type d "$@" | fzf \
+--height=100% \
 --info=inline \
 --multi \
 --layout=reverse \
