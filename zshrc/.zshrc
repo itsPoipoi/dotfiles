@@ -208,7 +208,7 @@ alias whatismyip="whatsmyip"
 function whatsmyip () {
 	# Internal IP Lookup.
 	if [ -e /sbin/ip ]; then
-    echo "Internal IP (LAN): $(/sbin/ip addr show eno1 | rg "inet " | awk -F: '{print $1}' | awk '{print $2}')"
+    echo "Internal IP ( LAN): $(/sbin/ip addr show eno1 | rg "inet " | awk -F: '{print $1}' | awk '{print $2}')"
     echo "Internal IP (WLAN): $(/sbin/ip addr show wlan0 | rg "inet " | awk -F: '{print $1}' | awk '{print $2}')"
 	else
     echo "Internal IP (LAN): $(/sbin/ifconfig eno1 | rg "inet " | awk -F: '{print $1}' | awk '{print $2}')"
@@ -216,7 +216,8 @@ function whatsmyip () {
 	fi
 
 	# External IP Lookup
-  echo "External IP: $(curl -s ifconfig.me)"
+  echo "External IP (IPv4): $(curl -s4 ifconfig.me)"
+  echo "External IP (IPv6): $(curl -s6 ifconfig.me)"
 }
 
 # SSH keygen
