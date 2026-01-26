@@ -203,17 +203,17 @@ mkdirg() {
 	cd "$1"
 }
 
-# IP address lookup
-alias whatismyip="whatsmyip"
-function whatsmyip () {
-	# Internal IP Lookup.
-	if [ -e /sbin/ip ]; then
+# IP Address Lookup
+function myip () {
+  # Internal IP Lookup
+  if ip addr show | rg "eno1" &>/dev/null; then
     echo "Internal IP ( LAN): $(/sbin/ip addr show eno1 | rg "inet " | awk -F: '{print $1}' | awk '{print $2}')"
+  else
+    echo "Internal IP ( LAN): $(/sbin/ip addr show eth0 | rg "inet " | awk -F: '{print $1}' | awk '{print $2}')"
+  fi
+  if ip addr show | rg "wlan0" &>/dev/null; then
     echo "Internal IP (WLAN): $(/sbin/ip addr show wlan0 | rg "inet " | awk -F: '{print $1}' | awk '{print $2}')"
-	else
-    echo "Internal IP (LAN): $(/sbin/ifconfig eno1 | rg "inet " | awk -F: '{print $1}' | awk '{print $2}')"
-    echo "Internal IP (WLAN): $(/sbin/ifconfig wlan0 | rg "inet " | awk -F: '{print $1}' | awk '{print $2}')"
-	fi
+  fi
 
 	# External IP Lookup
   echo "External IP (IPv4): $(curl -s4 ifconfig.co)"
