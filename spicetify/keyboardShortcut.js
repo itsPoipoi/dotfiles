@@ -46,7 +46,9 @@
 
     // % & # to go back and forward page
     "#": { callback: () => Spicetify.Platform.History.goBack() },
+    "shift+h": { callback: () => Spicetify.Platform.History.goBack() },
     "%": { callback: () => Spicetify.Platform.History.goForward() },
+    "shift+l": { callback: () => Spicetify.Platform.History.goForward() },
 
     // M to Like/Unlike track
     m: { callback: () => Spicetify.Player.toggleHeart() },
