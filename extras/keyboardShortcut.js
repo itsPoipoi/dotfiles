@@ -12,7 +12,7 @@
 
   // Variables / Conditions
   const vim = new VimBind();
-  const SCROLL_STEP = 10;
+  const SCROLL_STEP = 8;
 
   /**
    * Binds a keyboard shortcut using Mousetrap.
