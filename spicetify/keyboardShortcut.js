@@ -172,7 +172,7 @@
 function VimBind() {
   const elementQuery = ["[href]", "button", ".main-trackList-trackListRow", "[role='button']"].join(",");
 
-  const keyList = "qcopwasenfzxbvjmdylrtiuhgk".split("");
+  const keyList = "asenflrtiuopmd".split("");
 
   const lastKeyIndex = keyList.length - 1;
 
