@@ -122,11 +122,6 @@ export FZF_CTRL_T_COMMAND="fd --hidden --follow --type f"
 export FZF_CTRL_T_OPTS=" --multi --prompt='CWD-File > ' "
 export FZF_CTRL_R_OPTS="--prompt='CMD-Hist > ' --preview 'echo {}' --preview-window down:3:wrap"
 
-# Open
-open() {
-  xdg-open "$@" >/dev/null 2>&1 &
-}
-
 # Archives
 alias zip="zip -r"
 mktar() { tar -cvzf "${1%/}.tar.gz" "${1%/}"; }
@@ -287,8 +282,9 @@ alias rm='trash -v'
 alias mkdir='mkdir -p'
 alias ping='ping -c 5'
 alias less='less -R'
-alias curl="curl -#"
+alias curl='curl -#'
 alias vi='nvim'
+alias open='xdg-open'
 
 # Personal
 alias sht="omarchy-cmd-shutdown"
