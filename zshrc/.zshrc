@@ -216,8 +216,8 @@ function whatsmyip () {
 	fi
 
 	# External IP Lookup
-  echo "External IP (IPv4): $(curl -s4 ifconfig.me)"
-  echo "External IP (IPv6): $(curl -s6 ifconfig.me)"
+  echo "External IP (IPv4): $(curl -s4 ifconfig.co)"
+  echo "External IP (IPv6): $(curl -s6 ifconfig.co)"
 }
 
 # SSH keygen
