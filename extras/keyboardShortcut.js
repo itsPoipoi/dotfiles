@@ -65,7 +65,7 @@
     "ctrl+down": { callback: () => Spicetify.Player.setVolume(Spicetify.Player.getVolume() - 0.05) },
 
     // Activate Vim mode and set cancel key to 'ESCAPE'
-    f: {
+    s: {
       callback: (event) => {
         vim.activate(event);
         vim.setCancelKey("ESCAPE");
