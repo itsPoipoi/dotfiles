@@ -1,6 +1,7 @@
 {
   "keyMappings": "unmap j\nunmap k\nunmap J\nunmap K\nmap + scrollDown\nmap - scrollUp\nmap L nextTab\nmap H previousTab\nmap # goBack\nmap % goForward\n\nmap s LinkHints.activateMode\nmap S LinkHints.activateModeToOpenInNewTab\nmap ys LinkHints.activateModeToCopyLinkUrl\nmap <a-s> LinkHints.activateModeWithQueue",
   "linkHintCharacters": "asenflrtiuopmd",
+  "smoothScroll": false,
   "settingsVersion": "2.3.1",
   "userDefinedLinkHintCss": "div > .vimiumHintMarker {\n/* linkhint boxes */\nbackground: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#323232),\n  color-stop(100%,#323232));\nborder: 1px solid #BABABA;\n}\n\ndiv > .vimiumHintMarker span {\n/* linkhint text */\ncolor: white;\nfont-weight: normal;\nfont-size: 14px;\n}\n\ndiv > .vimiumHintMarker > .matchingCharacter {\n}"
 }
