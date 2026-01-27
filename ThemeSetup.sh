@@ -38,8 +38,11 @@ omarchy-theme-install https://github.com/guilhermetk/omarchy-rose-pine-dark
 
 # Theme Tweaks
 \rm -f "$HOME/.config/omarchy/themes/tokyoled/backgrounds/black.jpg"
-cp "$HOME/.config/omarchy/themes/ethereal/backgrounds/1.jpg" "$HOME/.config/omarchy/themes/tokyoled/backgrounds/1.jpg"
+\cp "$HOME/.config/omarchy/themes/ethereal/backgrounds/1.jpg" "$HOME/.config/omarchy/themes/tokyoled/backgrounds/1.jpg"
+\cp "$HOME/.config/omarchy/themes/tokyo-night/neovim.lua" "$HOME/.config/omarchy/themes/tokyoled/neovim.lua"
+sed -i 's/7aa2f7/5b8ffc/g' "$HOME/.config/omarchy/themes/tokyoled/kitty.conf"
+sed -i 's/a9b1d6/e8e8e8/g' "$HOME/.config/omarchy/themes/tokyoled/kitty.conf"
 \rm -rf "$HOME/.config/omarchy/themes/neo-sploosh/backgrounds/"
 mkdir "$HOME/.config/omarchy/themes/neo-sploosh/backgrounds/"
-cp "$HOME/.config/omarchy/themes/ethereal/backgrounds/1.jpg" "$HOME/.config/omarchy/themes/neo-sploosh/backgrounds/1.jpg"
-\cp "$HOME/.config/omarchy/themes/tokyo-night/neovim.lua" "$HOME/.config/omarchy/themes/tokyoled/neovim.lua"
+\cp "$HOME/.config/omarchy/themes/ethereal/backgrounds/1.jpg" "$HOME/.config/omarchy/themes/neo-sploosh/backgrounds/1.jpg"
+\cp "$HOME/.config/omarchy/themes/tokyoled/kitty.conf" "$HOME/.config/omarchy/themes/neo-sploosh/kitty.conf"
