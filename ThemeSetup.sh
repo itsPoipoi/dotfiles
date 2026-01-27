@@ -37,6 +37,8 @@ omarchy-theme-install https://github.com/dotsilva/omarchy-purplewave-theme
 omarchy-theme-install https://github.com/guilhermetk/omarchy-rose-pine-dark
 
 # Theme Tweaks
+# Remove all themes btop bg
+sed -i 's/t.\+main_bg.\+$/theme[main_bg]=""/' "$HOME/.config/omarchy/themes/*/btop.theme"
 # Tokyoled: Replace backgrounds, tweak colors
 \rm -f "$HOME/.config/omarchy/themes/tokyoled/backgrounds/black.jpg"
 \cp "$HOME/.config/omarchy/themes/ethereal/backgrounds/1.jpg" "$HOME/.config/omarchy/themes/tokyoled/backgrounds/1.jpg"
