@@ -251,6 +251,16 @@ keymap = [
   { on = "8", run = "tab_switch 7", desc = "Switch to eighth tab" },
   { on = "9", run = "tab_switch 8", desc = "Switch to ninth tab" },
 
+  { on = "<A-1>", run = "tab_switch 0", desc = "Switch to first tab" },
+  { on = "<A-2>", run = "tab_switch 1", desc = "Switch to second tab" },
+  { on = "<A-3>", run = "tab_switch 2", desc = "Switch to third tab" },
+  { on = "<A-4>", run = "tab_switch 3", desc = "Switch to fourth tab" },
+  { on = "<A-5>", run = "tab_switch 4", desc = "Switch to fifth tab" },
+  { on = "<A-6>", run = "tab_switch 5", desc = "Switch to sixth tab" },
+  { on = "<A-7>", run = "tab_switch 6", desc = "Switch to seventh tab" },
+  { on = "<A-8>", run = "tab_switch 7", desc = "Switch to eighth tab" },
+  { on = "<A-9>", run = "tab_switch 8", desc = "Switch to ninth tab" },
+
   { on = "[", run = "tab_switch -1 --relative", desc = "Switch to previous tab" },
   { on = "]", run = "tab_switch 1 --relative", desc = "Switch to next tab" },
 
