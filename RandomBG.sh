@@ -4,7 +4,7 @@
 WP_FOLDER=~/Pictures/Wallpapers
 
 # Time in seconds to change wallpaper
-sleep 5
+sleep 3
 WAIT_TIME=1200
 
 # Cache wallpaper list for efficiency
