@@ -13,8 +13,8 @@ normal_main = { fg = "#000000", bg = "blue", bold = true }
 normal_alt = { fg = "#000000", bg = "white", bold = true }
 # Select mode
 select_main = { fg = "#000000", bg = "red", bold = true }
-select_alt = { fg = "#000000", bg = "white" }
+select_alt = { fg = "#000000", bg = "white", bold = true }
 # Unset mode
 unset_main = { fg = "#000000", bg = "red", bold = true }
-unset_alt = { fg = "#000000", bg = "white" }
+unset_alt = { fg = "#000000", bg = "white", bold = true }
 # : }}}
