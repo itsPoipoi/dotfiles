@@ -1,0 +1,20 @@
+# : Tabs {{{
+[tabs]
+active = { fg = "#000000", bg = "white", bold = true }
+inactive = { fg = "white", bg = "#000000" }
+# Separator
+sep_inner = { open = "", close = "" }
+sep_outer = { open = "", close = "" }
+# : }}}
+
+# : Mode {{{
+[mode]
+normal_main = { fg = "#000000", bg = "blue", bold = true }
+normal_alt = { fg = "#000000", bg = "white" }
+# Select mode
+select_main = { fg = "#000000", bg = "red", bold = true }
+select_alt = { fg = "#000000", bg = "white" }
+# Unset mode
+unset_main = { fg = "#000000", bg = "red", bold = true }
+unset_alt = { fg = "#000000", bg = "white" }
+# : }}}
