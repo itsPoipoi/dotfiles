@@ -208,7 +208,7 @@ function myip () {
   # Internal IP Lookup
   if ip addr show | rg "eno1" &>/dev/null; then
     echo "Internal IP ( LAN): $(/sbin/ip addr show eno1 | rg "inet " | awk -F: '{print $1}' | awk '{print $2}')"
-  else
+  elif ip addr show | rg "eth0" &>/dev/null; then
     echo "Internal IP ( LAN): $(/sbin/ip addr show eth0 | rg "inet " | awk -F: '{print $1}' | awk '{print $2}')"
   fi
   if ip addr show | rg "wlan0" &>/dev/null; then
