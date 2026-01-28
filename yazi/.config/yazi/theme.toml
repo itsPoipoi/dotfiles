@@ -10,7 +10,7 @@ sep_outer = { open = "", close = "" }
 # : Mode {{{
 [mode]
 normal_main = { fg = "#000000", bg = "blue", bold = true }
-normal_alt = { fg = "#000000", bg = "white" }
+normal_alt = { fg = "#000000", bg = "white", bold = true }
 # Select mode
 select_main = { fg = "#000000", bg = "red", bold = true }
 select_alt = { fg = "#000000", bg = "white" }
