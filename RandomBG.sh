@@ -17,8 +17,8 @@ trap 'echo "Terminating..."; killall swaybg 2>/dev/null; exit' INT TERM
 STARTPID=$(pidof swaybg)
 kill "$STARTPID"
 
-FILE2START=$(echo "$WALLPAPERS" | shuf -n1)
-swaybg -o DP-1 -i "$FILE2START" -m fill &
+# FILE2START=$(echo "$WALLPAPERS" | shuf -n1)
+# swaybg -o DP-1 -i "$FILE2START" -m fill &
 
 while true; do
   # Get all PIDs in one call for efficiency
