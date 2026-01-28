@@ -9,6 +9,7 @@ WAIT_TIME=1200
 
 # Cache wallpaper list for efficiency
 WALLPAPERS=$(find "$WP_FOLDER" -type f -name '*')
+CURRENT_BACKGROUND_LINK="$HOME/.config/omarchy/current/background"
 
 # Add signal handling for graceful shutdown
 trap 'echo "Terminating..."; killall swaybg 2>/dev/null; exit' INT TERM
@@ -30,6 +31,8 @@ while true; do
   FILE=$(echo "$WALLPAPERS" | shuf -n1)
   swaybg -o DP-3 -i "$FILE" -m fill &
   swaybg -o eDP-1 -i "$FILE" -m fill &
+  # Set new background symlink
+  ln -nsf "$FILE" "$CURRENT_BACKGROUND_LINK"
   sleep 0.5
 
   # Add error checking for kill operations
@@ -48,6 +51,8 @@ while true; do
   FILE=$(echo "$WALLPAPERS" | shuf -n1)
   swaybg -o DP-1 -i "$FILE" -m fill &
   swaybg -o eDP-1 -i "$FILE" -m fill &
+  # Set new background symlink
+  ln -nsf "$FILE" "$CURRENT_BACKGROUND_LINK"
   sleep 0.5
 
   # Add error checking for kill operations
