@@ -4,8 +4,8 @@
 WP_FOLDER=~/Pictures/Wallpapers
 
 # Time in seconds to change wallpaper
-sleep 3
 WAIT_TIME=1200
+sleep "$WAIT_TIME"
 
 # Cache wallpaper list for efficiency
 WALLPAPERS=$(find "$WP_FOLDER" -type f -name '*')
@@ -16,9 +16,6 @@ trap 'echo "Terminating..."; killall swaybg 2>/dev/null; exit' INT TERM
 
 STARTPID=$(pidof swaybg)
 kill "$STARTPID"
-
-# FILE2START=$(echo "$WALLPAPERS" | shuf -n1)
-# swaybg -o DP-1 -i "$FILE2START" -m fill &
 
 while true; do
   # Get all PIDs in one call for efficiency
