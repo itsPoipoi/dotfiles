@@ -70,11 +70,7 @@ sed -i 's/t.\+main_bg.\+$/theme[main_bg]=""/' "$HOME"/.config/omarchy/themes/*/b
 \cp "$HOME/.config/omarchy/themes/ethereal/backgrounds/1.jpg" "$HOME/.config/omarchy/themes/tokyoled/backgrounds/1.jpg"
 sed -i 's/7aa2f7/5b8ffc/g' "$HOME/.config/omarchy/themes/tokyoled/colors.toml"
 sed -i 's/787c99/e8e8e8/g' "$HOME/.config/omarchy/themes/tokyoled/colors.toml"
-# Neo-sploosh: Replace backgrounds, tweak kitty colors, use tokyo-night neovim
-\rm -rf "$HOME/.config/omarchy/themes/neo-sploosh/backgrounds/"
-mkdir "$HOME/.config/omarchy/themes/neo-sploosh/backgrounds/"
-\cp "$HOME/.config/omarchy/themes/ethereal/backgrounds/1.jpg" "$HOME/.config/omarchy/themes/neo-sploosh/backgrounds/1.jpg"
-sed -i 's/008DC9/5b8ffc/g' "$HOME/.config/omarchy/themes/neo-sploosh/kitty.conf"
-sed -i 's/E4E4E4/e8e8e8/g' "$HOME/.config/omarchy/themes/neo-sploosh/kitty.conf"
-\cp "$HOME/.config/omarchy/themes/tokyo-night/neovim.lua" "$HOME/.config/omarchy/themes/neo-sploosh/neovim.lua"
+# Create Tokyoled variant with transparent waybar
+\cp -rf "$HOME/.config/omarchy/themes/tokyoled" "$HOME/.config/omarchy/themes/tokyoled-2"
+\cp "$HOME/.config/omarchy/themes/neo-sploosh/waybar.css" "$HOME/.config/omarchy/themes/tokyoled-2/"
 echo "Theme setup complete"
