@@ -401,6 +401,7 @@ install_webapps_cleanup() {
   omarchy-webapp-remove X
   omarchy-webapp-remove YouTube
   omarchy-webapp-remove Zoom
+  omarchy-webapp-install Instagram https://www.instagram.com/direct/inbox/ https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/instagram.png
   print_success "WebApps cleanup completed."
 }
 
