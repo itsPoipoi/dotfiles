@@ -1,0 +1,49 @@
+;; Every section should enable one and only one `include`
+;; -- enable each feature by un-commenting the related line.
+
+(defcfg
+  process-unmapped-keys yes
+)
+
+;;-----------------------------------------------------------------------------
+;; Key arrangement: With or without angle mod?
+
+;; (include defsrc_pc.kbd)  ;; PC, standard finger assignment
+(include defsrc_pc_anglemod.kbd)  ;; PC, ZXCVB are shifted to the left
+
+;;-----------------------------------------------------------------------------
+;; `Base` layer: standard or dual keys? (layer-taps, homerow mods?)
+
+;; (include deflayer_nav.kbd)  ;; standard keyboard behavior
+(include deflayer_nav_lt.kbd)  ;; layer-taps on both thumb keys
+;; (include deflayer_nav_lt_hrm.kbd)  ;; layer-taps + home-row mods
+
+;; Note: not enabling layer-taps here makes the rest of the file useless.
+
+
+;;-----------------------------------------------------------------------------
+;; Num-Navigation layer (requires layer-taps):
+
+(defvar
+  tto 250 ;; tap-repress-timeout
+  hto 250 ;; hold-timeout
+)
+
+(defalias
+  caps (tap-hold-press 0 200 esc lctl)
+  spc (tap-hold-press 0 250 spc ralt)
+)
+
+;; Live-reload (`lrld`) the configuration with Nav+Backspace.
+;; This will re-parse everything except for linux-dev,
+;; i.e. you cannot live-reload and switch keyboard devices.
+
+(deflayer navigation
+         F1     F2   F3   F4    F5           F6    F7  F8  F9  F10  F11  F12
+         S-tab  home up   end   pgup  lrld   prnt  1   2   3   menu
+  @caps  tab    lft  down rght  pgdn         ins   4   5   6   0
+  caps   voldwn volu mute prev  next   _     pp    7   8   9   _
+                     del               @spc            esc
+)
+
+;; vim: set ft=lisp

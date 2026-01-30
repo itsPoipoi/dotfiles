@@ -16,8 +16,13 @@ sudo udevadm control --reload-rules && sudo udevadm trigger
 sudo modprobe uinput
 
 # Import config
-sudo curl -sL https://raw.githubusercontent.com/itsPoipoi/dotfiles/refs/heads/omarchy/kanata/config.kbd --create-dirs -o /etc/kanata/config.kbd
-sudo chmod -R a+rx /etc/kanata
+sudo curl -sL https://raw.githubusercontent.com/itsPoipoi/dotfiles/refs/heads/omarchy/kanata/kanata.kbd --create-dirs -o /etc/kanata/kanata.kbd
+sudo curl -sL https://raw.githubusercontent.com/itsPoipoi/dotfiles/refs/heads/omarchy/kanata/defsrc_pc.kbd --create-dirs -o /etc/kanata/defsrc_pc.kbd
+sudo curl -sL https://raw.githubusercontent.com/itsPoipoi/dotfiles/refs/heads/omarchy/kanata/defsrc_pc_anglemod.kbd --create-dirs -o /etc/kanata/defsrc_pc_anglemod.kbd
+sudo curl -sL https://raw.githubusercontent.com/itsPoipoi/dotfiles/refs/heads/omarchy/kanata/deflayer_nav.kbd --create-dirs -o /etc/kanata/deflayer_nav.kbd
+sudo curl -sL https://raw.githubusercontent.com/itsPoipoi/dotfiles/refs/heads/omarchy/kanata/deflayer_nav_lt.kbd --create-dirs -o /etc/kanata/deflayer_nav_lt.kbd
+sudo curl -sL https://raw.githubusercontent.com/itsPoipoi/dotfiles/refs/heads/omarchy/kanata/deflayer_nav_lt_hrm.kbd --create-dirs -o /etc/kanata/deflayer_nav_lt_hrm.kbd
+sudo chmod -R 777 /etc/kanata
 
 # Setup systemd daemon service
 curl -sL https://raw.githubusercontent.com/itsPoipoi/dotfiles/refs/heads/omarchy/kanata/kanata.service --create-dirs -o ~/.config/systemd/user/kanata.service
