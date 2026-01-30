@@ -11,6 +11,11 @@
 - **📝 [Neovim Editor](https://github.com/itsPoipoi/neovim)**: Full IDE setup with LSP, treesitter, and custom plugins
 - **🐚 Zsh Shell**: Powerline prompt with zinit plugin manager
 - **🛠️ Developer Tools**: fastfetch, yazi, lazygit, and more productivity tools
+- **⌨ Kanata**: Advanced modular keyboard remapping with custom mods: angle mod, modtaps, extra layer, homerow mods
+<details><summary> Kanata Preview: </summary>
+<br>
+<p align="center"><img src="https://raw.githubusercontent.com/itsPoipoi/dotfiles/refs/heads/omarchy/kanata/preview-ergo-l-mods.png"></p>
+</details>
 
 ## 🚀 Quick Start
 
