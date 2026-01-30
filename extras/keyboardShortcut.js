@@ -200,7 +200,7 @@ function VimBind() {
     border-radius: 3px;
     border: solid 2px var(--spice-text);
     color: var(--spice-text);
-    text-transform: lowercase;
+    text-transform: uppercase;
     line-height: normal;
     font-size: 14px;
     font-weight: 500;
