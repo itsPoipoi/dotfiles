@@ -18,3 +18,11 @@ select_alt = { fg = "#000000", bg = "white", bold = true }
 unset_main = { fg = "#000000", bg = "red", bold = true }
 unset_alt = { fg = "#000000", bg = "white", bold = true }
 # : }}}
+
+# : Manager {{{
+[mgr]
+# Count
+count_copied = { fg = "#000000", bg = "green" }
+count_cut = { fg = "#000000", bg = "red" }
+count_selected = { fg = "#000000", bg = "yellow" }
+# : }}}
