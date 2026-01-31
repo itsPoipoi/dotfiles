@@ -449,7 +449,7 @@ show_main_menu() {
   1) full_install ;;
   2) selective_install ;;
   3) backup_restore_menu ;;
-  4) exit 0 ;;
+  4) clear && exit 0 ;;
   *)
     echo -e "${RED}Invalid choice. Please try again.${NC}"
     sleep 1
@@ -702,19 +702,4 @@ finish_install() {
   fi
 }
 
-# Clone dotfiles repository if it’s missing, update if it exists
-if [[ ! -d "$HOME/dotfiles" ]]; then
-  echo "${BLUE}Cloning dotfiles repository..."
-  git clone https://github.com/itsPoipoi/dotfiles.git "$HOME"/dotfiles
-else
-  echo "${BLUE}Updating dotfiles repository..."
-  git -C "$HOME"/dotfiles pull
-fi
-
-# Main execution
-main() {
-  # Show main menu
-  show_main_menu
-}
-
-main "$@"
+show_main_menu
