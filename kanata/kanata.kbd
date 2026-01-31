@@ -32,6 +32,7 @@
 (defalias
   caps (tap-hold-press 0 200 esc lctl)
   spc (tap-hold-press 0 250 spc ralt)
+  lsft (tap-hold-press 0 250 caps lsft)
 )
 
 ;; Live-reload (`lrld`) the configuration with Nav+Backspace.
@@ -40,9 +41,9 @@
 
 (deflayer navigation
          F1     F2   F3   F4    F5           F6    F7  F8  F9  F10  F11  F12
-         S-tab  home up   end   pgup  lrld   prnt  1   2   3   menu
+         S-tab  home up   end   pgup  lrld   prnt  1   2   3   _
   @caps  tab    lft  down rght  pgdn         ins   4   5   6   0
-  caps   voldwn volu mute prev  next   _     pp    7   8   9   _
+  @lsft  voldwn volu mute prev  next   _     pp    7   8   9   menu
                      del               @spc            esc
 )
 
