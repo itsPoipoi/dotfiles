@@ -33,4 +33,4 @@
   ll (tap-hold $tto $hto l rmet)
 )
 
-;; vim: set ft=lisp
+;; vim: set ft=lisp:

@@ -47,4 +47,5 @@
                      del               @spc            esc
 )
 
-;; vim: set ft=lisp
+;; vim: set ft=lisp:
+

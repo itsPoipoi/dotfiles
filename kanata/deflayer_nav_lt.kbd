@@ -21,4 +21,4 @@
   ralt (tap-hold-press $tto $hto ret ralt)
 )
 
-;; vim: set ft=lisp
+;; vim: set ft=lisp:
