@@ -22,7 +22,8 @@
 ### Installation
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/itsPoipoi/dotfiles/refs/heads/omarchy/remote.sh | bash
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/itsPoipoi/dotfiles/refs/heads/omarchy/remote.sh)"
+
 ```
 
 ## 🎛️ Interactive Installer
