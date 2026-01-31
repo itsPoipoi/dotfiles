@@ -4,3 +4,7 @@
 
 [mgr]
 show_hidden = true
+
+[preview]
+ueberzug_scale = 1
+ueberzug_offset = [12.5, 5, 0, 0]
