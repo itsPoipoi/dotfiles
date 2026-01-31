@@ -6,8 +6,6 @@
 
 # 🚀 Quick Start
 
-## Installation
-
 ```bash
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/itsPoipoi/dotfiles/refs/heads/omarchy/remote.sh)"
 ```
