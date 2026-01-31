@@ -4,7 +4,7 @@ if [[ -z $STOW_FOLDERS ]]; then
 fi
 
 if [[ -z $DOTFILES ]]; then
-    DOTFILES=$HOME/dotfiles
+    DOTFILES="$HOME/dotfiles"
 fi
 
 STOW_FOLDERS=$STOW_FOLDERS DOTFILES=$DOTFILES
@@ -13,17 +13,15 @@ pushd $DOTFILES
 for folder in $(echo $STOW_FOLDERS | sed "s/,/ /g")
 do
     echo "stow $folder"
-    stow -D $folder
-    stow --adopt $folder
-    git restore .
+    stow -d "$DOTFILES" --restow --adopt $folder
+    git -C "$DOTFILES" restore .
 done
 popd
 
 # Reload Hyprland
 if [ -f /usr/bin/hyprctl ]; then
-    echo "stow hypr"
-	stow -D hypr
-	stow --adopt hypr
-    git restore .
-	hyprctl reload
+  echo "stow hypr"
+  stow -d "$DOTFILES" --restow --adopt hypr
+  git -C "$DOTFILES" restore .
+  hyprctl reload
 fi

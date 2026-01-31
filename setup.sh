@@ -421,9 +421,7 @@ install_themes_setup() {
 install_stow_config() {
   local skip_confirm="$1"
   if [[ "$skip_confirm" == "--yes" ]] || confirm_action "Run stow install script and reload Hyprland?"; then
-    cd ~/dotfiles/ || exit
-    /bin/bash stow.sh
-    cd || exit
+    /bin/bash ~/dotfiles/stow.sh
   else
     echo -e "${GREEN}Skipping stow config.${NC}"
   fi
