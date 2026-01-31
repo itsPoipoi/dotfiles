@@ -5,7 +5,7 @@
         q    w    e    r    t    _    y    u    i    o    p
  @caps  a    s    d    f    g         h    j    k    l    ;
  lsft   z    x    c    v    b   @nav  n    m    ,    .    /
-                  @sft          @spc            @alt
+                  @lalt         @spc            @ralt
 )
 
 (defalias
@@ -17,8 +17,8 @@
   ;;  - acts as a modifier by default, or as BS/Ret when tapped separately;
   ;;  - works great with Qwerty-Lafayette and Ergo-L keyboard layouts, where
   ;;    neither Shift nor AltGr are used outside of the 3×10 main alpha keys.
-  sft (tap-hold-press $tto $hto bspc lalt)
-  alt (tap-hold-press $tto $hto ret ralt)
+  lalt (tap-hold-press $tto $hto bspc lalt)
+  ralt (tap-hold-press $tto $hto ret ralt)
 )
 
 ;; vim: set ft=lisp
