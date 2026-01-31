@@ -2,7 +2,18 @@
 
 🖥️ Designed for Omarchy, featuring Hyprland WM, Kitty terminal, Neovim editor, and Zsh shell with an interactive installer.
 
-## ✨ Features
+<br>
+
+# 🚀 Quick Start
+
+## Installation
+
+```bash
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/itsPoipoi/dotfiles/refs/heads/omarchy/remote.sh)"
+```
+<br>
+
+# ✨ Features
 
 - **🎯 Interactive Installer**: Menu-driven setup with full / selective install options
 - **🔄 Backup & Restore**: Automatic config backups with easy restoration
@@ -16,15 +27,6 @@
 <br>
 <p align="center"><img src="https://raw.githubusercontent.com/itsPoipoi/dotfiles/refs/heads/omarchy/kanata/preview-ergo-l-mods.png"></p>
 </details>
-
-# 🚀 Quick Start
-
-## Installation
-
-```bash
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/itsPoipoi/dotfiles/refs/heads/omarchy/remote.sh)"
-
-```
 
 ## 🎛️ Interactive Installer
 
