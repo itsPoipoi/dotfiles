@@ -21,18 +21,8 @@
 
 ### Installation
 
-HTTPS:
 ```bash
-git clone https://github.com/itsPoipoi/dotfiles.git ~/dotfiles
-cd ~/dotfiles
-./setup.sh
-```
-
-SSH:
-```bash
-git clone git@github.com:itsPoipoi/dotfiles.git ~/dotfiles
-cd ~/dotfiles
-./setup.sh
+curl -fsSL https://raw.githubusercontent.com/itsPoipoi/dotfiles/refs/heads/omarchy/setup.sh | bash
 ```
 
 ## 🎛️ Interactive Installer

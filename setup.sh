@@ -99,6 +99,9 @@ backup_files() {
 }
 
 perform_backup() {
+  # Ensure backup directory exists
+  mkdir -p "$BACKUP_DIR"
+
   local backup_path
   backup_path=$(create_backup_dir) || return 1
 
@@ -699,11 +702,17 @@ finish_install() {
   fi
 }
 
+# Clone dotfiles repository if it’s missing, update if it exists
+if [[ ! -d "$HOME/dotfiles" ]]; then
+  echo "${BLUE}Cloning dotfiles repository..."
+  git clone https://github.com/itsPoipoi/dotfiles.git "$HOME"/dotfiles
+else
+  echo "${BLUE}Updating dotfiles repository..."
+  git -C "$HOME"/dotfiles pull
+fi
+
 # Main execution
 main() {
-  # Ensure backup directory exists
-  mkdir -p "$BACKUP_DIR"
-
   # Show main menu
   show_main_menu
 }
