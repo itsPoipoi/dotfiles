@@ -17,9 +17,9 @@
 <p align="center"><img src="https://raw.githubusercontent.com/itsPoipoi/dotfiles/refs/heads/omarchy/kanata/preview-ergo-l-mods.png"></p>
 </details>
 
-## 🚀 Quick Start
+# 🚀 Quick Start
 
-### Installation
+## Installation
 
 ```bash
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/itsPoipoi/dotfiles/refs/heads/omarchy/remote.sh)"
