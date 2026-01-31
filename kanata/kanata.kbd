@@ -33,6 +33,8 @@
   caps (tap-hold-press 0 200 esc lctl)
   spc (tap-hold-press 0 250 spc ralt)
   lsft (tap-hold-press 0 250 caps lsft)
+  del (tap-hold-press $tto $hto del lalt)
+  esc (tap-hold-press $tto $hto esc ralt)
 )
 
 ;; Live-reload (`lrld`) the configuration with Nav+Backspace.
@@ -44,7 +46,7 @@
          S-tab  home up   end   pgup  lrld   prnt  1   2   3   _
   @caps  tab    lft  down rght  pgdn         ins   4   5   6   0
   @lsft  voldwn volu mute prev  next   _     pp    7   8   9   menu
-                     del               @spc            esc
+                     @del              @spc            @esc
 )
 
 ;; vim: set ft=lisp:
