@@ -11,7 +11,7 @@
 (defalias
   ;; Main mod-tap: VimNav layer when hold, Space when tapped.
   ;; The space key must be hold long enough (300ms) to become a layer shift.
-  nav (tap-hold $tto $hto tab (layer-while-held navigation))
+  nav (tap-hold-press $tto $hto tab (layer-while-held navigation))
 
   ;; Space-cadet thumb keys: Shift/BackSpace, AltGr/Escape
   ;;  - acts as a modifier by default, or as BS/Ret when tapped separately;
