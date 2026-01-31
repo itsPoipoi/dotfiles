@@ -284,7 +284,7 @@ install_sddm_setup() {
 
 install_neovim_config() {
   local skip_confirm="$1"
-  if [[ ! -f ~/.config/nvim/setupcheck ]]; then
+  if [[ ! -f ~/.config/nvim/lua/plugins/yazi.lua ]]; then
     if [[ "$skip_confirm" == "--yes" ]] || confirm_action "Import Neovim config?"; then
       echo -e "${YELLOW}Installing Neovim config...${NC}"
       mv ~/.config/nvim{,.bak} 2>/dev/null || true
