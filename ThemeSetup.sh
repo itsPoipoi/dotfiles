@@ -72,6 +72,6 @@ sed -i 's/7aa2f7/5b8ffc/g' "$HOME/.config/omarchy/themes/tokyoled/colors.toml"
 sed -i 's/787c99/e8e8e8/g' "$HOME/.config/omarchy/themes/tokyoled/colors.toml"
 sed -i 's/magenta/blue/g' "$HOME/.config/omarchy/themes/tokyoled/icons.theme"
 # Create Tokyoled variant with transparent waybar
-\cp -rf "$HOME/.config/omarchy/themes/tokyoled" "$HOME/.config/omarchy/themes/tokyoled-2"
+\cp -Trf "$HOME/.config/omarchy/themes/tokyoled" "$HOME/.config/omarchy/themes/tokyoled-2"
 \cp "$HOME/.config/omarchy/themes/neo-sploosh/waybar.css" "$HOME/.config/omarchy/themes/tokyoled-2/"
 echo "Theme setup complete"
