@@ -59,3 +59,5 @@ r = reset
 # Slideshow control
 t = slideshow +1
 <Shift+T> = slideshow -1
+
+# vim: set ft=ini:
