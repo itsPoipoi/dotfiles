@@ -224,13 +224,6 @@ function myip () {
 # SSH keygen
 alias sshkey="ssh-keygen -t rsa -b 4096 -C 'poipoigit@gmail.com'"
 
-# Fast git push
-gpp() {
-    git add .
-    git commit -m "..."
-    git push
-}
-
 # Yazi
 function y() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
