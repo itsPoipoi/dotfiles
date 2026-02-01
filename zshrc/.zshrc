@@ -124,6 +124,7 @@ export FZF_CTRL_R_OPTS="--prompt='CMD-Hist > ' --preview 'echo {}' --preview-win
 
 # Archives
 alias zip="zip -r"
+alias compress="mktar"
 mktar() { tar -cvzf "${1%/}.tar.gz" "${1%/}"; }
 extract() {
 	for archive in "$@"; do
