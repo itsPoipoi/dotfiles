@@ -12,13 +12,15 @@ fd . --hidden --follow "$@" | fzf \
 --marker="*" \
 --walker-skip .git,node_modules,target \
 --bind 'ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down' \
---bind 'ctrl-a:transform:echo "change-prompt(CWD > )+reload(fd . --hidden --follow)"' \
---bind 'ctrl-w:transform:echo "change-prompt(Home-File > )+reload(fd . ~ --hidden --follow --type f)"' \
---bind 'ctrl-e:transform:echo "change-prompt(Home-Dir > )+reload(fd . ~ --hidden --follow --type d)"' \
---bind 'alt-c:transform:echo "change-prompt(CWD-Dir > )+reload(fd --hidden --follow --type d)"' \
---bind 'ctrl-t:transform:echo "change-prompt(CWD-File > )+reload(fd --hidden --follow --type f)"' \
---bind 'ctrl-f:transform:echo "change-prompt(Root-Dir > )+reload(fd . / --hidden --follow --type d)"' \
 --bind 'ctrl-r:transform:echo "change-prompt(Root-File > )+reload(fd . / --hidden --follow --type f)"' \
+--bind 'ctrl-t:transform:echo "change-prompt(CWD-File > )+reload(fd --hidden --follow --type f)"' \
+--bind 'ctrl-i:transform:echo "change-prompt(Home-File > )+reload(fd . ~ --hidden --follow --type f)"' \
+--bind 'alt-q:transform:echo "change-prompt(Root-Dir > )+reload(fd . / --hidden --follow --type d)"' \
+--bind 'alt-c:transform:echo "change-prompt(CWD-Dir > )+reload(fd --hidden --follow --type d)"' \
+--bind 'alt-o:transform:echo "change-prompt(Home-Dir > )+reload(fd . ~ --hidden --follow --type d)"' \
+--bind 'ctrl-alt-r:transform:echo "change-prompt(Root > )+reload(fd . / --hidden --follow)"' \
+--bind 'ctrl-alt-t:transform:echo "change-prompt(CWD > )+reload(fd . --hidden --follow)"' \
+--bind 'ctrl-alt-i:transform:echo "change-prompt(Home > )+reload(fd . ~ --hidden --follow)"' \
 --bind 'focus:transform-preview-label:echo {}' \
 --preview-window 'right' \
 --preview '$HOME/dotfiles/fzf-preview.sh {}'
