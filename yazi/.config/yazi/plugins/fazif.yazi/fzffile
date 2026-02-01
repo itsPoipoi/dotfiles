@@ -19,8 +19,11 @@ fd . --hidden --follow --type f "$@" | fzf \
 --bind 'alt-c:transform:echo "change-prompt(CWD-Dir > )+reload(fd --hidden --follow --type d)"' \
 --bind 'alt-o:transform:echo "change-prompt(Home-Dir > )+reload(fd . ~ --hidden --follow --type d)"' \
 --bind 'ctrl-alt-r:transform:echo "change-prompt(Root > )+reload(fd . / --hidden --follow)"' \
+--bind 'ctrl-alt-q:transform:echo "change-prompt(Root > )+reload(fd . / --hidden --follow)"' \
 --bind 'ctrl-alt-t:transform:echo "change-prompt(CWD > )+reload(fd . --hidden --follow)"' \
+--bind 'ctrl-alt-c:transform:echo "change-prompt(CWD > )+reload(fd . --hidden --follow)"' \
 --bind 'ctrl-alt-i:transform:echo "change-prompt(Home > )+reload(fd . ~ --hidden --follow)"' \
+--bind 'ctrl-alt-o:transform:echo "change-prompt(Home > )+reload(fd . ~ --hidden --follow)"' \
 --bind 'focus:transform-preview-label:echo {}' \
 --preview-window 'right' \
 --preview '$HOME/dotfiles/fzf-preview.sh {}'
