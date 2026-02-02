@@ -204,6 +204,11 @@ mkdirg() {
 	cd "$1"
 }
 
+# Mount MTP
+function mtpmount () {
+  gio mount $(gio mount -li | rg 'mtp' | awk --field-separator== '{print $2}')
+}
+
 # IP Address Lookup
 function myip () {
   # Internal IP Lookup
