@@ -206,7 +206,8 @@ mkdirg() {
 
 # Mount MTP
 function mtpmount () {
-  gio mount $(gio mount -li | rg 'mtp' | awk --field-separator== '{print $2}')
+  # Use -u arg to unmount
+  gio mount $(gio mount -li | rg 'mtp' | awk -F= '{print $2}') $1
 }
 
 # IP Address Lookup
