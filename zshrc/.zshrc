@@ -285,6 +285,7 @@ alias less='less -R'
 alias curl='curl -#'
 alias vi='nvim'
 alias open='xdg-open'
+alias rsync='rsync -avh --progress --partial'
 
 # Personal
 alias sht="omarchy-cmd-shutdown"
