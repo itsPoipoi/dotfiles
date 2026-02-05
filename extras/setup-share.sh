@@ -6,6 +6,8 @@ if ip addr show | rg "eno1" &>/dev/null; then
   ETH_IF="eno1"
 elif ip addr show | rg "eth0" &>/dev/null; then
   ETH_IF="eth0"
+elif ip addr show | rg "enp0" &>/dev/null; then
+  ETH_IF="enp0s13f0u1"
 fi
 
 # Assign static IPs based on machine role
