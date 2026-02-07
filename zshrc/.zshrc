@@ -91,16 +91,19 @@ zvm_after_init_commands+=(zvm_after_init)
 set -o ignoreeof
 set -o vi
 function lazykeys {
-    bindkey '^[[Z' autosuggest-accept # shift-tab
-    bindkey -M vicmd -s '^F' '\nzi\n'
-    bindkey -M viins -s '^F' 'zi\n'
-    bindkey -M vicmd -s '^Y' '\ny\n'
-    bindkey -M viins -s '^Y' 'y\n'
-    bindkey -M viins "^W" forward-word
-    bindkey -M viins "^B" backward-kill-word
-    bindkey -M viins "\e[1;5C" forward-word
-    bindkey -M viins "\e[1;5D" backward-word
-    bindkey -M viins "\e[3;5~" kill-word
+  bindkey -M viins -s '^F' 'zi\n'
+  bindkey -M vicmd -s '^F' '\nzi\n'
+  bindkey -M viins -s '^Y' 'y\n'
+  bindkey -M vicmd -s '^Y' '\ny\n'
+  bindkey -M viins "^W" vi-forward-word
+  bindkey -M vicmd "^W" vi-forward-word
+  bindkey -M viins "^B" vi-backward-word
+  bindkey -M vicmd "^B" vi-backward-word
+  bindkey -M viins "^H" backward-kill-word # CTRL + Backspace
+  bindkey -M vicmd "^H" backward-kill-word # CTRL + Backspace
+  bindkey -M viins "\e[1;5D" vi-backward-word # CTRL + Left
+  bindkey -M viins "\e[1;5C" vi-forward-word  # CTRL + Right
+  bindkey -M viins "\e[3;5~" kill-word # CTRL + Delete
 }
 # Load keybinds after zvm keybinds
 zvm_after_init_commands+=(lazykeys)
