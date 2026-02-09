@@ -289,6 +289,7 @@ alias curl='curl -#'
 alias vi='nvim'
 alias open='xdg-open'
 alias rsync='rsync -avh --progress --partial'
+alias sshfs='sshfs -o reconnect,ServerAliveInterval=15,ServerAliveCountMax=3,idmap=user'
 
 # Personal
 alias sht="omarchy-cmd-shutdown"
