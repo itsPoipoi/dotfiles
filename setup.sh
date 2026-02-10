@@ -376,12 +376,12 @@ install_spicetify_setup() {
       sudo chmod a+wr /opt/spotify
       sudo chmod a+wr /opt/spotify/Apps -R
       curl -fsSL https://raw.githubusercontent.com/spicetify/cli/main/install.sh | sh
-      spicetify config spotify_path "/opt/spotify"
-      spicetify config custom_apps new-releases
-      spicetify config custom_apps lyrics-plus
+      ~/.spicetify/spicetify config spotify_path "/opt/spotify"
+      ~/.spicetify/spicetify config custom_apps new-releases
+      ~/.spicetify/spicetify config custom_apps lyrics-plus
       \cp -f "$HOME/dotfiles/extras/keyboardShortcut.js" "$HOME/.spicetify/Extensions/"
-      spicetify config extensions keyboardShortcut.js
-      spicetify backup apply
+      ~/.spicetify/spicetify config extensions keyboardShortcut.js
+      ~/.spicetify/spicetify backup apply
       rm -f "$HOME/dotfiles/install.log"
     else
       echo -e "${GREEN}Skipping Spicetify setup.${NC}"
