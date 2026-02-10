@@ -46,12 +46,12 @@ zinit cdreplay -q
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# Zsh vim config 
+# Zsh vim config
 ZVM_READKEY_ENGINE=$ZVM_READKEY_ENGINE_ZLE
 ZVM_VI_SURROUND_BINDKEY=s-prefix
 ZVM_SYSTEM_CLIPBOARD_ENABLED=true
 ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
-
+ZVM_VI_EDITOR=nvim
 
 # History
 HISTSIZE=5000
