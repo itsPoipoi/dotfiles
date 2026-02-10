@@ -115,6 +115,7 @@ zvm_after_init_commands+=(lazykeys)
 # Editor's
 export EDITOR=nvim
 export VISUAL=nvim
+export SUDO_EDITOR="$EDITOR"
 
 # fzf exports
 export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --glob '!.git'"
