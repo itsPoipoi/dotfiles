@@ -297,6 +297,7 @@ alias rbt="omarchy-cmd-reboot"
 alias ff="fastfetch"
 alias zi="__zoxide_zi"
 alias c="opencode"
+alias d="docker"
 alias lg="lazygit"
 alias kssh="kitten ssh"
 alias ezrc='nvim ~/.zshrc'
