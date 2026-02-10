@@ -299,6 +299,7 @@ alias zi="__zoxide_zi"
 alias c="opencode"
 alias d="docker"
 alias lg="lazygit"
+alias ld="lazydocker"
 alias kssh="kitten ssh"
 alias ezrc='nvim ~/.zshrc'
 alias src="clear; source ~/.zshrc"
