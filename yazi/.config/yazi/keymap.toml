@@ -235,6 +235,10 @@ keymap = [
   ], run = "cd /", desc = "Go root" },
   { on = [
     "g",
+    ".",
+  ], run = "cd ~/dotfiles", desc = "Go dotfiles" },
+  { on = [
+    "g",
     "c",
   ], run = "cd ~/.config", desc = "Go ~/.config" },
   { on = [
