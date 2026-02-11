@@ -10,8 +10,8 @@ NC=$'\e[0m' # No Color
 
 # Global variables
 BACKUP_DIR="$HOME/.dots-backup"
-MODULES=("system_deps" "shell_setup" "sddm_setup" "layout_setup" "neovim_config" "limine_config" "ssh_service" "ssh_keys" "git_config" "kanata_setup" "vesktop_setup" "spicetify_setup" "webapps_cleanup" "themes_setup" "stow_config")
-MODULE_NAMES=("System Dependencies" "Shell Setup (zsh)" "SDDM Setup" "Layout Setup" "Neovim Config" "Limine Config" "SSH Service" "SSH Keys" "Git Config" "Kanata Setup" "Vesktop Setup" "Spicetify Setup" "WebApps Cleanup" "Themes Setup" "Stow Config")
+MODULES=("system_deps" "shell_setup" "sddm_setup" "layout_setup" "neovim_config" "limine_config" "ssh_service" "ssh_keys" "git_config" "kanata_setup" "vesktop_setup" "spicetify_setup" "webapps_cleanup" "themes_setup" "stow_config" "extras_setup")
+MODULE_NAMES=("System Dependencies" "Shell Setup (zsh)" "SDDM Setup" "Layout Setup" "Neovim Config" "Limine Config" "SSH Service" "SSH Keys" "Git Config" "Kanata Setup" "Vesktop Setup" "Spicetify Setup" "WebApps Cleanup" "Themes Setup" "Stow Config" "Extras Setup")
 
 # Utility functions
 print_header() {
@@ -284,6 +284,8 @@ install_layout_setup() {
   local skip_confirm="$1"
   if [[ "$skip_confirm" == "--yes" ]] || confirm_action "Setup Ergo-L keyboard layout for LUKS/SDDM?"; then
     sudo localectl set-x11-keymap fr pc105 ergol
+  else
+    echo -e "${GREEN}Skipping keyboard layout setup.${NC}"
   fi
 }
 
@@ -457,6 +459,19 @@ install_stow_config() {
     /bin/bash ~/dotfiles/stow.sh
   else
     echo -e "${GREEN}Skipping stow config.${NC}"
+  fi
+}
+
+install_extras_setup() {
+  local skip_confirm="$1"
+  if [[ "$skip_confirm" == "--yes" ]] || confirm_action "Install extra essential programs now? (Floorp, VLC, JamesDSP...)"; then
+    yay -S --noconfirm --needed vlc vlc-plugins-all floorp-bin opera jamesdsp ookla-speedtest-bin
+    xdg-mime default vlc.desktop video/x-matroska
+    xdg-mime default vlc.desktop video/mp4
+    xdg-mime default imv-dir.desktop image/jpeg
+    xdg-mime default imv-dir.desktop image/png
+  else
+    echo -e "${GREEN}Skipping extras.${NC}"
   fi
 }
 
