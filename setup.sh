@@ -471,6 +471,8 @@ install_extras_setup() {
     xdg-mime default imv-dir.desktop image/jpeg
     xdg-mime default imv-dir.desktop image/png
   else
+    xdg-mime default imv-dir.desktop image/jpeg
+    xdg-mime default imv-dir.desktop image/png
     echo -e "${GREEN}Skipping extras.${NC}"
   fi
 }
