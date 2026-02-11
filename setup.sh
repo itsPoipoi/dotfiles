@@ -10,8 +10,8 @@ NC=$'\e[0m' # No Color
 
 # Global variables
 BACKUP_DIR="$HOME/.dots-backup"
-MODULES=("system_deps" "shell_setup" "sddm_setup" "neovim_config" "limine_config" "ssh_service" "ssh_keys" "git_config" "kanata_setup" "vesktop_setup" "spicetify_setup" "webapps_cleanup" "themes_setup" "stow_config")
-MODULE_NAMES=("System Dependencies" "Shell Setup (zsh)" "SDDM Setup" "Neovim Config" "Limine Config" "SSH Service" "SSH Keys" "Git Config" "Kanata Setup" "Vesktop Setup" "Spicetify Setup" "WebApps Cleanup" "Themes Setup" "Stow Config")
+MODULES=("system_deps" "shell_setup" "sddm_setup" "layout_setup" "neovim_config" "limine_config" "ssh_service" "ssh_keys" "git_config" "kanata_setup" "vesktop_setup" "spicetify_setup" "webapps_cleanup" "themes_setup" "stow_config")
+MODULE_NAMES=("System Dependencies" "Shell Setup (zsh)" "SDDM Setup" "Layout Setup" "Neovim Config" "Limine Config" "SSH Service" "SSH Keys" "Git Config" "Kanata Setup" "Vesktop Setup" "Spicetify Setup" "WebApps Cleanup" "Themes Setup" "Stow Config")
 
 # Utility functions
 print_header() {
@@ -272,16 +272,18 @@ install_sddm_setup() {
       sudo rm -f /etc/sddm.conf.d/autologin.conf
       bash -c "$(curl -fsSL https://raw.githubusercontent.com/keyitdev/sddm-astronaut-theme/master/setup.sh)"
       rm -rf "$HOME/sddm-astronaut-theme/"
-
-      # Ergol keymap
-      if confirm_action "Set Ergol as X11 keymap for SDDM?"; then
-        sudo localectl set-x11-keymap fr pc105 ergol
-      fi
     else
       echo -e "${GREEN}Skipping SDDM setup.${NC}"
     fi
   else
     echo -e "${GREEN}SDDM already configured.${NC}"
+  fi
+}
+
+install_layout_setup() {
+  local skip_confirm="$1"
+  if [[ "$skip_confirm" == "--yes" ]] || confirm_action "Setup Ergo-L keyboard layout for LUKS/SDDM?"; then
+    sudo localectl set-x11-keymap fr pc105 ergol
   fi
 }
 
@@ -506,11 +508,14 @@ full_install() {
     "sddm_setup")
       [[ ! -f /etc/sddm.conf.d/autologin.conf ]] && skip_reason="SDDM autologin not found"
       ;;
+    "layout_setup")
+      localectl status | grep ergol &>/dev/null && skip_reason="Ergo-L layout already set"
+      ;;
     "neovim_config")
       [[ -f ~/.config/nvim/setupcheck ]] && skip_reason="Neovim config already imported"
       ;;
     "limine_config")
-      grep 'timeout: 1' /boot/limine.conf 2>/dev/null && skip_reason="Limine already configured"
+      grep 'timeout: 1' /boot/limine.conf &>/dev/null && skip_reason="Limine already configured"
       ;;
     "ssh_service")
       systemctl is-active --quiet sshd.service 2>/dev/null && skip_reason="SSHD service already running"
@@ -611,6 +616,11 @@ selective_install() {
         13) display_num="d" ;;
         14) display_num="e" ;;
         15) display_num="f" ;;
+        16) display_num="g" ;;
+        17) display_num="h" ;;
+        18) display_num="i" ;;
+        19) display_num="j" ;;
+        20) display_num="k" ;;
         esac
       fi
       echo "$display_num. ${module_status[$i]} ${MODULE_NAMES[$i]}"
@@ -640,6 +650,11 @@ selective_install() {
         d) index=13 ;;
         e) index=14 ;;
         f) index=15 ;;
+        g) index=16 ;;
+        h) index=17 ;;
+        i) index=18 ;;
+        j) index=19 ;;
+        k) index=20 ;;
         esac
       fi
       if [[ $index -ge 0 && $index -lt ${#MODULE_NAMES[@]} ]]; then
