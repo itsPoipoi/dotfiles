@@ -231,9 +231,6 @@ function myip () {
   echo "External IP (IPv6): $(curl -s6 ifconfig.co)"
 }
 
-# SSH keygen
-alias sshkey="ssh-keygen -t rsa -b 4096 -C 'poipoigit@gmail.com'"
-
 # Yazi
 function y() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
