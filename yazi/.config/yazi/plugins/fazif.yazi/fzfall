@@ -26,4 +26,4 @@ fd . --hidden --follow "$@" | fzf \
 --bind 'ctrl-alt-o:transform:echo "change-prompt(Home > )+reload(fd . ~ --hidden --follow)"' \
 --bind 'focus:transform-preview-label:echo {}' \
 --preview-window 'right' \
---preview '$HOME/dotfiles/fzf-preview.sh {}'
+--preview '$HOME/dotfiles/extras/fzf-preview.sh {}'
