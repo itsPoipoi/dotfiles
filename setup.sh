@@ -512,7 +512,7 @@ full_install() {
       localectl status | grep ergol &>/dev/null && skip_reason="Ergo-L layout already set"
       ;;
     "neovim_config")
-      [[ -f ~/.config/nvim/setupcheck ]] && skip_reason="Neovim config already imported"
+      [[ -f ~/.config/nvim/lua/plugins/yazi.lua ]] && skip_reason="Neovim config already imported"
       ;;
     "limine_config")
       grep 'timeout: 1' /boot/limine.conf &>/dev/null && skip_reason="Limine already configured"
