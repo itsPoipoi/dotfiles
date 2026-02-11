@@ -498,7 +498,7 @@ full_install() {
       [[ -f ~/.config/nvim/setupcheck ]] && skip_reason="Neovim config already imported"
       ;;
     "ssh_service")
-      systemctl --user is-active --quiet sshd.service 2>/dev/null && skip_reason="SSHD service already running"
+      systemctl is-active --quiet sshd.service 2>/dev/null && skip_reason="SSHD service already running"
       ;;
     "ssh_keys")
       [[ -f ~/.ssh/id_rsa.pub ]] && skip_reason="SSH key already exists"
