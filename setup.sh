@@ -10,8 +10,8 @@ NC=$'\e[0m' # No Color
 
 # Global variables
 BACKUP_DIR="$HOME/.dots-backup"
-MODULES=("system_deps" "shell_setup" "sddm_setup" "neovim_config" "ssh_service" "ssh_keys" "git_config" "kanata_setup" "vesktop_setup" "spicetify_setup" "webapps_cleanup" "themes_setup" "stow_config")
-MODULE_NAMES=("System Dependencies" "Shell Setup (zsh)" "SDDM Setup" "Neovim Config" "SSH Service" "SSH Keys" "Git Config" "Kanata Setup" "Vesktop Setup" "Spicetify Setup" "WebApps Cleanup" "Themes Setup" "Stow Config")
+MODULES=("system_deps" "shell_setup" "sddm_setup" "neovim_config" "limine_config" "ssh_service" "ssh_keys" "git_config" "kanata_setup" "vesktop_setup" "spicetify_setup" "webapps_cleanup" "themes_setup" "stow_config")
+MODULE_NAMES=("System Dependencies" "Shell Setup (zsh)" "SDDM Setup" "Neovim Config" "Limine Config" "SSH Service" "SSH Keys" "Git Config" "Kanata Setup" "Vesktop Setup" "Spicetify Setup" "WebApps Cleanup" "Themes Setup" "Stow Config")
 
 # Utility functions
 print_header() {
@@ -306,6 +306,18 @@ install_neovim_config() {
   fi
 }
 
+install_limine_config() {
+  local skip_confirm="$1"
+  if [[ "$skip_confirm" == "--yes" ]] || confirm_action "Tweak Limine config?"; then
+    sudo sed -i 's/^#.*timeout.*$/timeout: 1/g' "/boot/limine.conf"
+    sudo sed -i 's/\(branding_color: \)2/\14\ninterface_help_color: 4/g' "/boot/limine.conf"
+    sudo sed -i 's/\(term_back.*d: \).*$/\1000000/g' "/boot/limine.conf"
+    sudo sed -i 's/\(backdrop: \).*$/\1000000/g' "/boot/limine.conf"
+  else
+    echo -e "${GREEN}Skipping Limine config.${NC}"
+  fi
+}
+
 install_ssh_service() {
   local skip_confirm="$1"
   if [[ "$skip_confirm" == "--yes" ]] || confirm_action "Enable SSH service and firewall rules?"; then
@@ -496,6 +508,9 @@ full_install() {
       ;;
     "neovim_config")
       [[ -f ~/.config/nvim/setupcheck ]] && skip_reason="Neovim config already imported"
+      ;;
+    "limine_config")
+      grep 'timeout: 1' /boot/limine.conf 2>/dev/null && skip_reason="Limine already configured"
       ;;
     "ssh_service")
       systemctl is-active --quiet sshd.service 2>/dev/null && skip_reason="SSHD service already running"
