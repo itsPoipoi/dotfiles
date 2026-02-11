@@ -219,7 +219,7 @@ keymap = [
   # Goto
   { on = [
     "g",
-    "#",
+    "h",
   ], run = "cd ~", desc = "Go home" },
   { on = [
     "g",
