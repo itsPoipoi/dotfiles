@@ -10,8 +10,8 @@ NC=$'\e[0m' # No Color
 
 # Global variables
 BACKUP_DIR="$HOME/.dots-backup"
-MODULES=("system_deps" "shell_setup" "sddm_setup" "neovim_config" "ssh_keys" "git_config" "kanata_setup" "vesktop_setup" "spicetify_setup" "webapps_cleanup" "themes_setup" "stow_config")
-MODULE_NAMES=("System Dependencies" "Shell Setup (zsh)" "SDDM Setup" "Neovim Config" "SSH Keys" "Git Config" "Kanata Setup" "Vesktop Setup" "Spicetify Setup" "WebApps Cleanup" "Themes Setup" "Stow Config")
+MODULES=("system_deps" "shell_setup" "sddm_setup" "neovim_config" "ssh_service" "ssh_keys" "git_config" "kanata_setup" "vesktop_setup" "spicetify_setup" "webapps_cleanup" "themes_setup" "stow_config")
+MODULE_NAMES=("System Dependencies" "Shell Setup (zsh)" "SDDM Setup" "Neovim Config" "SSH Service" "SSH Keys" "Git Config" "Kanata Setup" "Vesktop Setup" "Spicetify Setup" "WebApps Cleanup" "Themes Setup" "Stow Config")
 
 # Utility functions
 print_header() {
@@ -291,6 +291,9 @@ install_neovim_config() {
     if [[ "$skip_confirm" == "--yes" ]] || confirm_action "Import Neovim config?"; then
       echo -e "${YELLOW}Installing Neovim config...${NC}"
       mv ~/.config/nvim{,.bak} 2>/dev/null || true
+      \rm -rf ~/.local/share/nvim 2>/dev/null || true
+      \rm -rf ~/.local/state/nvim 2>/dev/null || true
+      \rm -rf ~/.cache/nvim 2>/dev/null || true
       if ! git clone https://github.com/itsPoipoi/neovim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim; then
         print_error "Failed to clone Neovim config repository"
         return 1
@@ -300,6 +303,22 @@ install_neovim_config() {
     fi
   else
     echo -e "${GREEN}Neovim config already imported.${NC}"
+  fi
+}
+
+install_ssh_service() {
+  local skip_confirm="$1"
+  if [[ "$skip_confirm" == "--yes" ]] || confirm_action "Enable SSH service and firewall rules?"; then
+    sudo ufw enable
+    sudo ufw default deny incoming
+    sudo ufw default allow outgoing
+    sudo ufw allow from 192.168.1.0/24 to any port 22
+    sudo ufw allow from 100.64.0.0/10 to any port 22
+    sudo ufw deny 22
+    sudo ufw reload
+    sudo systemctl enable --now sshd.service
+  else
+    echo -e "${GREEN}Skipping SSH setup.${NC}"
   fi
 }
 
@@ -478,6 +497,9 @@ full_install() {
     "neovim_config")
       [[ -f ~/.config/nvim/setupcheck ]] && skip_reason="Neovim config already imported"
       ;;
+    "ssh_service")
+      systemctl --user is-active --quiet sshd.service 2>/dev/null && skip_reason="SSHD service already running"
+      ;;
     "ssh_keys")
       [[ -f ~/.ssh/id_rsa.pub ]] && skip_reason="SSH key already exists"
       ;;
@@ -567,9 +589,13 @@ selective_install() {
         display_num="$((i + 1))"
       else
         case $i in
-        9) display_num="a" ;;
-        10) display_num="b" ;;
-        11) display_num="c" ;;
+        9) display_num="0" ;;
+        10) display_num="a" ;;
+        11) display_num="b" ;;
+        12) display_num="c" ;;
+        13) display_num="d" ;;
+        14) display_num="e" ;;
+        15) display_num="f" ;;
         esac
       fi
       echo "$display_num. ${module_status[$i]} ${MODULE_NAMES[$i]}"
@@ -586,15 +612,19 @@ selective_install() {
     elif [[ $key == "q" ]]; then
       show_main_menu
       return
-    elif [[ $key =~ [1-9] || $key =~ [abc] ]]; then
+    elif [[ $key =~ [0-9] || $key =~ [abc] ]]; then
       local index
       if [[ $key =~ [1-9] ]]; then
         index=$((key - 1))
       else
         case $key in
-        a) index=9 ;;
-        b) index=10 ;;
-        c) index=11 ;;
+        0) index=9 ;;
+        a) index=10 ;;
+        b) index=11 ;;
+        c) index=12 ;;
+        d) index=13 ;;
+        e) index=14 ;;
+        f) index=15 ;;
         esac
       fi
       if [[ $index -ge 0 && $index -lt ${#MODULE_NAMES[@]} ]]; then
@@ -603,7 +633,11 @@ selective_install() {
           selected+=("$index")
         else
           module_status[index]="[ ]"
-          selected=("${selected[@]/$index/}")
+          tmp=()
+          for i in "${selected[@]}"; do
+            [[ "$i" != "$index" ]] && tmp+=("$i")
+          done
+          selected=("${tmp[@]}")
         fi
       fi
     fi
