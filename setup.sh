@@ -659,7 +659,7 @@ selective_install() {
     elif [[ $key == "q" ]]; then
       show_main_menu
       return
-    elif [[ $key =~ [0-9] || $key =~ [abc] ]]; then
+    elif [[ $key =~ [0-9] || $key =~ [a-z] ]]; then
       local index
       if [[ $key =~ [1-9] ]]; then
         index=$((key - 1))
