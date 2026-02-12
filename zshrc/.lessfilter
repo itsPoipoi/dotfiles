@@ -93,6 +93,8 @@ elif [ "$kind" = javascript ]; then
   fi
 elif [ "$category" = image ]; then
   kitten icat --clear --transfer-mode=memory --unicode-placeholder --stdin=no --place="${FZF_PREVIEW_COLUMNS}"x"${FZF_PREVIEW_LINES}"@0x0 "$1" | sed '$d' | sed $'$s/$/\e[m/'
+elif [ "$category" = video ]; then
+  file "$1"
 elif [ "$category" = text ]; then
   if has_cmd bat; then
     bat --color=always "$1"
