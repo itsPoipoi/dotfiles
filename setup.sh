@@ -470,7 +470,7 @@ install_stow_config() {
 install_extras_setup() {
   local skip_confirm="$1"
   if [[ "$skip_confirm" == "--yes" ]] || confirm_action "Install extra essential programs now? (Floorp, VLC, JamesDSP...)"; then
-    yay -S --noconfirm --needed vlc vlc-plugins-all floorp-bin opera jamesdsp ookla-speedtest-bin
+    yay -S --noconfirm --needed vlc vlc-plugins-all floorp-bin opera jamesdsp qbittorrent ookla-speedtest-bin
     set_filetypes_img
     set_filetypes_vid
   else
