@@ -471,15 +471,39 @@ install_extras_setup() {
   local skip_confirm="$1"
   if [[ "$skip_confirm" == "--yes" ]] || confirm_action "Install extra essential programs now? (Floorp, VLC, JamesDSP...)"; then
     yay -S --noconfirm --needed vlc vlc-plugins-all floorp-bin opera jamesdsp ookla-speedtest-bin
-    xdg-mime default vlc.desktop video/x-matroska
-    xdg-mime default vlc.desktop video/mp4
-    xdg-mime default imv-dir.desktop image/jpeg
-    xdg-mime default imv-dir.desktop image/png
+    set_filetypes_img
+    set_filetypes_vid
   else
-    xdg-mime default imv-dir.desktop image/jpeg
-    xdg-mime default imv-dir.desktop image/png
+    set_filetypes_img
     echo -e "${GREEN}Skipping extras.${NC}"
   fi
+}
+
+set_filetypes_img() {
+  xdg-mime default imv-dir.desktop image/jpeg
+  xdg-mime default imv-dir.desktop image/png
+  xdg-mime default imv-dir.desktop image/gif
+  xdg-mime default imv-dir.desktop image/webp
+  xdg-mime default imv-dir.desktop image/bmp
+  xdg-mime default imv-dir.desktop image/tiff
+}
+
+set_filetypes_vid() {
+  xdg-mime default vlc.desktop video/mp4
+  xdg-mime default vlc.desktop video/x-msvideo
+  xdg-mime default vlc.desktop video/x-matroska
+  xdg-mime default vlc.desktop video/x-flv
+  xdg-mime default vlc.desktop video/x-ms-wmv
+  xdg-mime default vlc.desktop video/mpeg
+  xdg-mime default vlc.desktop video/ogg
+  xdg-mime default vlc.desktop video/webm
+  xdg-mime default vlc.desktop video/quicktime
+  xdg-mime default vlc.desktop video/3gpp
+  xdg-mime default vlc.desktop video/3gpp2
+  xdg-mime default vlc.desktop video/x-ms-asf
+  xdg-mime default vlc.desktop video/x-ogm+ogg
+  xdg-mime default vlc.desktop video/x-theora+ogg
+  xdg-mime default vlc.desktop application/ogg
 }
 
 # Menu functions
