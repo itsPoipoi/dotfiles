@@ -91,6 +91,9 @@ elif [ "$kind" = javascript ]; then
   if has_cmd bat; then
     bat --color=always -ljs "$1"
   fi
+elif [ "$category" = application ]; then
+  file "$1"
+  exit
 elif [ "$category" = image ]; then
   kitten icat --clear --transfer-mode=memory --unicode-placeholder --stdin=no --place="${FZF_PREVIEW_COLUMNS}"x"${FZF_PREVIEW_LINES}"@0x0 "$1" | sed '$d' | sed $'$s/$/\e[m/'
 elif [ "$category" = video ]; then
@@ -102,5 +105,6 @@ elif [ "$category" = text ]; then
     pygmentize "$1" | less
   fi
 else
+  file "$1"
   exit 1
 fi
