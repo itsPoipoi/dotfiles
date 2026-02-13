@@ -300,10 +300,13 @@ install_remote_luks() {
     echo 'DROPBEAR_OPTIONS="-s -j -k"' | sudo tee /etc/dropbear/dropbear.conf >/dev/null
     sudo cp ~/dotfiles/extras/authorized_keys /etc/dropbear/root_key
     sudo chmod 600 /etc/dropbear/root_key
+    sudo sed -i 's/\(^H.*ck \)encrypt /\1/g' "/etc/mkinitcpio.conf"
+    sudo sed -i 's/\(^H.*map \)/\1netconf encrypt dropbear /g' "/etc/mkinitcpio.conf"
     sudo sed -i 's/\(^H.*ck \)encrypt /\1/g' "/etc/mkinitcpio.conf.d/omarchy_hooks.conf"
     sudo sed -i 's/\(^H.*map \)/\1netconf encrypt dropbear /g' "/etc/mkinitcpio.conf.d/omarchy_hooks.conf"
     sudo sed -i 's/quiet/quiet ip=dhcp/g' "/etc/default/limine"
     sudo limine-mkinitcpio
+    sudo dropbearkey -t ed25519 -f /etc/dropbear/dropbear_ed25519_host_key
   else
     echo -e "${GREEN}Skipping remote SSH unlock setup.${NC}"
   fi
