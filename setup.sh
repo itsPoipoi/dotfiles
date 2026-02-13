@@ -10,8 +10,8 @@ NC=$'\e[0m' # No Color
 
 # Global variables
 BACKUP_DIR="$HOME/.dots-backup"
-MODULES=("system_deps" "shell_setup" "sddm_setup" "layout_setup" "neovim_config" "limine_config" "ssh_service" "ssh_keys" "git_config" "kanata_setup" "vesktop_setup" "spicetify_setup" "webapps_cleanup" "themes_setup" "stow_config" "extras_setup")
-MODULE_NAMES=("System Dependencies" "Shell Setup (zsh)" "SDDM Setup" "Layout Setup" "Neovim Config" "Limine Config" "SSH Service" "SSH Keys" "Git Config" "Kanata Setup" "Vesktop Setup" "Spicetify Setup" "WebApps Cleanup" "Themes Setup" "Stow Config" "Extras Setup")
+MODULES=("system_deps" "shell_setup" "sddm_setup" "layout_setup" "remote_luks" "neovim_config" "limine_config" "ssh_service" "ssh_keys" "git_config" "kanata_setup" "vesktop_setup" "spicetify_setup" "webapps_cleanup" "themes_setup" "stow_config" "extras_setup")
+MODULE_NAMES=("System Dependencies" "Shell Setup (zsh)" "SDDM Setup" "Layout Setup" "Remote LUKS" "Neovim Config" "Limine Config" "SSH Service" "SSH Keys" "Git Config" "Kanata Setup" "Vesktop Setup" "Spicetify Setup" "WebApps Cleanup" "Themes Setup" "Stow Config" "Extras Setup")
 
 # Utility functions
 print_header() {
@@ -292,6 +292,23 @@ install_layout_setup() {
   fi
 }
 
+install_remote_luks() {
+  local skip_confirm="$1"
+  if [[ "$skip_confirm" == "--yes" ]] || confirm_action "Setup remote SSH unlock for LUKS encryption?"; then
+    yay -S --noconfirm --needed mkinitcpio-dropbear mkinitcpio-netconf
+    sudo mkdir -p /etc/dropbear
+    echo 'DROPBEAR_OPTIONS="-s -j -k"' | sudo tee /etc/dropbear/dropbear.conf >/dev/null
+    sudo cp ~/dotfiles/extras/authorized_keys /etc/dropbear/root_key
+    sudo chmod 600 /etc/dropbear/root_key
+    sudo sed -i 's/\(^H.*ck \)encrypt /\1/g' "/etc/mkinitcpio.conf.d/omarchy_hooks.conf"
+    sudo sed -i 's/\(^H.*map \)/\1netconf encrypt dropbear /g' "/etc/mkinitcpio.conf.d/omarchy_hooks.conf"
+    sudo sed -i 's/quiet/quiet ip=dhcp/g' "/etc/default/limine"
+    sudo limine-mkinitcpio
+  else
+    echo -e "${GREEN}Skipping remote SSH unlock setup.${NC}"
+  fi
+}
+
 install_neovim_config() {
   local skip_confirm="$1"
   if [[ ! -f ~/.config/nvim/lua/plugins/yazi.lua ]]; then
@@ -554,6 +571,9 @@ full_install() {
       ;;
     "layout_setup")
       localectl status | grep ergol &>/dev/null && skip_reason="Ergo-L layout already set"
+      ;;
+    "remote_luks")
+      [[ -f /etc/dropbear/root_key ]] && skip_reason="Dropbear config already found"
       ;;
     "neovim_config")
       [[ -f ~/.config/nvim/lua/plugins/yazi.lua ]] && skip_reason="Neovim config already imported"
