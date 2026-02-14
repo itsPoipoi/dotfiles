@@ -295,17 +295,15 @@ install_layout_setup() {
 install_remote_luks() {
   local skip_confirm="$1"
   if [[ "$skip_confirm" == "--yes" ]] || confirm_action "Setup remote SSH unlock for LUKS encryption?"; then
-    yay -S --noconfirm --needed mkinitcpio-dropbear mkinitcpio-netconf
-    sudo mkdir -p /etc/dropbear
-    echo 'DROPBEAR_OPTIONS="-s -j -k"' | sudo tee /etc/dropbear/dropbear.conf >/dev/null
-    sudo cp ~/dotfiles/extras/root_key /etc/dropbear/root_key
-    sudo chmod 600 /etc/dropbear/root_key
-    sudo dropbearkey -t ed25519 -f /etc/dropbear/dropbear_ed25519_host_key
-    sudo sed -i 's/\(^H.*ck \)encrypt /\1/g' "/etc/mkinitcpio.conf"
-    sudo sed -i 's/\(^H.*map \)/\1netconf encrypt dropbear /g' "/etc/mkinitcpio.conf"
-    sudo sed -i 's/\(^H.*ck \)encrypt /\1/g' "/etc/mkinitcpio.conf.d/omarchy_hooks.conf"
-    sudo sed -i 's/\(^H.*map \)/\1netconf encrypt dropbear /g' "/etc/mkinitcpio.conf.d/omarchy_hooks.conf"
-    sudo sed -i 's/quiet/quiet ip=dhcp/g' "/etc/default/limine"
+    yay -S --noconfirm --needed busybox tinyssh mkinitcpio-netconf mkinitcpio-tinyssh mkinitcpio-utils
+    sudo sed -i 's/"quiet splash"/"quiet splash ip=dhcp"/g' "/etc/default/limine"
+    sudo sed -i 's/\(^H.*\)encrypt /\1netconf tinyssh encryptssh /g' "/etc/mkinitcpio.conf.d/omarchy_hooks.conf"
+    sudo sed -i 's/\(^H.*udev\)\(.*\) keyboard\(.*\) encrypt \(.*$\)/\1 keyboard\2\3 netconf tinyssh encryptssh \4/g' "/etc/mkinitcpio.conf"
+    sudo cp ~/dotfiles/extras/root_key /etc/tinyssh/root_key
+    chmod 600 /etc/tinyssh/root_key
+    tinyssh-convert /etc/tinyssh/sshkeydir </etc/ssh/ssh_host_ed25519_key
+    chmod 700 /etc/tinyssh/sshkeydir
+    chmod 600 /etc/tinyssh/sshkeydir/ed25519.pk
     sudo limine-mkinitcpio
   else
     echo -e "${GREEN}Skipping remote SSH unlock setup.${NC}"
