@@ -298,12 +298,13 @@ install_remote_luks() {
     yay -S --noconfirm --needed busybox tinyssh mkinitcpio-netconf mkinitcpio-tinyssh mkinitcpio-utils
     sudo sed -i 's/"quiet splash"/"quiet splash ip=dhcp"/g' "/etc/default/limine"
     sudo sed -i 's/\(^H.*\)encrypt /\1netconf tinyssh encryptssh /g' "/etc/mkinitcpio.conf.d/omarchy_hooks.conf"
-    sudo sed -i 's/\(^H.*udev\)\(.*\) keyboard\(.*\) encrypt \(.*$\)/\1 keyboard\2\3 netconf tinyssh encryptssh \4/g' "/etc/mkinitcpio.conf"
+    # sudo sed -i 's/\(^H.*udev\)\(.*\) keyboard\(.*\) encrypt \(.*$\)/\1 keyboard\2\3 netconf tinyssh encryptssh \4/g' "/etc/mkinitcpio.conf"
+    sudo sed -i 's/\(^.*11.*$\)/  #\1/g' "/usr/lib/initcpio/install/encryptssh"
     sudo cp ~/dotfiles/extras/root_key /etc/tinyssh/root_key
-    chmod 600 /etc/tinyssh/root_key
-    tinyssh-convert /etc/tinyssh/sshkeydir </etc/ssh/ssh_host_ed25519_key
-    chmod 700 /etc/tinyssh/sshkeydir
-    chmod 600 /etc/tinyssh/sshkeydir/ed25519.pk
+    sudo chmod 600 /etc/tinyssh/root_key
+    sudo sh -c 'tinyssh-convert /etc/tinyssh/sshkeydir < /etc/ssh/ssh_host_ed25519_key'
+    sudo chmod 700 /etc/tinyssh/sshkeydir
+    sudo chmod 600 /etc/tinyssh/sshkeydir/ed25519.pk
     sudo limine-mkinitcpio
   else
     echo -e "${GREEN}Skipping remote SSH unlock setup.${NC}"
