@@ -435,7 +435,9 @@ install_spicetify_setup() {
       ~/.spicetify/spicetify config spotify_path "/opt/spotify"
       ~/.spicetify/spicetify config custom_apps lyrics-plus
       \cp -f "$HOME/dotfiles/extras/keyboardShortcut.js" "$HOME/.spicetify/Extensions/"
+      \cp -f "$HOME/dotfiles/extras/spotifyBackup.js" "$HOME/.spicetify/Extensions/"
       ~/.spicetify/spicetify config extensions keyboardShortcut.js
+      ~/.spicetify/spicetify config extensions spotifyBackup.js
       ~/.spicetify/spicetify backup apply
       rm -f "$HOME/dotfiles/install.log"
     else
