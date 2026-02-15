@@ -582,7 +582,7 @@ full_install() {
       localectl status | grep ergol &>/dev/null && skip_reason="Ergo-L layout already set"
       ;;
     "remote_luks")
-      [[ -f /etc/tinyssh/root_key ]] && skip_reason="Tinyssh config already found"
+      [[ -f /etc/tinyssh/root_key ]] && skip_reason="TinySSH config already found"
       ;;
     "neovim_config")
       [[ -f ~/.config/nvim/lua/plugins/yazi.lua ]] && skip_reason="Neovim config already imported"
