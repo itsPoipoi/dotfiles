@@ -303,7 +303,7 @@ alias c="opencode"
 alias d="docker"
 alias zg="lazygit"
 alias zd="lazydocker"
-alias ssh="kitten ssh" # use \ssh to skip
+alias kssh="kitten ssh"
 
 # Tailscale
 alias ts="tailscale status"
