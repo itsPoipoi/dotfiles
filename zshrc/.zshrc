@@ -289,9 +289,13 @@ alias open='xdg-open'
 alias rsync='rsync -avh --progress --partial'
 alias sshfs='sshfs -o reconnect,ServerAliveInterval=15,ServerAliveCountMax=3,idmap=user'
 
-# Personal
+# General
 alias sht="omarchy-cmd-shutdown"
 alias rbt="omarchy-cmd-reboot"
+alias ezrc='nvim ~/.zshrc'
+alias src="clear; source ~/.zshrc"
+
+# Utils
 alias ff="fastfetch"
 alias zi="__zoxide_zi"
 alias sy="sudo -E yazi"
@@ -299,6 +303,11 @@ alias c="opencode"
 alias d="docker"
 alias zg="lazygit"
 alias zd="lazydocker"
-alias kssh="kitten ssh"
-alias ezrc='nvim ~/.zshrc'
-alias src="clear; source ~/.zshrc"
+alias ssh="kitten ssh" # use \ssh to skip
+
+# Tailscale
+alias ts="tailscale status"
+alias ton="sudo tailscale up"
+alias toff="sudo tailscale down"
+alias texon="sudo tailscale up --reset --login-server=https://head.poipoi.ovh --accept-routes --ssh --exit-node=pi"
+alias texoff="sudo tailscale up --reset --login-server=https://head.poipoi.ovh --accept-routes --ssh"
