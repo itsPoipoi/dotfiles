@@ -215,7 +215,7 @@ install_system_deps() {
   mkdir -p "$HOME/.config/Thunar" || print_error "Failed to create Thunar config directory"
   mkdir -p "$HOME/.config/xfce4" || print_error "Failed to create xfce4 config directory"
 
-  if ! yay -S --noconfirm --needed base-devel gcc make yazi ffmpeg 7zip jq sshfs rsync poppler lsof fzf tumbler zoxide glow grc eza tree-sitter-cli pandoc-cli nwg-displays resvg imagemagick ueberzugpp git ripgrep fd unzip neovim trash-cli bat fastfetch stow man-db less zsh; then
+  if ! yay -S --noconfirm --needed base-devel gcc make yazi ffmpeg 7zip jq sshfs rsync poppler lsof fzf tumbler zoxide glow grc eza tree-sitter-cli npm pandoc-cli nwg-displays resvg imagemagick ueberzugpp git ripgrep fd unzip neovim trash-cli bat fastfetch stow man-db less zsh; then
     print_error "Failed to install base packages"
     return 1
   fi
