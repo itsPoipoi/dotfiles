@@ -307,7 +307,7 @@ alias kssh="kitten ssh"
 
 # Tailscale
 alias ts="tailscale status"
-alias ton="sudo tailscale up"
-alias toff="sudo tailscale down"
-alias texon="sudo tailscale up --reset --login-server=https://head.poipoi.ovh --accept-routes --ssh --exit-node=pi"
-alias texoff="sudo tailscale up --reset --login-server=https://head.poipoi.ovh --accept-routes --ssh"
+alias {tup,ton}="sudo tailscale up"
+alias {twn,toff}="sudo tailscale down"
+alias texon="sudo tailscale up --reset --login-server=https://headscale.poipoi.ovh --accept-routes --ssh --exit-node=pi"
+alias texoff="sudo tailscale up --reset --login-server=https://headscale.poipoi.ovh --accept-routes --ssh"
