@@ -9,8 +9,9 @@ fd . --hidden --follow "$@" | fzf \
 --cycle \
 --layout=reverse \
 --preview-window=wrap \
---marker="*" \
+--marker="▌" \
 --walker-skip .git,node_modules,target \
+--bind 'ctrl-space:toggle' \
 --bind 'ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down' \
 --bind 'ctrl-r:transform:echo "change-prompt(Root-File > )+reload(fd . / --hidden --follow --type f)"' \
 --bind 'ctrl-t:transform:echo "change-prompt(CWD-File > )+reload(fd --hidden --follow --type f)"' \
