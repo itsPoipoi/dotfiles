@@ -356,7 +356,6 @@ install_ssh_service() {
     sudo sed -i 's/^#\(Pubkey.*ion\).*$/\1 yes/g' "/etc/ssh/sshd_config"
     sudo sed -i 's/^#\(Password.*ion\).*$/\1 no/g' "/etc/ssh/sshd_config"
     sudo sed -i 's/^#\(Permit.*words\).*$/\1 no/g' "/etc/ssh/sshd_config"
-    sudo sed -i 's/^#\(KbdI.*ion\).*$/\1 no/g' "/etc/ssh/sshd_config"
     sudo sed -i 's/^#\(Kerb.*A.*ion\).*$/\1 no/g' "/etc/ssh/sshd_config"
     sudo sed -i 's/^#\(GSSAP.*A.*ion\).*$/\1 no/g' "/etc/ssh/sshd_config"
     sudo sed -i 's/^#\(UsePAM\).*$/\1 no/g' "/etc/ssh/sshd_config"
