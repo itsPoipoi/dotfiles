@@ -121,9 +121,9 @@ export SUDO_EDITOR="$EDITOR"
 export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --glob '!.git'"
 export FZF_DEFAULT_OPTS_FILE="$HOME/.fzfopts"
 export FZF_ALT_C_COMMAND="fd --hidden --follow --type d"
-export FZF_ALT_C_OPTS=" --multi --prompt='CWD-Dir > ' "
+export FZF_ALT_C_OPTS="--prompt='CWD-Dir > ' "
 export FZF_CTRL_T_COMMAND="fd --hidden --follow --type f"
-export FZF_CTRL_T_OPTS=" --multi --prompt='CWD-File > ' "
+export FZF_CTRL_T_OPTS="--multi --prompt='CWD-File > ' "
 export FZF_CTRL_R_OPTS="--prompt='CMD-Hist > ' --preview 'echo {}' --preview-window down:3:wrap"
 
 # Archives
