@@ -91,10 +91,12 @@ zvm_after_init_commands+=(zvm_after_init)
 set -o ignoreeof
 set -o vi
 function lazykeys {
-  bindkey -M viins -s '^F' 'zi\n'
-  bindkey -M vicmd -s '^F' '\nzi\n'
-  bindkey -M viins -s '^Y' 'y\n'
-  bindkey -M vicmd -s '^Y' '\ny\n'
+  bindkey -M viins -s "^F" "zi\n"
+  bindkey -M vicmd -s "^F" "\nzi\n"
+  bindkey -M viins -s "^Y" "y\n"
+  bindkey -M vicmd -s "^Y" "\ny\n"
+  bindkey -M vicmd "\+" down-line-or-history
+  bindkey -M vicmd "\-" up-line-or-history
   bindkey -M viins "^W" vi-forward-word
   bindkey -M vicmd "^W" vi-forward-word
   bindkey -M viins "^B" vi-backward-word
