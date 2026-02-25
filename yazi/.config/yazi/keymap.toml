@@ -650,6 +650,12 @@ on = "z"
 run = "plugin ouch"
 desc = "Add selected file to archive"
 
+## chmod
+[[mgr.prepend_keymap]]
+on = ["c", "m"]
+run = "plugin chmod"
+desc = "Chmod on selected file"
+
 ## Smart Filter
 [[mgr.prepend_keymap]]
 on = "S"
