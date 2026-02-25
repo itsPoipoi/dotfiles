@@ -675,14 +675,9 @@ run = "plugin sudo -- paste"
 desc = "Paste yanked file"
 
 [[mgr.prepend_keymap]]
-on = [".", "P"]
-run = "plugin sudo -- paste --force"
-desc = "Paste yanked file (overwrite)"
-
-[[mgr.prepend_keymap]]
-on = [".", "r"]
-run = "plugin sudo -- rename"
-desc = "Rename selected file"
+on = [".", "a"]
+run = "plugin sudo -- create"
+desc = "Create a file/dir"
 
 [[mgr.prepend_keymap]]
 on = [".", "k"]
@@ -690,9 +685,29 @@ run = "plugin sudo -- link"
 desc = "Symlink absolute path"
 
 [[mgr.prepend_keymap]]
+on = [".", "P"]
+run = "plugin sudo -- paste --force"
+desc = "Paste yanked file (overwrite)"
+
+[[mgr.prepend_keymap]]
+on = [".", "d"]
+run = "plugin sudo -- remove --permanently"
+desc = "Permanently delete selected file"
+
+[[mgr.prepend_keymap]]
 on = [".", "K"]
 run = "plugin sudo -- link --relative"
 desc = "Symlink relative path"
+
+[[mgr.prepend_keymap]]
+on = [".", "m"]
+run = "plugin sudo -- chmod"
+desc = "Chmod selected file"
+
+[[mgr.prepend_keymap]]
+on = [".", "r"]
+run = "plugin sudo -- rename"
+desc = "Rename selected file"
 
 [[mgr.prepend_keymap]]
 on = [".", "<C-k>"]
