@@ -128,33 +128,6 @@ export FZF_CTRL_T_COMMAND="fd --hidden --follow --type f"
 export FZF_CTRL_T_OPTS="--multi --prompt='CWD-File > ' "
 export FZF_CTRL_R_OPTS="--prompt='CMD-Hist > ' --preview 'echo {}' --preview-window down:3:wrap"
 
-# Archives
-alias zip="zip -r"
-alias compress="mktar"
-mktar() { tar -cvzf "${1%/}.tar.gz" "${1%/}"; }
-extract() {
-	for archive in "$@"; do
-		if [ -f "$archive" ]; then
-			case $archive in
-			*.tar.bz2) tar xvjf $archive ;;
-			*.tar.gz) tar xvzf $archive ;;
-			*.bz2) bunzip2 $archive ;;
-			*.rar) rar x $archive ;;
-			*.gz) gunzip $archive ;;
-			*.tar) tar xvf $archive ;;
-			*.tbz2) tar xvjf $archive ;;
-			*.tgz) tar xvzf $archive ;;
-			*.zip) unzip $archive ;;
-			*.Z) uncompress $archive ;;
-			*.7z) 7z x $archive ;;
-			*) echo "don't know how to extract '$archive'..." ;;
-			esac
-		else
-			echo "'$archive' is not a valid file!"
-		fi
-	done
-}
-
 # Searches for text in all files in the current folder
 ftext() {
 	# -i case-insensitive
@@ -298,6 +271,8 @@ alias ezrc='nvim ~/.zshrc'
 alias src="clear; source ~/.zshrc"
 
 # Utils
+alias {archive,compress}="ouch compress"
+alias {extract,decompress}="ouch decompress"
 alias ff="fastfetch"
 alias zi="__zoxide_zi"
 alias sy="sudo -E yazi"
