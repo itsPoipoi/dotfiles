@@ -5,6 +5,120 @@
 [mgr]
 
 keymap = [
+
+  ###### Plugins START
+
+  # fazif
+  { on = "<A-f>", run = "plugin fazif fzfall", desc = "Find files/directories with fd and fzf" },
+  { on = "<C-t>", run = "plugin fazif fzffile", desc = "Find files with fd and fzf" },
+  { on = "<A-c>", run = "plugin fazif fzfdir", desc = "Find directories with fd and fzf" },
+
+  # jump-to-char
+  { on = "s", run = "plugin jump-to-char", desc = "Jump to char" },
+
+  # relative-motions
+  { on = "1", run = "plugin relative-motions 1", desc = "Move in relative steps" },
+  { on = "2", run = "plugin relative-motions 2", desc = "Move in relative steps" },
+  { on = "3", run = "plugin relative-motions 3", desc = "Move in relative steps" },
+  { on = "4", run = "plugin relative-motions 4", desc = "Move in relative steps" },
+  { on = "5", run = "plugin relative-motions 5", desc = "Move in relative steps" },
+  { on = "6", run = "plugin relative-motions 6", desc = "Move in relative steps" },
+  { on = "7", run = "plugin relative-motions 7", desc = "Move in relative steps" },
+  { on = "8", run = "plugin relative-motions 8", desc = "Move in relative steps" },
+  { on = "9", run = "plugin relative-motions 9", desc = "Move in relative steps" },
+
+  # Augment Commands
+  { on = "<Enter>", run = "plugin augment-command -- enter --smart", desc = "Enter a directory and skip directories with only a single subdirectory" },
+  { on = "%", run = "plugin augment-command -- enter", desc = "Enter a directory and skip directories with only a single subdirectory" },
+  { on = "#", run = "plugin augment-command -- leave", desc = "Leave a directory and skip directories with only a single subdirectory" },
+  { on = "o", run = "plugin augment-command -- open --smart", desc = "Open selected files" },
+  { on = "A", run = "plugin augment-command -- create --enter --open", desc = "Create a file and open it (ends with / for directories)" },
+  { on = "p", run = "plugin augment-command -- paste", desc = "Paste yanked files" },
+  { on = "P", run = "plugin augment-command -- paste --force", desc = "Paste yanked files (overwrite)" },
+  { on = "T", run = "plugin augment-command -- tab_create --smart", desc = "Create a new tab with hovered directory" },
+
+  # ouch
+  { on = "z", run = "plugin ouch", desc = "Add selected file to archive" },
+
+  # chmod
+  { on = [
+    "c",
+    "m",
+  ], run = "plugin chmod", desc = "Chmod on selected file" },
+
+  # Smart Filter
+  { on = "S", run = "plugin smart-filter", desc = "Smart filter" },
+
+  # trash-cli
+  { on = "R", run = "plugin recycle-bin", desc = "Open trash menu" },
+
+  # sudo.yazi
+  { on = [
+    ".",
+    "p",
+  ], run = "plugin sudo -- paste", desc = "Paste yanked file" },
+  { on = [
+    ".",
+    "a",
+  ], run = "plugin sudo -- create", desc = "Create a file/dir" },
+  { on = [
+    ".",
+    "k",
+  ], run = "plugin sudo -- link", desc = "Symlink absolute path" },
+  { on = [
+    ".",
+    "P",
+  ], run = "plugin sudo -- paste --force", desc = "Paste yanked file (overwrite)" },
+  { on = [
+    ".",
+    "D",
+  ], run = "plugin sudo -- remove --permanently", desc = "Permanently delete selected file" },
+  { on = [
+    ".",
+    "K",
+  ], run = "plugin sudo -- link --relative", desc = "Symlink relative path" },
+  { on = [
+    ".",
+    "m",
+  ], run = "plugin sudo -- chmod", desc = "Chmod selected file" },
+  { on = [
+    ".",
+    "r",
+  ], run = "plugin sudo -- rename", desc = "Rename selected file" },
+  { on = [
+    ".",
+    "<C-k>",
+  ], run = "plugin sudo -- hardlink", desc = "Hardlink yanked file" },
+
+  # rsync
+  { on = "M", run = "plugin rsync", desc = "Copy file using rsync" },
+  { on = [
+    "m",
+    "p",
+  ], run = "plugin rsync 'pi'", desc = "Rsync to Pi" },
+  { on = [
+    "m",
+    "d",
+  ], run = "plugin rsync 'desk'", desc = "Rsync to Desktop" },
+  { on = [
+    "m",
+    "l",
+  ], run = "plugin rsync 'lap'", desc = "Rsync to Laptop" },
+  { on = [
+    "m",
+    "P",
+  ], run = "plugin rsync 'lanpi'", desc = "Rsync to Pi (LAN)" },
+  { on = [
+    "m",
+    "D",
+  ], run = "plugin rsync 'landesk'", desc = "Rsync to Desktop (LAN)" },
+  { on = [
+    "m",
+    "L",
+  ], run = "plugin rsync 'lanlap'", desc = "Rsync to Laptop (LAN)" },
+
+  ###### Plugins END
+
   { on = "<Esc>", run = "escape", desc = "Exit visual mode, clear selection, or cancel search" },
   { on = "<C-[>", run = "escape", desc = "Exit visual mode, clear selection, or cancel search" },
   { on = "q", run = "quit", desc = "Quit the process" },
@@ -287,6 +401,7 @@ keymap = [
   # Help
   { on = "~", run = "help", desc = "Open help" },
   { on = "<F1>", run = "help", desc = "Open help" },
+
 ]
 
 [tasks]
@@ -535,220 +650,3 @@ keymap = [
   # Filtering
   { on = "S", run = "filter", desc = "Filter help items" },
 ]
-
-####### Plugins
-
-## fazif
-[[mgr.prepend_keymap]]
-on = "<A-f>"
-run = "plugin fazif fzfall"
-desc = "Find files/directories with fd and fzf"
-
-[[mgr.prepend_keymap]]
-on = "<C-t>"
-run = "plugin fazif fzffile"
-desc = "Find files with fd and fzf"
-
-[[mgr.prepend_keymap]]
-on = "<A-c>"
-run = "plugin fazif fzfdir"
-desc = "Find directories with fd and fzf"
-
-## jump-to-char
-[[mgr.prepend_keymap]]
-on = "s"
-run = "plugin jump-to-char"
-desc = "Jump to char"
-
-## relative-motions
-[[mgr.prepend_keymap]]
-on = ["1"]
-run = "plugin relative-motions 1"
-desc = "Move in relative steps"
-
-[[mgr.prepend_keymap]]
-on = ["2"]
-run = "plugin relative-motions 2"
-desc = "Move in relative steps"
-
-[[mgr.prepend_keymap]]
-on = ["3"]
-run = "plugin relative-motions 3"
-desc = "Move in relative steps"
-
-[[mgr.prepend_keymap]]
-on = ["4"]
-run = "plugin relative-motions 4"
-desc = "Move in relative steps"
-
-[[mgr.prepend_keymap]]
-on = ["5"]
-run = "plugin relative-motions 5"
-desc = "Move in relative steps"
-
-[[mgr.prepend_keymap]]
-on = ["6"]
-run = "plugin relative-motions 6"
-desc = "Move in relative steps"
-
-[[mgr.prepend_keymap]]
-on = ["7"]
-run = "plugin relative-motions 7"
-desc = "Move in relative steps"
-
-[[mgr.prepend_keymap]]
-on = ["8"]
-run = "plugin relative-motions 8"
-desc = "Move in relative steps"
-
-[[mgr.prepend_keymap]]
-on = ["9"]
-run = "plugin relative-motions 9"
-desc = "Move in relative steps"
-
-## Augment Commands
-[[mgr.prepend_keymap]]
-on = "<Enter>"
-run = "plugin augment-command -- enter --smart"
-desc = "Enter a directory and skip directories with only a single subdirectory"
-
-[[mgr.prepend_keymap]]
-on = "%"
-run = "plugin augment-command -- enter"
-desc = "Enter a directory and skip directories with only a single subdirectory"
-
-[[mgr.prepend_keymap]]
-on = "#"
-run = "plugin augment-command -- leave"
-desc = "Leave a directory and skip directories with only a single subdirectory"
-
-[[mgr.prepend_keymap]]
-on = "o"
-run = "plugin augment-command -- open --smart"
-desc = "Open selected files"
-
-[[mgr.prepend_keymap]]
-on = "A"
-run = "plugin augment-command -- create --enter --open"
-desc = "Create a file and open it (ends with / for directories)"
-
-[[mgr.prepend_keymap]]
-on = "p"
-run = "plugin augment-command -- paste"
-desc = "Paste yanked files"
-
-[[mgr.prepend_keymap]]
-on = "P"
-run = "plugin augment-command -- paste --force"
-desc = "Paste yanked files (overwrite)"
-
-[[mgr.prepend_keymap]]
-on = "T"
-run = "plugin augment-command -- tab_create --smart"
-desc = "Create a new tab with hovered directory"
-
-## ouch
-[[mgr.prepend_keymap]]
-on = "z"
-run = "plugin ouch"
-desc = "Add selected file to archive"
-
-## chmod
-[[mgr.prepend_keymap]]
-on = ["c", "m"]
-run = "plugin chmod"
-desc = "Chmod on selected file"
-
-## Smart Filter
-[[mgr.prepend_keymap]]
-on = "S"
-run = "plugin smart-filter"
-desc = "Smart filter"
-
-## trash-cli
-[[mgr.prepend_keymap]]
-on = "R"
-run = "plugin recycle-bin"
-desc = "Open trash menu"
-
-## sudo.yazi
-[[mgr.prepend_keymap]]
-on = [".", "p"]
-run = "plugin sudo -- paste"
-desc = "Paste yanked file"
-
-[[mgr.prepend_keymap]]
-on = [".", "a"]
-run = "plugin sudo -- create"
-desc = "Create a file/dir"
-
-[[mgr.prepend_keymap]]
-on = [".", "k"]
-run = "plugin sudo -- link"
-desc = "Symlink absolute path"
-
-[[mgr.prepend_keymap]]
-on = [".", "P"]
-run = "plugin sudo -- paste --force"
-desc = "Paste yanked file (overwrite)"
-
-[[mgr.prepend_keymap]]
-on = [".", "D"]
-run = "plugin sudo -- remove --permanently"
-desc = "Permanently delete selected file"
-
-[[mgr.prepend_keymap]]
-on = [".", "K"]
-run = "plugin sudo -- link --relative"
-desc = "Symlink relative path"
-
-[[mgr.prepend_keymap]]
-on = [".", "m"]
-run = "plugin sudo -- chmod"
-desc = "Chmod selected file"
-
-[[mgr.prepend_keymap]]
-on = [".", "r"]
-run = "plugin sudo -- rename"
-desc = "Rename selected file"
-
-[[mgr.prepend_keymap]]
-on = [".", "<C-k>"]
-run = "plugin sudo -- hardlink"
-desc = "Hardlink yanked file"
-
-## rsync
-[[mgr.prepend_keymap]]
-on = "M"
-run = "plugin rsync"
-desc = "Copy file using rsync"
-
-[[mgr.prepend_keymap]]
-on = ["m", "p"]
-run = "plugin rsync 'pi'"
-desc = "Rsync to Pi"
-
-[[mgr.prepend_keymap]]
-on = ["m", "d"]
-run = "plugin rsync 'desk'"
-desc = "Rsync to Desktop"
-
-[[mgr.prepend_keymap]]
-on = ["m", "l"]
-run = "plugin rsync 'lap'"
-desc = "Rsync to Laptop"
-
-[[mgr.prepend_keymap]]
-on = ["m", "P"]
-run = "plugin rsync 'lanpi'"
-desc = "Rsync to Pi (LAN)"
-
-[[mgr.prepend_keymap]]
-on = ["m", "D"]
-run = "plugin rsync 'landesk'"
-desc = "Rsync to Desktop (LAN)"
-
-[[mgr.prepend_keymap]]
-on = ["m", "L"]
-run = "plugin rsync 'lanlap'"
-desc = "Rsync to Laptop (LAN)"
