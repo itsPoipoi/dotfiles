@@ -655,3 +655,9 @@ desc = "Add selected file to archive"
 on = "S"
 run = "plugin smart-filter"
 desc = "Smart filter"
+
+## trash-cli
+[[mgr.prepend_keymap]]
+on = "R"
+run = "plugin recycle-bin"
+desc = "Smart filter"

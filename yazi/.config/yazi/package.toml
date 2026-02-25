@@ -23,5 +23,10 @@ use = "yazi-rs/plugins:smart-filter"
 rev = "b224ddf"
 hash = "c887903a63a2ff520081b6d90a4b3392"
 
+[[plugin.deps]]
+use = "uhs-robert/recycle-bin"
+rev = "fa68711"
+hash = "8714306b5cac6359edbacbf545fbd691"
+
 [flavor]
 deps = []
