@@ -223,15 +223,19 @@ keymap = [
   ], run = "cd ~", desc = "Go home" },
   { on = [
     "g",
+    "r",
+  ], run = "cd /", desc = "Go root" },
+  { on = [
+    "g",
+    "G",
+  ], run = "plugin augment-command -- first_file", desc = "Go to first file" },
+  { on = [
+    "g",
     "~",
   ], run = "cd ~", desc = "Go home" },
   { on = [
     "g",
     "/",
-  ], run = "cd /", desc = "Go root" },
-  { on = [
-    "g",
-    "r",
   ], run = "cd /", desc = "Go root" },
   { on = [
     "g",
@@ -247,12 +251,16 @@ keymap = [
   ], run = "cd ~/Downloads", desc = "Go ~/Downloads" },
   { on = [
     "g",
-    "<Space>",
-  ], run = "cd --interactive", desc = "Jump interactively" },
+    "t",
+  ], run = "cd ~/.local/share/Trash/files", desc = "Go ~/Downloads" },
   { on = [
     "g",
     "f",
   ], run = "follow", desc = "Follow hovered symlink" },
+  { on = [
+    "g",
+    "<Space>",
+  ], run = "cd --interactive", desc = "Jump interactively" },
 
   # Tabs
   { on = "t", run = "tab_create --current", desc = "Create a new tab with CWD" },
@@ -638,11 +646,6 @@ desc = "Paste yanked files (overwrite)"
 on = "T"
 run = "plugin augment-command -- tab_create --smart"
 desc = "Create a new tab with hovered directory"
-
-[[mgr.prepend_keymap]]
-on = ["g", "G"]
-run = "plugin augment-command -- first_file"
-desc = "Go to first file"
 
 ## ouch
 [[mgr.prepend_keymap]]
