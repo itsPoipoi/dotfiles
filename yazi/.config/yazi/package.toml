@@ -28,5 +28,10 @@ use = "uhs-robert/recycle-bin"
 rev = "fa68711"
 hash = "8714306b5cac6359edbacbf545fbd691"
 
+[[plugin.deps]]
+use = "TD-Sky/sudo"
+rev = "86205aa"
+hash = "9628b660afb192d32f2ea5f6634d3e72"
+
 [flavor]
 deps = []
