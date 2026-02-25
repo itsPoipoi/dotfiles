@@ -396,7 +396,7 @@ keymap = [
   { on = ">", run = "tab_swap 1", desc = "Swap current tab with next tab" },
 
   # Tasks
-  { on = ":", run = "tasks:show", desc = "Show task manager" },
+  { on = "l", run = "tasks:show", desc = "Show task manager" },
 
   # Help
   { on = "~", run = "help", desc = "Open help" },
@@ -410,7 +410,7 @@ keymap = [
   { on = "<Esc>", run = "close", desc = "Close task manager" },
   { on = "q", run = "close", desc = "Close task manager" },
   { on = "<C-c>", run = "close", desc = "Close task manager" },
-  { on = ":", run = "close", desc = "Close task manager" },
+  { on = "l", run = "close", desc = "Close task manager" },
 
   { on = "-", run = "arrow prev", desc = "Previous task" },
   { on = "+", run = "arrow next", desc = "Next task" },
