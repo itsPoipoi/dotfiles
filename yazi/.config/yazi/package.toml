@@ -18,5 +18,10 @@ use = "ndtoan96/ouch"
 rev = "594b8a2"
 hash = "c9e628fc0312d198db22ae2fa74883b"
 
+[[plugin.deps]]
+use = "yazi-rs/plugins:smart-filter"
+rev = "b224ddf"
+hash = "c887903a63a2ff520081b6d90a4b3392"
+
 [flavor]
 deps = []

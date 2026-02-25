@@ -644,7 +644,14 @@ on = ["g", "G"]
 run = "plugin augment-command -- first_file"
 desc = "Go to first file"
 
+## ouch
 [[mgr.prepend_keymap]]
 on = "z"
 run = "plugin ouch"
 desc = "Add selected file to archive"
+
+## Smart Filter
+[[mgr.prepend_keymap]]
+on = "S"
+run = "plugin smart-filter"
+desc = "Smart filter"
