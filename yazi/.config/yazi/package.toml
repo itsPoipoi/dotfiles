@@ -1,9 +1,4 @@
 [[plugin.deps]]
-use = "Shallow-Seek/fazif"
-rev = "6e10488"
-hash = "c549ff30fb1d1d97c734010fe82f6295"
-
-[[plugin.deps]]
 use = "yazi-rs/plugins:git"
 rev = "b224ddf"
 hash = "270915fa8282a19908449530ff66f7e2"
@@ -14,9 +9,9 @@ rev = "b224ddf"
 hash = "7a4b4237223aaa94e589d1c01a23542a"
 
 [[plugin.deps]]
-use = "dedukun/relative-motions"
-rev = "a603d9e"
-hash = "e02a788e5b8ae0fb47fd0193dda589cc"
+use = "hankertrix/augment-command"
+rev = "7c12bdf"
+hash = "f7e6d377e4efee567ec6d1c2355f2ca3"
 
 [flavor]
 deps = []

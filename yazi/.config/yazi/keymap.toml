@@ -21,8 +21,8 @@ keymap = [
 
   { on = "<C-u>", run = "arrow -50%", desc = "Move cursor up half page" },
   { on = "<C-d>", run = "arrow 50%", desc = "Move cursor down half page" },
-  { on = "<C-b>", run = "arrow -100%", desc = "Move cursor up one page" },
-  { on = "<C-f>", run = "arrow 100%", desc = "Move cursor down one page" },
+  # { on = "<C-b>", run = "arrow -100%", desc = "Move cursor up one page" },
+  # { on = "<C-f>", run = "arrow 100%", desc = "Move cursor down one page" },
 
   { on = "<S-PageUp>", run = "arrow -50%", desc = "Move cursor up half page" },
   { on = "<S-PageDown>", run = "arrow 50%", desc = "Move cursor down half page" },
@@ -88,8 +88,8 @@ keymap = [
   { on = "f", run = "search --via=fd", desc = "Search files by name via fd" },
   { on = "F", run = "search --via=rg", desc = "Search files by content via ripgrep" },
   { on = "<C-s>", run = "escape --search", desc = "Cancel the ongoing search" },
-  { on = "Z", run = "plugin fzf", desc = "Jump to a file/directory via fzf" },
-  { on = "z", run = "plugin zoxide", desc = "Jump to a directory via zoxide" },
+  # { on = "Z", run = "plugin fzf", desc = "Jump to a file/directory via fzf" },
+  { on = "<C-f>", run = "plugin zoxide", desc = "Jump to a directory via zoxide" },
 
   # Linemode
   { on = [
@@ -531,19 +531,16 @@ keymap = [
 ####### Plugins
 
 ## fazif
-# File/Directory finder using fd + fzf
 [[mgr.prepend_keymap]]
 on = "Z"
 run = "plugin fazif fzfall"
 desc = "Find files/directories with fd and fzf"
 
-# File finder using fd + fzf
 [[mgr.prepend_keymap]]
 on = "<C-t>"
 run = "plugin fazif fzffile"
 desc = "Find files with fd and fzf"
 
-# Directory finder using fd + fzf
 [[mgr.prepend_keymap]]
 on = "<A-c>"
 run = "plugin fazif fzfdir"
@@ -600,3 +597,54 @@ desc = "Move in relative steps"
 on = ["9"]
 run = "plugin relative-motions 9"
 desc = "Move in relative steps"
+
+## Augment Commands
+[[mgr.prepend_keymap]]
+on = "<Enter>"
+run = "plugin augment-command -- enter --smart"
+desc = "Enter a directory and skip directories with only a single subdirectory"
+
+[[mgr.prepend_keymap]]
+on = "%"
+run = "plugin augment-command -- enter"
+desc = "Enter a directory and skip directories with only a single subdirectory"
+
+[[mgr.prepend_keymap]]
+on = "#"
+run = "plugin augment-command -- leave"
+desc = "Leave a directory and skip directories with only a single subdirectory"
+
+[[mgr.prepend_keymap]]
+on = "o"
+run = "plugin augment-command -- open --smart"
+desc = "Open selected files"
+
+[[mgr.prepend_keymap]]
+on = "A"
+run = "plugin augment-command -- create --enter --open"
+desc = "Create a file and open it (ends with / for directories)"
+
+[[mgr.prepend_keymap]]
+on = "p"
+run = "plugin augment-command -- paste"
+desc = "Paste yanked files"
+
+[[mgr.prepend_keymap]]
+on = "P"
+run = "plugin augment-command -- paste --force"
+desc = "Paste yanked files (overwrite if the destination exists)"
+
+[[mgr.prepend_keymap]]
+on = "T"
+run = "plugin augment-command -- tab_create --smart"
+desc = "Create a new tab with hovered directory"
+
+[[mgr.prepend_keymap]]
+on = ["g", "G"]
+run = "plugin augment-command -- first_file"
+desc = "Go to first file"
+
+[[mgr.prepend_keymap]]
+on = "z"
+run = "plugin augment-command -- archive"
+desc = "Add selected file to archive"

@@ -18,3 +18,7 @@ run = "git"
 id = "git"
 url = "*/"
 run = "git"
+
+[[opener.extract]]
+run = "ya pub augmented-extract --list %s"
+desc = "Extract here"
