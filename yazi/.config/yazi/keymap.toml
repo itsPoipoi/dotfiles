@@ -714,23 +714,38 @@ on = [".", "<C-k>"]
 run = "plugin sudo -- hardlink"
 desc = "Hardlink yanked file"
 
-[[mgr.prepend_keymap]]
-on = [".", "a"]
-run = "plugin sudo -- create"
-desc = "Create a file/dir"
-
-[[mgr.prepend_keymap]]
-on = [".", "d"]
-run = "plugin sudo -- remove --permanently"
-desc = "Permanently delete selected file"
-
-[[mgr.prepend_keymap]]
-on = [".", "m"]
-run = "plugin sudo -- chmod"
-desc = "Chmod selected file"
-
 ## rsync
 [[mgr.prepend_keymap]]
-on = ["m"]
+on = "M"
 run = "plugin rsync"
 desc = "Copy file using rsync"
+
+[[mgr.prepend_keymap]]
+on = ["m", "p"]
+run = "plugin rsync 'pi'"
+desc = "Rsync to Pi"
+
+[[mgr.prepend_keymap]]
+on = ["m", "d"]
+run = "plugin rsync 'desk'"
+desc = "Rsync to Desktop"
+
+[[mgr.prepend_keymap]]
+on = ["m", "l"]
+run = "plugin rsync 'lap'"
+desc = "Rsync to Laptop"
+
+[[mgr.prepend_keymap]]
+on = ["m", "P"]
+run = "plugin rsync 'lanpi'"
+desc = "Rsync to Pi (LAN)"
+
+[[mgr.prepend_keymap]]
+on = ["m", "D"]
+run = "plugin rsync 'landesk'"
+desc = "Rsync to Desktop (LAN)"
+
+[[mgr.prepend_keymap]]
+on = ["m", "L"]
+run = "plugin rsync 'lanlap'"
+desc = "Rsync to Laptop (LAN)"
