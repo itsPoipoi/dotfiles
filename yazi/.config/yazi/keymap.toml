@@ -240,7 +240,7 @@ keymap = [
   { on = [
     "g",
     ".",
-  ], run = "cd ~/dotfiles", desc = "Go dotfiles" },
+  ], run = "cd ~/dotfiles", desc = "Go to dotfiles" },
   { on = [
     "g",
     "c",
@@ -248,11 +248,11 @@ keymap = [
   { on = [
     "g",
     "d",
-  ], run = "cd ~/Downloads", desc = "Go ~/Downloads" },
+  ], run = "cd ~/Downloads", desc = "Go to downloads" },
   { on = [
     "g",
     "t",
-  ], run = "cd ~/.local/share/Trash/files", desc = "Go ~/Downloads" },
+  ], run = "cd ~/.local/share/Trash/files", desc = "Go to trash" },
   { on = [
     "g",
     "f",
