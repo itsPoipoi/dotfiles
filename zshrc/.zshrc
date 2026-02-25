@@ -139,26 +139,6 @@ ftext() {
 	rg -iHn $2 $3 $4 $5 --color=always "$1" . | less -R
 }
 
-# Copy file with a progress bar
-cpp() {
-	set -e
-	strace -q -ewrite cp -- "${1}" "${2}" 2>&1 |
-		awk '{
-	count += $NF
-	if (count % 10 == 0) {
-		percent = count / total_size * 100
-		printf "%3d%% [", percent
-		for (i=0;i<=percent;i++)
-			printf "="
-			printf ">"
-			for (i=percent;i<100;i++)
-				printf " "
-				printf "]\r"
-			}
-		}
-	END { print "" }' total_size="$(stat -c '%s' "${1}")" count=0
-}
-
 # Copy and go to the directory
 cpg() {
 	if [ -d "$2" ]; then
@@ -223,12 +203,6 @@ function y() {
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
-# Change directory aliases
-alias ..='cd ..'
-alias ...='cd ../..'
-alias ....='cd ../../..'
-alias .....='cd ../../../..'
-
 # cd into the old directory
 alias bd='cd "$OLDPWD"'
 
@@ -242,14 +216,6 @@ alias ld='eza -aD --icons'										# directories only
 alias ll='eza -alh --icons --group-directories-first'			# long listing format
 alias lfiles='eza -alhf --icons'   								# long format, files only
 alias ldirs='eza -alhD --icons'   								# long format, directories only
-alias lx='eza -alhfs extension --icons '   						# sort files by extension
-alias lk='eza -alhrs size --icons --group-directories-first'		# sort by size
-alias lc='eza -alhrs changed --icons --group-directories-first'	# sort by change time
-alias lt='eza -alhrs created --icons --group-directories-first'	# sort by date
-
-# Search running processes
-alias p="ps aux | rg "
-alias topcpu="/bin/ps -eo pcpu,pid,user,args | sort -k 1 -r | head -10"
 
 # Modified commands
 alias cp='cp -i'
