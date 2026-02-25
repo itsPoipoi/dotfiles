@@ -646,5 +646,5 @@ desc = "Go to first file"
 
 [[mgr.prepend_keymap]]
 on = "z"
-run = "plugin augment-command -- archive"
+run = "plugin ouch"
 desc = "Add selected file to archive"
