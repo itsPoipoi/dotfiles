@@ -693,7 +693,7 @@ run = "plugin sudo -- paste --force"
 desc = "Paste yanked file (overwrite)"
 
 [[mgr.prepend_keymap]]
-on = [".", "d"]
+on = [".", "D"]
 run = "plugin sudo -- remove --permanently"
 desc = "Permanently delete selected file"
 
