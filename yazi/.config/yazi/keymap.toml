@@ -287,7 +287,7 @@ keymap = [
   { on = "<Esc>", run = "close", desc = "Close task manager" },
   { on = "q", run = "close", desc = "Close task manager" },
   { on = "<C-c>", run = "close", desc = "Close task manager" },
-  { on = "l", run = "close", desc = "Close task manager" },
+  { on = ":", run = "close", desc = "Close task manager" },
 
   { on = "-", run = "arrow prev", desc = "Previous task" },
   { on = "+", run = "arrow next", desc = "Next task" },
@@ -307,7 +307,7 @@ keymap = [
 
 keymap = [
   { on = "<Esc>", run = "close", desc = "Close the spot" },
-  { on = "<C-[>", run = "close", desc = "Close the spot" },
+  { on = "q", run = "close", desc = "Close the spot" },
   { on = "<C-c>", run = "close", desc = "Close the spot" },
   { on = "<Tab>", run = "close", desc = "Close the spot" },
 
@@ -718,4 +718,4 @@ desc = "Chmod selected file"
 [[mgr.prepend_keymap]]
 on = ["m"]
 run = "plugin rsync"
-desc = "Copy files using rsync"
+desc = "Copy file using rsync"
