@@ -75,7 +75,7 @@ zstyle ':completion:*' menu no
 zstyle ':completion:*:git-checkout:*' sort false
 zstyle ':fzf-tab:*' fzf-min-height 25
 zstyle ':fzf-tab:*' switch-group '<' '>'
-zstyle ':fzf-tab:*' fzf-bindings 'ctrl-y:accept' 'ctrl-w:accept' 'ctrl-u:preview-half-page-up' 'ctrl-d:preview-half-page-down'
+zstyle ':fzf-tab:*' fzf-bindings 'ctrl-y:accept' 'ctrl-w:accept' 'ctrl-u:preview-half-page-up' 'ctrl-d:preview-half-page-down' 'ctrl-space:toggle+down'
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -aD1 --group-directories-first --icons --color=always $realpath'
 zstyle ':fzf-tab:complete:z:*' fzf-preview 'eza -aD1 --group-directories-first --icons --color=always $realpath'
 
