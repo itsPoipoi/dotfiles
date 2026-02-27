@@ -5,6 +5,7 @@ themes_to_remove=(
     "flexoki-light" 
     "rose-pine"
     "hackerman"
+    "miasma"
     "ristretto"
     "kanagawa"
     "vantablack"
