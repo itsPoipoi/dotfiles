@@ -7,6 +7,8 @@ themes_to_remove=(
     "hackerman"
     "ristretto"
     "kanagawa"
+    "vantablack"
+    "white"
 #   "nord"
 #   "gruvbox"
 #   "everforest"
