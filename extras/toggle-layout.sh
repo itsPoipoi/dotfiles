@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-if systemctl --user is-active kanata.service; then
+if hyprctl devices | grep "Ergo"; then
   systemctl --user stop kanata.service
   hyprctl switchxkblayout all 1
   notify-send "💻   Azerty"
