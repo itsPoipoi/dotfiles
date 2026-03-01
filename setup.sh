@@ -465,6 +465,7 @@ install_webapps_cleanup() {
   omarchy-webapp-remove Zoom
   omarchy-webapp-install Instagram https://www.instagram.com/direct/inbox/ https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/instagram.png
   omarchy-webapp-install Messenger https://www.messenger.com/ https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/facebook-messenger.png
+  omarchy-webapp-install "Keep Notes" https://keep.google.com/ https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/google-keep.png
   print_success "WebApps cleanup completed."
 }
 
