@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-if hyprctl devices | grep "Ergo"; then
+if hyprctl devices | grep "Ergo‑L"; then
   if systemctl --user is-active kanata.service; then
     systemctl --user stop kanata.service
     notify-send "💻   Kanata:  OFF"
