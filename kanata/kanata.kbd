@@ -8,8 +8,8 @@
 ;;-----------------------------------------------------------------------------
 ;; Key arrangement: With or without angle mod?
 
-;; (include defsrc_pc.kbd)  ;; PC, standard finger assignment
-(include defsrc_pc_anglemod.kbd)  ;; PC, ZXCVB are shifted to the left
+(include defsrc_pc.kbd)  ;; PC, standard finger assignment
+; (include defsrc_pc_anglemod.kbd)  ;; PC, ZXCVB are shifted to the left
 
 ;;-----------------------------------------------------------------------------
 ;; `Base` layer: standard or dual keys? (layer-taps, homerow mods?)
