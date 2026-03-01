@@ -22,7 +22,7 @@ sudo curl -sL https://raw.githubusercontent.com/itsPoipoi/dotfiles/refs/heads/om
 sudo curl -sL https://raw.githubusercontent.com/itsPoipoi/dotfiles/refs/heads/omarchy/kanata/deflayer_nav.kbd --create-dirs -o /etc/kanata/deflayer_nav.kbd
 sudo curl -sL https://raw.githubusercontent.com/itsPoipoi/dotfiles/refs/heads/omarchy/kanata/deflayer_nav_lt.kbd --create-dirs -o /etc/kanata/deflayer_nav_lt.kbd
 sudo curl -sL https://raw.githubusercontent.com/itsPoipoi/dotfiles/refs/heads/omarchy/kanata/deflayer_nav_lt_hrm.kbd --create-dirs -o /etc/kanata/deflayer_nav_lt_hrm.kbd
-sudo chmod -R 777 /etc/kanata
+sudo chmod -R 755 /etc/kanata
 
 # Setup systemd daemon service
 curl -sL https://raw.githubusercontent.com/itsPoipoi/dotfiles/refs/heads/omarchy/kanata/kanata.service --create-dirs -o ~/.config/systemd/user/kanata.service
