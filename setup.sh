@@ -283,7 +283,7 @@ install_sddm_setup() {
 install_layout_setup() {
   local skip_confirm="$1"
   if [[ "$skip_confirm" == "--yes" ]] || confirm_action "Setup Ergo-L keyboard layout for LUKS/SDDM?"; then
-    sudo localectl set-x11-keymap fr pc105 ergol
+    sudo localectl set-x11-keymap fr pc105 ergol_iso
     sudo cp ~/dotfiles/extras/ergol-boot.map /usr/share/kbd/keymaps/i386/qwerty/
     sudo cp ~/dotfiles/extras/vconsole.conf /etc/vconsole.conf
     sudo limine-mkinitcpio
