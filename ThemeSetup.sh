@@ -70,7 +70,7 @@ echo "Applying theme tweaks"
 sed -i 's/t.\+main_bg.\+$/theme[main_bg]=""/' "$HOME"/.config/omarchy/themes/*/btop.theme
 # Tokyoled: Replace backgrounds, tweak colors
 \rm -f "$HOME/.config/omarchy/themes/tokyoled/backgrounds/black.jpg"
-\cp "$HOME/.local/share/omarchy/themes/ethereal/backgrounds/1.jpg" "$HOME/.config/omarchy/themes/tokyoled/backgrounds/1.jpg"
+\cp "$HOME/.local/share/omarchy/themes/ethereal/backgrounds/1-cosmic.jpg" "$HOME/.config/omarchy/themes/tokyoled/backgrounds/1-cosmic.jpg"
 sed -i 's/7aa2f7/5b8ffc/g' "$HOME/.config/omarchy/themes/tokyoled/colors.toml"
 sed -i 's/787c99/e8e8e8/g' "$HOME/.config/omarchy/themes/tokyoled/colors.toml"
 sed -i 's/magenta/blue/g' "$HOME/.config/omarchy/themes/tokyoled/icons.theme"
