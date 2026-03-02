@@ -296,7 +296,7 @@ install_remote_luks() {
   local skip_confirm="$1"
   if [[ "$skip_confirm" == "--yes" ]] || confirm_action "Setup remote SSH unlock for LUKS encryption?"; then
     yay -S --noconfirm --needed busybox tinyssh mkinitcpio-netconf mkinitcpio-tinyssh mkinitcpio-utils
-    sudo sed -i 's/"quiet splash"/"quiet splash ip=dhcp"/g' "/etc/default/limine"
+    sudo sed -i 's/".*quiet splash"/"quiet splash ip=:::::eth0:dhcp"/g' "/etc/default/limine"
     sudo sed -i 's/\(^H.*\)encrypt /\1netconf tinyssh encryptssh /g' "/etc/mkinitcpio.conf.d/omarchy_hooks.conf"
     sudo sed -i 's/\(^.*11.*$\)/  #\1/g' "/usr/lib/initcpio/install/encryptssh"
     sudo cp ~/dotfiles/extras/root_key /etc/tinyssh/root_key
