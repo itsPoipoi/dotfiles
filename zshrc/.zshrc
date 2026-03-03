@@ -233,7 +233,7 @@ alias sshfs='sshfs -o reconnect,ServerAliveInterval=15,ServerAliveCountMax=3,idm
 # General
 alias sht="omarchy-system-shutdown"
 alias rbt="omarchy-system-reboot"
-alias ezrc='nvim ~/.zshrc'
+alias ezrc='\nvim ~/.zshrc'
 alias src="clear; source ~/.zshrc"
 
 # Utils
