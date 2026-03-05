@@ -547,6 +547,7 @@ show_main_menu() {
   2) selective_install ;;
   3) backup_restore_menu ;;
   4) clear && exit 0 ;;
+  q) clear && exit 0 ;;
   *)
     echo -e "${RED}Invalid choice. Please try again.${NC}"
     sleep 1
