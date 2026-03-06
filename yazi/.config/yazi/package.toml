@@ -38,5 +38,10 @@ use = "yazi-rs/plugins:chmod"
 rev = "b224ddf"
 hash = "815dd20e682dec52bb92864037fa5f53"
 
+[[plugin.deps]]
+use = "boydaihungst/gvfs"
+rev = "9d64595"
+hash = "b6f691f01a2122bd94866800d4d12a22"
+
 [flavor]
 deps = []
