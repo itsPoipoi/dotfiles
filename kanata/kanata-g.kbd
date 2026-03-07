@@ -1,0 +1,42 @@
+;; Every section should enable one and only one `include`
+
+(defcfg
+  process-unmapped-keys yes
+)
+
+;;-----------------------------------------------------------------------------
+;; Key arrangement: With or without angle mod?
+
+(include defsrc_pc.kbd)  ;; PC, standard finger assignment
+
+;;-----------------------------------------------------------------------------
+;; `Base` layer: standard or dual keys? (layer-taps, homerow mods?)
+
+(include deflayer_nav_lt-g.kbd)  ;; layer-taps on both thumb keys
+
+;;-----------------------------------------------------------------------------
+;; Num-Navigation layer (requires layer-taps):
+
+(defvar
+  tto 250 ;; tap-repress-timeout
+  hto 250 ;; hold-timeout
+)
+
+(defalias
+  caps (tap-hold-press 0 200 esc lctl)
+  lsft (tap-hold-press 0 250 caps lsft)
+  del (tap-hold-press $tto $hto del lalt)
+  esc (tap-hold-press $tto $hto esc ralt)
+)
+
+;; Live-reload (`lrld`) the configuration with Nav+Backspace.
+
+(deflayer navigation
+            F1    F2    F3   F4   F5   F6    F7  F8  F9  F10  F11  F12 lrld
+            S-tab home  up   end  pgup prnt  7   8   9   0
+ @caps      tab   lft  down  rght pgdn ins   4   5   6   0
+ @lsft prev next  pp  voldwn volu  _   mute  1   2   3   0
+                  @del            spc           @esc
+)
+
+;; vim: set ft=lisp:
