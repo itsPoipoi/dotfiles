@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 if hyprctl devices | grep "Ergo‑L"; then
   systemctl --user stop kanata.service
+  systemctl --user stop kanata-g.service
   hyprctl switchxkblayout all 1
   notify-send -t 1000 "💻   Layout:  AZERTY   |   Kanata:  OFF"
 else
