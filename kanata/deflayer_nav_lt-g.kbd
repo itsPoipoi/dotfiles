@@ -17,8 +17,8 @@
   ;;  - acts as a modifier by default, or as BS/Ret when tapped separately;
   ;;  - works great with Qwerty-Lafayette and Ergo-L keyboard layouts, where
   ;;    neither Shift nor AltGr are used outside of the 3×10 main alpha keys.
-  lalt (tap-hold-press $tto $hto bspc lalt)
-  ralt (tap-hold-press $tto $hto ret ralt)
+  lalt (tap-hold-press 120 $hto bspc lalt)
+  ralt (tap-hold-press 120 $hto ret ralt)
 )
 
 ;; vim: set ft=lisp:
