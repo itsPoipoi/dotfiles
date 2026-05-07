@@ -1,0 +1,32 @@
+[general]
+resize = { mode = "smart" }
+# resize = { mode = "size", width=2000, height=800 }
+# Exit directly after copy/save action. 0.20.1: Does not apply to save as
+# early-exit = true
+# Exit directly after save as (0.20.1)
+# early-exit-save-as = true
+# Select the tool on startup [possible values: pointer, crop, line, arrow, rectangle, text, marker, blur, brush]
+initial-tool = "text"
+# Increase or decrease the size of the annotations
+annotation-size-factor = 1.8
+# The zoom factor to use for the image.
+# 1.0 means no zooming.
+# zoom-factor = 1.1
+# The length to move the text when using arrow keys. defaults to 50.0
+# text-move-length = 50.0
+
+[color-palette]
+palette = ["#eb4d4b", "#f0932b", "#6ab04c", "#22a6b3", "#ffd700"]
+
+# [keybinds]
+# pointer = "p"
+# crop = "c"
+# brush = "b"
+# line = "i"
+# arrow = "z"
+# rectangle = "r"
+# ellipse = "e"
+# text = "t"
+# marker = "m"
+# blur = "u"
+# highlight = "g"
