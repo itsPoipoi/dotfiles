@@ -1,2 +1,7 @@
+proc
+.cache
 .git
 .ssh
+.steam
+compatdata
+Steam Controller Configs
