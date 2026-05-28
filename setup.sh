@@ -439,9 +439,11 @@ install_spicetify_setup() {
       \cp -f "$HOME/dotfiles/extras/keyboardShortcut.js" "$HOME/.spicetify/Extensions/"
       \cp -f "$HOME/dotfiles/extras/spotifyBackup.js" "$HOME/.spicetify/Extensions/"
       \cp -f "$HOME/dotfiles/extras/immersiveView.js" "$HOME/.spicetify/Extensions/"
+      \cp -f "$HOME/dotfiles/extras/youtubekeybinds.js" "$HOME/.spicetify/Extensions/"
       ~/.spicetify/spicetify config extensions keyboardShortcut.js
       ~/.spicetify/spicetify config extensions spotifyBackup.js
       ~/.spicetify/spicetify config extensions immersiveView.js
+      ~/.spicetify/spicetify config extensions youtubekeybinds.js
       ~/.spicetify/spicetify backup apply
       rm -f "$HOME/dotfiles/install.log"
     else

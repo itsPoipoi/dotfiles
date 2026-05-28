@@ -51,7 +51,7 @@
     "shift+l": { callback: () => Spicetify.Platform.History.goForward() },
 
     // M to Like/Unlike track
-    m: { callback: () => Spicetify.Player.toggleHeart() },
+    "m": { callback: () => Spicetify.Player.toggleHeart() },
 
     // Forward Slash to open search page
     "/": { callback: () => Spicetify.Platform.History.replace("/search") },
