@@ -12,8 +12,6 @@ require("relative-motions"):setup({
 	enter_mode = "cache_or_first",
 })
 
--- https://github.com/hankertrix/augment-command.yazi?tab=readme-ov-file#configuration
-th.create_title = { "Create and open:", "Create (dir):" }
 require("augment-command"):setup({
 	prompt = false,
 	default_item_group_for_prompt = "hovered",
@@ -22,7 +20,6 @@ require("augment-command"):setup({
 	skip_single_subdirectory_on_enter = true,
 	skip_single_subdirectory_on_leave = true,
 	use_default_create_behaviour = true,
-	create_item_delay = 0.25,
 	enter_archives = false,
 	extract_retries = 3,
 	recursively_extract_archives = true,

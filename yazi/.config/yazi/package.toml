@@ -1,27 +1,22 @@
 [[plugin.deps]]
 use = "yazi-rs/plugins:git"
-rev = "b224ddf"
-hash = "270915fa8282a19908449530ff66f7e2"
+rev = "bb758e2"
+hash = "88e56a64b7ce7c4314427452343fef17"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:jump-to-char"
-rev = "b224ddf"
+rev = "bb758e2"
 hash = "7a4b4237223aaa94e589d1c01a23542a"
 
 [[plugin.deps]]
-use = "hankertrix/augment-command"
-rev = "7c12bdf"
-hash = "f7e6d377e4efee567ec6d1c2355f2ca3"
-
-[[plugin.deps]]
 use = "ndtoan96/ouch"
-rev = "594b8a2"
-hash = "c9e628fc0312d198db22ae2fa74883b"
+rev = "406ce6c"
+hash = "f5afc904d5106ee368c8aa2ded43bd74"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:smart-filter"
-rev = "b224ddf"
-hash = "c887903a63a2ff520081b6d90a4b3392"
+rev = "bb758e2"
+hash = "d6f7351ea25a43c9b5f4315fa1e23935"
 
 [[plugin.deps]]
 use = "uhs-robert/recycle-bin"
@@ -30,18 +25,23 @@ hash = "8714306b5cac6359edbacbf545fbd691"
 
 [[plugin.deps]]
 use = "TD-Sky/sudo"
-rev = "86205aa"
-hash = "9628b660afb192d32f2ea5f6634d3e72"
+rev = "afd61ce"
+hash = "d390cd2d8b996939a695411b446f58d0"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:chmod"
-rev = "b224ddf"
-hash = "815dd20e682dec52bb92864037fa5f53"
+rev = "bb758e2"
+hash = "5b1c276b75cae91cbbdbe7863f39a540"
 
 [[plugin.deps]]
 use = "boydaihungst/gvfs"
-rev = "9d64595"
-hash = "b6f691f01a2122bd94866800d4d12a22"
+rev = "c5a0bb9"
+hash = "480fde69fef0bcaeb2c21a726f94412c"
+
+[[plugin.deps]]
+use = "hankertrix/augment-command"
+rev = "dd2d6cf"
+hash = "cba2bae0c4ad211f4219de550b3838a5"
 
 [flavor]
 deps = []

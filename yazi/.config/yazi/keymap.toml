@@ -29,14 +29,14 @@ keymap = [
   { on = "9", run = "plugin relative-motions 9", desc = "Move in relative steps" },
 
   # Augment Commands
-  { on = "<Enter>", run = "plugin augment-command -- enter --smart", desc = "Enter a directory and skip directories with only a single subdirectory" },
-  { on = "%", run = "plugin augment-command -- enter", desc = "Enter a directory and skip directories with only a single subdirectory" },
-  { on = "#", run = "plugin augment-command -- leave", desc = "Leave a directory and skip directories with only a single subdirectory" },
-  { on = "o", run = "plugin augment-command -- open --smart", desc = "Open selected files" },
-  { on = "A", run = "plugin augment-command -- create --enter --open", desc = "Create a file and open it (ends with / for directories)" },
-  { on = "p", run = "plugin augment-command -- paste", desc = "Paste yanked files" },
-  { on = "P", run = "plugin augment-command -- paste --force", desc = "Paste yanked files (overwrite)" },
-  { on = "T", run = "plugin augment-command -- tab_create --smart", desc = "Create a new tab with hovered directory" },
+  { on = "<Enter>", run = "plugin augment-command.enter -- --smart", desc = "Enter a directory and skip directories with only a single subdirectory" },
+  { on = "%", run = "plugin augment-command.enter", desc = "Enter a directory and skip directories with only a single subdirectory" },
+  { on = "#", run = "plugin augment-command.leave", desc = "Leave a directory and skip directories with only a single subdirectory" },
+  { on = "o", run = "plugin augment-command.open -- --smart", desc = "Open selected files" },
+  { on = "A", run = "plugin augment-command.create -- --enter --open", desc = "Create a file and open it (ends with / for directories)" },
+  { on = "p", run = "plugin augment-command.paste", desc = "Paste yanked files" },
+  { on = "P", run = "plugin augment-command.paste -- paste --force", desc = "Paste yanked files (overwrite)" },
+  { on = "T", run = "plugin augment-command.tab-create -- tab_create --smart", desc = "Create a new tab with hovered directory" },
 
   # ouch
   { on = "z", run = "plugin ouch", desc = "Add selected file to archive" },
@@ -453,7 +453,7 @@ keymap = [
   { on = [
     "g",
     "G",
-  ], run = "plugin augment-command -- first_file", desc = "Go to first file" },
+  ], run = "plugin augment-command.first-file", desc = "Go to first file" },
   { on = [
     "g",
     "~",
