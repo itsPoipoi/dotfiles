@@ -1,6 +1,6 @@
 function handle {
   if [[ ${1:0:10} == "openwindow" ]]; then
-    sleep 0.2
+    sleep 0.3
     ~/dotfiles/extras/bit-dispatch.sh
   fi
 }
