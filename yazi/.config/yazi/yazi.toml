@@ -38,7 +38,8 @@ prepend_previewers = [
   # For mounted hard disk/drive.
   { url = "/run/media/USER_NAME/**/*", run = "noop" },
 ]
-prepend_fetchers = [
-  { id = "git", url = "*", run = "git", group = "git" },
-  { id = "git", url = "*/", run = "git", group = "git" },
-]
+
+# prepend_fetchers = [
+#   { id = "git", url = "*", run = "git", group = "git" },
+#   { id = "git", url = "*/", run = "git", group = "git" },
+# ]
