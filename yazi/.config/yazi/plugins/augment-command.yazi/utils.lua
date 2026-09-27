@@ -766,10 +766,8 @@ function M.get_temporary_name(path)
 end
 
 -- Function to get the current working directory
----@type fun(): string Returns the current working directory as a string
-M.get_current_directory = ya.sync(
-	function(_) return tostring(cx.active.current.cwd.path) end
-)
+---@type fun(): Url Returns the current working directory as a Url
+M.get_current_directory = ya.sync(function(_) return cx.active.current.cwd end)
 
 -- Function to get the path of the hovered item
 ---@type fun(
@@ -995,22 +993,18 @@ function M.get_item_group(config)
 end
 
 -- Function to get all the items in the given directory
----@param directory_path string The path to the directory
+---@param directory Url The Url to the directory
 ---@param get_hidden_items boolean Whether to get hidden items
 ---@param directories_only boolean? Whether to only get directories
----@return string[] directory_items The list of urls to the directory items
-function M.get_directory_items(
-	directory_path,
-	get_hidden_items,
-	directories_only
-)
+---@return Url[] directory_items The list of urls to the directory items
+function M.get_directory_items(directory, get_hidden_items, directories_only)
 
 	-- Initialise the list of directory items
 	---@type string[]
 	local directory_items = {}
 
 	-- Read the contents of the directory
-	local directory_contents, _ = fs.read_dir(Url(directory_path), {})
+	local directory_contents, _ = fs.read_dir(directory, {})
 
 	-- If there are no directory contents,
 	-- then return the empty list of directory items
@@ -1030,7 +1024,7 @@ function M.get_directory_items(
 		if directories_only and not item.cha.is_dir then goto continue end
 
 		-- Otherwise, add the item path to the list of directory items
-		table.insert(directory_items, tostring(item.url.path))
+		table.insert(directory_items, item.url)
 
 		-- The continue label to continue the loop
 		::continue::
@@ -1041,12 +1035,12 @@ function M.get_directory_items(
 end
 
 -- Function to skip child directories with only one directory
----@param initial_directory_path string The path of the initial directory
+---@param initial_directory Url The Url of the initial directory
 ---@return nil
-function M.skip_single_child_directories(initial_directory_path)
+function M.skip_single_child_directories(initial_directory)
 
 	-- Initialise the directory variable to the initial directory given
-	local directory = initial_directory_path
+	local directory = initial_directory
 
 	-- Get the tab preferences
 	local tab_preferences = M.get_tab_preferences()
@@ -1059,7 +1053,7 @@ function M.skip_single_child_directories(initial_directory_path)
 			M.get_directory_items(directory, tab_preferences.show_hidden)
 
 		-- If the number of directory items is not 1,
-		-- then break out of the loop.
+		-- then break the loop
 		if #directory_items ~= 1 then break end
 
 		-- Otherwise, get the directory item
@@ -1067,7 +1061,7 @@ function M.skip_single_child_directories(initial_directory_path)
 
 		-- Get the cha object of the directory item
 		-- and don't follow symbolic links
-		local directory_item_cha = fs.cha(Url(directory_item), false)
+		local directory_item_cha = fs.cha(directory_item, false)
 
 		-- If the cha object of the directory item is nil
 		-- then break the loop
@@ -1157,7 +1151,7 @@ local function get_part_of_path_in_yazi_cwd(given_path)
 	if type(given_path) == "string" then given_path = Url(given_path) end
 
 	-- Get the current working directory
-	local current_working_directory = Url(M.get_current_directory())
+	local current_working_directory = M.get_current_directory()
 
 	-- Strip the current working directory from the front of the given path
 	local remaining_path = given_path:strip_prefix(current_working_directory)
@@ -1206,7 +1200,12 @@ end)
 
 -- Function to wait until the given path exists in Yazi
 ---@param given_path string|Url The path to check for
-function M.wait_until_path_exists_in_yazi(given_path)
+---@param timeout integer? The timeout in seconds, defaults to 2 seconds
+---@return boolean wait_timed_out Returns whether the wait timed out
+function M.wait_until_path_exists_in_yazi(given_path, timeout)
+
+	-- Initialise the timeout to 2 seconds
+	timeout = timeout or 2
 
 	-- Get the part of the path in Yazi's current working directory
 	local path_part = tostring(get_part_of_path_in_yazi_cwd(given_path))
@@ -1214,10 +1213,22 @@ function M.wait_until_path_exists_in_yazi(given_path)
 	-- Get whether the path exists in Yazi
 	local path_exists = path_exists_in_yazi_cwd(path_part)
 
-	-- While the path does not exist in Yazi, try again
+	-- Get the start time
+	local start_time = ya.time()
+
+	-- While the path does not exist in Yazi
 	while not path_exists do
+
+		-- Update the path exists variable
 		path_exists = path_exists_in_yazi_cwd(path_part)
+
+		-- If the current time minus the start time is more than the timeout,
+		-- return true
+		if ya.time() - start_time > timeout then return true end
 	end
+
+	-- Return false as the wait didn't timeout
+	return false
 end
 
 -- Return the module table

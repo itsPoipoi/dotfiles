@@ -340,7 +340,8 @@ local function move_extracted_items(archive_url, destination_url)
 	-- There is a limit of 2 as we just need to
 	-- know if the destination contains only
 	-- a single item or not.
-	local extracted_items = fs.read_dir(destination_url, { limit = 2 })
+	local extracted_items =
+		fs.read_dir(destination_url, { limit = 2 })
 
 	-- If the extracted items doesn't exist,
 	-- clean up and return the error
@@ -444,7 +445,7 @@ local function move_extracted_items(archive_url, destination_url)
 
 		-- Rename the destination directory itself to the target path
 		move_successful, error_message =
-			fs.rename(Url(destination_url), Url(target_path))
+			fs.rename(destination_url, Url(target_path))
 	end
 
 	-- Clean up the destination directory
@@ -502,8 +503,16 @@ function M.recursively_extract_archive(
 		tostring(temp_directory_url.path)
 	)
 
-	-- If there is no archiver, return the result
+	-- Create the function to clean up the temporary directory
+	local function clean_up() fs.remove("dir_all", temp_directory_url) end
+
+	-- If there is no archiver
 	if not archiver then
+
+		-- Clean up the temporary directory
+		clean_up()
+
+		-- Return the result
 		return utils.merge_tables({}, get_archiver_result, {
 			archive_path = archive_path,
 			destination_path = destination_path,
@@ -512,12 +521,21 @@ function M.recursively_extract_archive(
 
 	-- Function to add additional information to the extraction result
 	-- The additional information are:
-	--      - The archive path
-	--      - The destination path
-	--      - The name of the archiver
+	--		- The archive path
+	--		- The destination path
+	--		- The name of the archiver
+	--
+	-- It also cleans up the temporary directory if needed
+	--
 	---@param result Archiver.Result The result to add the paths to
+	---@param clean_up_wanted boolean? Whether to remove the temporary directory
 	---@return Archiver.Result modified_result The result with the paths added
-	local function add_additional_info(result)
+	local function add_additional_info_and_clean_up(result, clean_up_wanted)
+
+		-- If cleaning up is wanted, clean up the temporary directory
+		if clean_up_wanted then clean_up() end
+
+		-- Return the result with the paths added
 		return utils.merge_tables({}, result, {
 			archive_path = archive_path,
 			destination_path = destination_path,
@@ -531,10 +549,10 @@ function M.recursively_extract_archive(
 	local archive_files, archive_dirs, is_single_folder, archiver_result =
 		archiver:get_items()
 
-	-- If there are no are no archive files and directories,
+	-- If there are no archive files and directories,
 	-- return the extraction result
 	if #archive_files + #archive_dirs < 1 then
-		return add_additional_info(archiver_result)
+		return add_additional_info_and_clean_up(archiver_result, true)
 	end
 
 	-- Get if the archive has only one file
@@ -545,12 +563,14 @@ function M.recursively_extract_archive(
 
 	-- If the extraction result is not successful, return it
 	if not extraction_result.successful then
-		return add_additional_info(extraction_result)
+		return add_additional_info_and_clean_up(extraction_result, true)
 	end
 
 	-- Get the result of moving the extracted items
-	local move_result =
-		move_extracted_items(Url(archive_path), temp_directory_url)
+	local move_result = move_extracted_items(
+		Url(archive_path),
+		temp_directory_url
+	)
 
 	-- Get the extracted items path
 	local extracted_items_path = move_result.extracted_items_path
@@ -564,7 +584,7 @@ function M.recursively_extract_archive(
 		or not extracted_items_path
 		or not config.recursively_extract_archives
 	then
-		return add_additional_info(move_result)
+		return add_additional_info_and_clean_up(move_result, true)
 	end
 
 	-- Get the url of the extracted items path
@@ -578,6 +598,9 @@ function M.recursively_extract_archive(
 
 	-- If the parent directory doesn't exist
 	if not parent_directory_url then
+
+		-- Clean up the temporary directory
+		clean_up()
 
 		-- Modify the move result with a custom error
 		---@type Archiver.Result
@@ -619,11 +642,6 @@ function M.recursively_extract_archive(
 		-- Get the full path to the archive
 		local full_archive_path = tostring(full_archive_url.path)
 
-		-- Yazi is now way too quick (a good problem to have, really),
-		-- so we slow it down a little to make sure that the
-		-- extracted files are not overwritten by each other
-		ya.sleep(10e-3)
-
 		-- Recursively extract the archive
 		utils.emit_augmented_command(
 			"extract",
@@ -637,8 +655,8 @@ function M.recursively_extract_archive(
 		::continue::
 	end
 
-	-- Return the move result
-	return add_additional_info(move_result)
+	-- Return the move result without cleaning up
+	return add_additional_info_and_clean_up(move_result)
 end
 
 -- Function to show an archiver error
