@@ -6,8 +6,6 @@ hl.unbind("SUPER + G")
 hl.unbind("SUPER + Slash")
 hl.unbind("SUPER + code:21")
 hl.unbind("SUPER + code:61")
--- hl.unbind("PRINT")
--- hl.unbind("SUPER + PRINT")
 hl.unbind("SUPER + ALT + S")
 hl.unbind("SUPER + ALT + SPACE")
 hl.unbind("SUPER + SHIFT + B")
@@ -26,13 +24,7 @@ hl.unbind("SUPER + SHIFT + CTRL + A")
 o.bind("SUPER + SHIFT + K", "Keybindings", "omarchy-menu-keybindings")
 o.bind("SUPER + R", "Apps menu", "omarchy-menu toggle apps")
 o.bind("SUPER + Q", "Close window", hl.dsp.window.close())
-o.bind(
-	"SUPER + SHIFT + S",
-	"Move window to scratchpad",
-	hl.dsp.window.move({ workspace = "special:scratchpad", follow = false })
-)
-
--- bindd = SUPER SHIFT, BACKSPACE, Toggle focus mode, exec, $HOME/dotfiles/extras/toggle-focus.sh
+o.bind("SUPER + SHIFT + S", "Move window to scratchpad", hl.dsp.window.move({ workspace = "special:scratchpad", follow = false }))
 
 o.bind("SUPER + CTRL + V", "Clipboard manager", "omarchy-shell shell toggle omarchy.clipboard")
 o.bind("SUPER + Z", "Show time", "omarchy-notification-time -t 1500")
@@ -49,9 +41,9 @@ o.bind("XF86AudioRaiseVolume", "Volume up", "omarchy-audio-output-volume +1", { 
 o.bind("XF86AudioLowerVolume", "Volume down", "omarchy-audio-output-volume -1", { locked = true, repeating = true })
 
 -- Microphone controls
--- bindd = ALT, Equal, Toggle Microphone, exec, $HOME/dotfiles/extras/toggle-mic.sh # System-wide mute
--- bindn = , Equal, sendshortcut, CTRL SHIFT, M, class:^(vesktop)$ # Discord mute
--- bindni = , mouse:276, sendshortcut, CTRL SHIFT, Y, class:^(vesktop)$ # Discord PTT
+o.bind("ALT + Equal", "Mute microphone", "omarchy-audio-input-mute; canberra-gtk-play -i device-removed -V 15", { locked = true })
+hl.bind("Equal", hl.dsp.send_shortcut({ mods = "CTRL + SHIFT", key = "M", window = "class:^(vesktop)$" }), {non_consuming = true})
+hl.bind("mouse:276", hl.dsp.send_shortcut({ mods = "CTRL + SHIFT", key = "Y", window = "class:^(vesktop)$" }), {non_consuming = true, ignore_mods = true})
 
 -- Application bindings
 o.bind("SUPER + E", "Yazi", "uwsm-app -- xdg-terminal-exec --hold kitty @ send-text y'\r'")
@@ -67,21 +59,34 @@ o.bind("SUPER + SHIFT + A", "Agent", "omarchy-agent --pick")
 -- WebApps
 o.bind("SUPER + A", "ChatGPT", "omarchy-launch-or-focus-webapp ChatGPT https://chatgpt.com")
 o.bind("SUPER + H", "WhatsApp", "omarchy-launch-or-focus-webapp WhatsApp https://web.whatsapp.com/")
-o.bind(
-	"SUPER + G",
-	"Google Messages",
-	"omarchy-launch-or-focus-webapp Google.Messages https://messages.google.com/web/conversations"
-)
-o.bind(
-	"SUPER + I",
-	"Instagram Messages",
-	"omarchy-launch-or-focus-webapp Instagram https://www.instagram.com/direct/inbox/"
-)
+o.bind( "SUPER + G", "Google Messages", "omarchy-launch-or-focus-webapp Google.Messages https://messages.google.com/web/conversations")
+o.bind( "SUPER + I", "Instagram Messages", "omarchy-launch-or-focus-webapp Instagram https://www.instagram.com/direct/inbox/")
 o.bind("SUPER + U", "Facebook Messenger", "omarchy-launch-or-focus-webapp Messenger https://www.messenger.com")
 o.bind("SUPER + K", "Keep Notes", "omarchy-launch-or-focus-webapp Google.Keep https://keep.google.com")
--- bindd = SHIFT SUPER, M, Open Message WebApps, exec, $HOME/dotfiles/extras/messages-open.sh
--- bindd = CTRL SUPER, M, Close Message WebApps, exec, $HOME/dotfiles/extras/messages-close.sh
+o.bind("SUPER + SHIFT + M", "Open Message WebApps", "$HOME/dotfiles/extras/messages-open.sh")
+o.bind("SUPER + CTRL + M", "Close Message WebApps", "$HOME/dotfiles/extras/messages-close.sh")
 
 -- # Path of Exile 2
--- bindne = CTRL, mouse:276, sendshortcut, ,LEFT, class:^(steam_app_2694490)$
--- bindne = CTRL, mouse:275, sendshortcut, ,RIGHT, class:^(steam_app_2694490)$
+hl.bind("CTRL + mouse:276", hl.dsp.send_shortcut({ mods = "", key = "LEFT", window = "class:^(steam_app_2694490)$" }), {non_consuming = true, repeating = true})
+hl.bind("CTRL + mouse:275", hl.dsp.send_shortcut({ mods = "", key = "RIGHT", window = "class:^(steam_app_2694490)$" }), {non_consuming = true, repeating = true})
+
+-- Focus Mode
+o.bind("SUPER + SHIFT + BACKSPACE", "Toggle Focus Mode", function()
+	local focus_mode = (hl.get_config("decoration.blur.enabled") == true)
+
+	if focus_mode then
+		hl.exec_cmd("hyprctl reload")
+		return
+	end
+
+	hl.config({
+		decoration = {
+			blur = {
+				enabled = true,
+				size = 3,
+				passes = 3,
+				brightness = 0.25,
+			},
+		},
+	})
+end)
