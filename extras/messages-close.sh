@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-hyprctl dispatch closewindow class:".*[mM]essages.*"
-hyprctl dispatch closewindow class:".*[iI]nstagram.*"
-hyprctl dispatch closewindow class:".*[wW]hats[aA]pp.*"
-hyprctl dispatch closewindow class:".*[mM]essenger.*"
+hyprctl dispatch 'hl.dsp.window.close({ window = "class:.*[Mm]essages.*" })'
+hyprctl dispatch 'hl.dsp.window.close({ window = "class:.*[iI]nstagram.*" })'
+hyprctl dispatch 'hl.dsp.window.close({ window = "class:.*[wW]hats[aA]pp.*" })'
+hyprctl dispatch 'hl.dsp.window.close({ window = "class:.*[mM]essenger.*" })'
