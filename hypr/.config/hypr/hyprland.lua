@@ -231,9 +231,17 @@ hl.window_rule({
 	no_shadow = true,
 })
 
--- TODO: Replace with Tensaku
--- WARN: Config too
---
--- # Satty
--- windowrule = tag +satty, match:class com.gabm.satty
--- windowrule = size monitor_w monitor_h, match:tag satty
+-- Tensaku
+hl.window_rule({
+	match = {
+		initial_class = "dev.tensaku.Tensaku",
+	},
+	tag = "+tensaku",
+})
+
+hl.window_rule({
+	match = {
+		tag = "tensaku",
+	},
+	size = "monitor_w monitor_h",
+})
