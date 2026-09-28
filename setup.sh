@@ -215,7 +215,7 @@ install_system_deps() {
   mkdir -p "$HOME/.config/Thunar" || print_error "Failed to create Thunar config directory"
   mkdir -p "$HOME/.config/xfce4" || print_error "Failed to create xfce4 config directory"
 
-  if ! yay -S --noconfirm --needed base-devel nvibrant gcc make yazi ffmpeg dua-cli 7zip ouch nushell jq sshfs rsync poppler lsof fzf tumbler zoxide glow grc eza tree-sitter-cli npm pandoc-cli nwg-displays libcanberra sound-theme-freedesktop resvg imagemagick ueberzugpp git ripgrep fd unzip neovim trash-cli bat fastfetch stow man-db less zsh; then
+  if ! yay -S --noconfirm --needed base-devel gcc make yazi ffmpeg dua-cli 7zip ouch nushell jq sshfs rsync poppler lsof fzf tumbler zoxide glow grc eza tree-sitter-cli npm pandoc-cli nwg-displays libcanberra sound-theme-freedesktop resvg imagemagick ueberzugpp git ripgrep fd unzip neovim trash-cli bat fastfetch stow man-db less zsh; then
     print_error "Failed to install base packages"
     return 1
   fi
@@ -460,9 +460,7 @@ install_webapps_cleanup() {
   omarchy-webapp-remove Figma
   omarchy-webapp-remove Fizzy
   omarchy-webapp-remove GitHub
-  omarchy-webapp-remove "Google Contacts"
   omarchy-webapp-remove "Google Photos"
-  omarchy-webapp-remove "Google Maps"
   omarchy-webapp-remove HEY
   omarchy-webapp-remove X
   omarchy-webapp-remove YouTube
@@ -493,7 +491,7 @@ install_stow_config() {
 
 install_extras_setup() {
   local skip_confirm="$1"
-  if [[ "$skip_confirm" == "--yes" ]] || confirm_action "Install extra essential programs now? (Floorp, VLC, JamesDSP...)"; then
+  if [[ "$skip_confirm" == "--yes" ]] || confirm_action "Install extra essential programs now? (Floorp, VLC, EasyEffects...)"; then
     yay -S --noconfirm --needed vlc vlc-plugins-all floorp-bin opera easyeffects lsp-plugins calf libdeep_filter_ladspa-bin qbittorrent ookla-speedtest-bin
     set_filetypes_img
     set_filetypes_vid
