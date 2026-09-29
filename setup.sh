@@ -302,6 +302,7 @@ install_webapps_cleanup() {
     omarchy-webapp-remove Figma
     omarchy-webapp-remove Fizzy
     omarchy-webapp-remove GitHub
+    omarchy-webapp-remove Discord
     omarchy-webapp-remove "Google Photos"
     omarchy-webapp-remove HEY
     omarchy-webapp-remove X
@@ -312,7 +313,7 @@ install_webapps_cleanup() {
     omarchy-webapp-install "Keep Notes" https://keep.google.com/ https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/google-keep.png
     print_success "WebApps cleanup completed."
   else
-      echo -e "${GREEN}Skipping WebApps removal.${NC}"
+    echo -e "${GREEN}Skipping WebApps removal.${NC}"
   fi
 }
 
@@ -470,7 +471,7 @@ full_install() {
       [[ -d ~/.config/omarchy/plugins/bibek.menu ]] && skip_reason="Omarchy plugins already installed"
       ;;
     "webapps_cleanup")
-      [[ ! -f  /home/poipoi/.local/share/applications/Basecamp.desktop ]] && skip_reason="Webapps already cleaned up"
+      [[ ! -f /home/poipoi/.local/share/applications/Basecamp.desktop ]] && skip_reason="Webapps already cleaned up"
       ;;
     esac
 
