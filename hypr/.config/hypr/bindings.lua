@@ -26,7 +26,6 @@ o.bind("SUPER + R", "Apps menu", "omarchy-menu toggle apps")
 o.bind("SUPER + Q", "Close window", hl.dsp.window.close())
 o.bind("SUPER + SHIFT + S", "Move window to scratchpad", hl.dsp.window.move({ workspace = "special:scratchpad", follow = false }))
 
-o.bind("SUPER + CTRL + V", "Clipboard manager", "omarchy-shell shell toggle omarchy.clipboard")
 o.bind("SUPER + Z", "Show time", "omarchy-notification-time -t 1500")
 o.bind("SUPER + SHIFT + Z", "Show battery", "omarchy-notification-battery -t 1500")
 o.bind("SUPER + CTRL + Z", "Dismiss all notifications", "omarchy-shell notifications dismissAll")
