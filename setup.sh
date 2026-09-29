@@ -9,7 +9,6 @@ BLUE=$'\e[0;34m'
 NC=$'\e[0m' # No Color
 
 # Global variables
-BACKUP_DIR="$HOME/.dots-backup"
 MODULES=("system_deps" "shell_setup" "sddm_setup" "layout_setup" "remote_luks" "neovim_config" "limine_config" "ssh_service" "ssh_keys" "git_config" "kanata_setup" "vesktop_setup" "spicetify_setup" "webapps_cleanup" "themes_setup" "stow_config" "extras_setup")
 MODULE_NAMES=("System Dependencies" "Shell Setup (zsh)" "SDDM Setup" "Layout Setup" "Remote LUKS" "Neovim Config" "Limine Config" "SSH Service" "SSH Keys" "Git Config" "Kanata Setup" "Vesktop Setup" "Spicetify Setup" "WebApps Cleanup" "Themes Setup" "Stow Config" "Extras Setup")
 
@@ -45,167 +44,6 @@ confirm_action() {
   "") [[ "$default" == "y" ]] && return 0 || return 1 ;;
   *) return 1 ;;
   esac
-}
-
-# Backup functions
-create_backup_dir() {
-  local timestamp
-  timestamp=$(date +"%Y-%m-%d_%H-%M-%S")
-  BACKUP_PATH="$BACKUP_DIR/$timestamp"
-  mkdir -p "$BACKUP_PATH" || {
-    print_error "Failed to create backup directory"
-    return 1
-  }
-  echo "$BACKUP_PATH"
-}
-
-backup_files() {
-  local module="$1"
-  local backup_path="$2"
-  local module_dir="$backup_path/$module"
-  mkdir -p "$module_dir"
-
-  case "$module" in
-  "shell_setup")
-    echo "$SHELL" >"$module_dir/current_shell.txt" 2>/dev/null
-    ;;
-  "sddm_setup")
-    if [[ -f /etc/sddm.conf.d/autologin.conf ]]; then
-      sudo cp /etc/sddm.conf.d/autologin.conf "$module_dir/" 2>/dev/null || true
-    fi
-    ;;
-  "neovim_config")
-    if [[ -d ~/.config/nvim ]]; then
-      cp -r ~/.config/nvim "$module_dir/" 2>/dev/null || true
-    fi
-    ;;
-  "ssh_keys")
-    if [[ -f ~/.ssh/id_rsa ]]; then
-      cp ~/.ssh/id_rsa* "$module_dir/" 2>/dev/null || true
-    fi
-    ;;
-  "git_config")
-    git config --global --list >"$module_dir/git_config.txt" 2>/dev/null || true
-    ;;
-  "stow_config")
-    local configs=("fastfetch" "hypr" "kitty" "lazygit" "thunar" "yazi" "xfce4" "zshrc")
-    for config in "${configs[@]}"; do
-      if [[ -d ~/.config/$config ]]; then
-        cp -r "$HOME/.config/$config" "$module_dir/" 2>/dev/null || true
-      fi
-    done
-    ;;
-  esac
-}
-
-perform_backup() {
-  # Ensure backup directory exists
-  mkdir -p "$BACKUP_DIR"
-
-  local backup_path
-  backup_path=$(create_backup_dir) || return 1
-
-  echo -e "${YELLOW}Creating backup...${NC}"
-
-  for module in "${MODULES[@]}"; do
-    case "$module" in
-    "shell_setup" | "sddm_setup" | "neovim_config" | "ssh_keys" | "git_config" | "stow_config")
-      backup_files "$module" "$backup_path"
-      ;;
-    esac
-  done
-
-  print_success "Backup created at: $backup_path"
-  return 0
-}
-
-# Restore functions
-list_backups() {
-  if [[ ! -d "$BACKUP_DIR" ]]; then
-    print_error "No backups found."
-    return 1
-  fi
-
-  local backups=()
-  while IFS= read -r -d '' dir; do
-    backups+=("$(basename "$dir")")
-  done < <(find "$BACKUP_DIR" -mindepth 1 -maxdepth 1 -type d -print0 | sort -zr)
-
-  if [[ ${#backups[@]} -eq 0 ]]; then
-    print_error "No backups found."
-    return 1
-  fi
-
-  echo -e "${BLUE}Available backups:${NC}"
-  for i in "${!backups[@]}"; do
-    echo "$((i + 1)). ${backups[$i]}"
-  done
-
-  echo "$((${#backups[@]} + 1)). Cancel"
-  echo
-
-  local choice
-  read -rn 1 -s choice
-  echo "$choice"
-
-  if [[ $choice -ge 1 && $choice -le ${#backups[@]} ]]; then
-    echo "${backups[$((choice - 1))]}"
-    return 0
-  else
-    return 1
-  fi
-}
-
-restore_backup() {
-  local backup_name="$1"
-  local backup_path="$BACKUP_DIR/$backup_name"
-
-  if [[ ! -d "$backup_path" ]]; then
-    print_error "Backup not found: $backup_name"
-    return 1
-  fi
-
-  echo -e "${YELLOW}Restoring from backup: $backup_name${NC}"
-
-  # Restore logic for each module
-  if [[ -f "$backup_path/shell_setup/current_shell.txt" ]]; then
-    local saved_shell
-    saved_shell=$(cat "$backup_path/shell_setup/current_shell.txt")
-    if [[ "$saved_shell" != "$SHELL" ]]; then
-      echo -e "${YELLOW}Note: Shell was $saved_shell, currently $SHELL. Manual change may be needed.${NC}"
-    fi
-  fi
-
-  if [[ -f "$backup_path/sddm_setup/autologin.conf" ]]; then
-    sudo cp "$backup_path/sddm_setup/autologin.conf" /etc/sddm.conf.d/ 2>/dev/null || true
-  fi
-
-  if [[ -d "$backup_path/neovim_config/nvim" ]]; then
-    rm -rf ~/.config/nvim 2>/dev/null || true
-    cp -r "$backup_path/neovim_config/nvim" ~/.config/ 2>/dev/null || true
-  fi
-
-  if [[ -f "$backup_path/ssh_keys/id_rsa" ]]; then
-    cp "$backup_path/ssh_keys/id_rsa"* ~/.ssh/ 2>/dev/null || true
-    chmod 600 ~/.ssh/id_rsa 2>/dev/null || true
-  fi
-
-  if [[ -f "$backup_path/git_config/git_config.txt" ]]; then
-    # Note: Git config restore would require parsing and re-applying
-    echo -e "${YELLOW}Git config backup found. Manual restore may be needed.${NC}"
-  fi
-
-  if [[ -d "$backup_path/stow_config" ]]; then
-    local configs=("fastfetch" "hypr" "kitty" "lazygit" "thunar" "yazi" "xfce4" "zshrc")
-    for config in "${configs[@]}"; do
-      if [[ -d "$backup_path/stow_config/$config" ]]; then
-        rm -rf "$HOME/.config/$config" 2>/dev/null || true
-        cp -r "$backup_path/stow_config/$config" ~/.config/ 2>/dev/null || true
-      fi
-    done
-  fi
-
-  print_success "Restore completed. You may need to restart services or reload configs."
 }
 
 # Module functions
@@ -537,8 +375,7 @@ show_main_menu() {
   echo "Choose an option:"
   echo "1. Interactive Install (all modules)"
   echo "2. Selective Install (choose modules)"
-  echo "3. Backup/Restore"
-  echo "4. Exit"
+  echo "3. Exit"
   echo
 
   local choice
@@ -548,8 +385,7 @@ show_main_menu() {
   case $choice in
   1) full_install ;;
   2) selective_install ;;
-  3) backup_restore_menu ;;
-  4) clear && exit 0 ;;
+  3) clear && exit 0 ;;
   q) clear && exit 0 ;;
   *)
     echo -e "${RED}Invalid choice. Please try again.${NC}"
@@ -636,13 +472,6 @@ full_install() {
   echo
 
   if confirm_action "Proceed with full install?"; then
-    if confirm_action "Create backup before installing?"; then
-      perform_backup || {
-        echo -e "${RED}Backup failed. Aborting.${NC}"
-        sleep 1
-        show_main_menu
-      }
-    fi
 
     for i in "${!applicable_modules[@]}"; do
       echo -e "${BLUE}Running: ${applicable_names[$i]}${NC}"
@@ -761,14 +590,6 @@ selective_install() {
   echo
 
   if confirm_action "Proceed with selective install?"; then
-    if confirm_action "Create backup before installing?"; then
-      perform_backup || {
-        echo -e "${RED}Backup failed. Aborting.${NC}"
-        sleep 1
-        show_main_menu
-      }
-    fi
-
     for idx in "${selected[@]}"; do
       echo -e "${BLUE}Running: ${MODULE_NAMES[$idx]}${NC}"
       "install_${MODULES[$idx]}" --yes
@@ -778,49 +599,6 @@ selective_install() {
   else
     show_main_menu
   fi
-}
-
-backup_restore_menu() {
-  clear
-  print_header
-
-  echo "Backup/Restore Options:"
-  echo "1. Create new backup"
-  echo "2. Restore from backup"
-  echo "3. Back to main menu"
-  echo
-
-  local choice
-  read -rn 1 -s choice
-  echo "$choice"
-
-  case $choice in
-  1)
-    if perform_backup; then
-      echo -e "${GREEN}Backup completed successfully.${NC}"
-    fi
-    sleep 1
-    show_main_menu
-    ;;
-  2)
-    local backup_name
-    if backup_name=$(list_backups); then
-      if confirm_action "Restore from backup: $backup_name?"; then
-        restore_backup "$backup_name"
-      fi
-    fi
-    sleep 1
-    show_main_menu
-    ;;
-  3 | q)
-    show_main_menu
-    ;;
-  *)
-    echo -e "${RED}Invalid choice.${NC}"
-    sleep 0.5
-    backup_restore_menu
-    ;;
-  esac
 }
 
 finish_install() {
