@@ -332,6 +332,7 @@ install_plugins_setup() {
     omarchy plugin add https://github.com/SaifOmar/so.den.git --enable --yes
     omarchy plugin add https://github.com/matjam/omawall.git --enable --yes
     omarchy plugin add https://github.com/BibekBhusal0/omarchy-better-menu.git --enable --yes
+    omarchy plugin add https://github.com/onlyVishesh/omarchy-power-manager.git --enable --yes
     omarchy plugin add https://github.com/SirJul1337/omarchy-lock-explorer.git --enable --yes
     print_success "Use omarchy-shell lock explore to configure Lockscreen!"
   else

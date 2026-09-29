@@ -28,6 +28,7 @@ o.bind("SUPER + SHIFT + S", "Move window to scratchpad", hl.dsp.window.move({ wo
 
 o.bind("SUPER + Z", "Show time", "omarchy-notification-time -t 1500")
 o.bind("SUPER + SHIFT + Z", "Show battery", "omarchy-notification-battery -t 1500")
+o.bind("SUPER + SHIFT + P", "Show battery", "omarchy-shell shell toggle onlyvishesh.power-manager")
 o.bind("SUPER + CTRL + Z", "Dismiss all notifications", "omarchy-shell notifications dismissAll")
 o.bind("SUPER + SHIFT + C", "Calendar", "omarchy-shell shell toggle omarchy.clock")
 
