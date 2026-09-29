@@ -219,7 +219,7 @@ hl.window_rule({
 	size = "1430 850",
 })
 
--- # Ueberzug
+-- Ueberzug
 hl.window_rule({
 	match = {
 		initial_class = ".*ueberzug.*",
@@ -244,4 +244,14 @@ hl.window_rule({
 		tag = "tensaku",
 	},
 	size = "monitor_w monitor_h",
+})
+
+-- LocalSend
+hl.window_rule({
+	match = {
+		initial_class = ".*org.localsend.*",
+	},
+	float = true,
+	center = true,
+	size = "900 700",
 })
