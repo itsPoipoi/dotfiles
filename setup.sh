@@ -9,8 +9,8 @@ BLUE=$'\e[0;34m'
 NC=$'\e[0m' # No Color
 
 # Global variables
-MODULES=("system_deps" "shell_setup" "sddm_setup" "layout_setup" "remote_luks" "neovim_config" "limine_config" "ssh_service" "ssh_keys" "git_config" "kanata_setup" "vesktop_setup" "spicetify_setup" "webapps_cleanup" "themes_setup" "stow_config" "extras_setup")
-MODULE_NAMES=("System Dependencies" "Shell Setup (zsh)" "SDDM Setup" "Layout Setup" "Remote LUKS" "Neovim Config" "Limine Config" "SSH Service" "SSH Keys" "Git Config" "Kanata Setup" "Vesktop Setup" "Spicetify Setup" "WebApps Cleanup" "Themes Setup" "Stow Config" "Extras Setup")
+MODULES=("system_deps" "shell_setup" "sddm_setup" "layout_setup" "remote_luks" "neovim_config" "limine_config" "ssh_service" "ssh_keys" "git_config" "kanata_setup" "vesktop_setup" "spicetify_setup" "webapps_cleanup" "themes_setup" "plugins_setup" "stow_config" "extras_setup")
+MODULE_NAMES=("System Dependencies" "Shell Setup (zsh)" "SDDM Setup" "Layout Setup" "Remote LUKS" "Neovim Config" "Limine Config" "SSH Service" "SSH Keys" "Git Config" "Kanata Setup" "Vesktop Setup" "Spicetify Setup" "WebApps Cleanup" "Themes Setup" "Plugins Setup" "Stow Config" "Extras Setup")
 
 # Utility functions
 print_header() {
@@ -295,20 +295,25 @@ install_spicetify_setup() {
 }
 
 install_webapps_cleanup() {
-  echo -e "${GREEN}Removing undesirable WebApps...${NC}"
-  omarchy-webapp-remove Basecamp
-  omarchy-webapp-remove Figma
-  omarchy-webapp-remove Fizzy
-  omarchy-webapp-remove GitHub
-  omarchy-webapp-remove "Google Photos"
-  omarchy-webapp-remove HEY
-  omarchy-webapp-remove X
-  omarchy-webapp-remove YouTube
-  omarchy-webapp-remove Zoom
-  omarchy-webapp-install Instagram https://www.instagram.com/direct/inbox/ https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/instagram.png
-  omarchy-webapp-install Messenger https://www.messenger.com/ https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/facebook-messenger.png
-  omarchy-webapp-install "Keep Notes" https://keep.google.com/ https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/google-keep.png
-  print_success "WebApps cleanup completed."
+  local skip_confirm="$1"
+  if [[ "$skip_confirm" == "--yes" ]] || confirm_action "Remove undesirable Omarchy WebApps?"; then
+    echo -e "${GREEN}Removing undesirable WebApps...${NC}"
+    omarchy-webapp-remove Basecamp
+    omarchy-webapp-remove Figma
+    omarchy-webapp-remove Fizzy
+    omarchy-webapp-remove GitHub
+    omarchy-webapp-remove "Google Photos"
+    omarchy-webapp-remove HEY
+    omarchy-webapp-remove X
+    omarchy-webapp-remove YouTube
+    omarchy-webapp-remove Zoom
+    omarchy-webapp-install Instagram https://www.instagram.com/direct/inbox/ https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/instagram.png
+    omarchy-webapp-install Messenger https://www.messenger.com/ https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/facebook-messenger.png
+    omarchy-webapp-install "Keep Notes" https://keep.google.com/ https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/google-keep.png
+    print_success "WebApps cleanup completed."
+    else
+      echo -e "${GREEN}Skipping WebApps removal.${NC}"
+  fi
 }
 
 install_themes_setup() {
@@ -317,6 +322,19 @@ install_themes_setup() {
     /bin/bash ~/dotfiles/ThemeSetup.sh
   else
     echo -e "${GREEN}Skipping themes setup.${NC}"
+  fi
+}
+
+install_plugins_setup() {
+  local skip_confirm="$1"
+  if [[ "$skip_confirm" == "--yes" ]] || confirm_action "Setup Omarchy plugins?"; then
+    omarchy plugin add https://github.com/SaifOmar/so.den.git --enable --yes
+    omarchy plugin add https://github.com/matjam/omawall.git --enable --yes
+    omarchy plugin add https://github.com/BibekBhusal0/omarchy-better-menu.git --enable --yes
+    omarchy plugin add https://github.com/SirJul1337/omarchy-lock-explorer.git --enable --yes
+    print_success "Use omarchy-shell lock explore to configure Lockscreen!"
+  else
+    echo -e "${GREEN}Skipping plugins setup.${NC}"
   fi
 }
 
@@ -447,6 +465,9 @@ full_install() {
       ;;
     "themes_setup")
       [[ -d ~/.config/omarchy/themes/tokyoled ]] && skip_reason="Omarchy themes already installed"
+      ;;
+    "plugins_setup")
+      [[ -d ~/.config/omarchy/plugins/bibek.menu ]] && skip_reason="Omarchy plugins already installed"
       ;;
     "webapps_cleanup")
       [[ ! -f  /home/poipoi/.local/share/applications/Basecamp.desktop ]] && skip_reason="Webapps already cleaned up"
