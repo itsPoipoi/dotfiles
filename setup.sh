@@ -311,7 +311,7 @@ install_webapps_cleanup() {
     omarchy-webapp-install Messenger https://www.messenger.com/ https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/facebook-messenger.png
     omarchy-webapp-install "Keep Notes" https://keep.google.com/ https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/google-keep.png
     print_success "WebApps cleanup completed."
-    else
+  else
       echo -e "${GREEN}Skipping WebApps removal.${NC}"
   fi
 }
@@ -507,12 +507,6 @@ full_install() {
 }
 
 selective_install() {
-  clear
-  print_header
-
-  echo -e "${YELLOW}Select modules to install (space to toggle, enter to proceed):${NC}"
-  echo
-
   # Simple toggle menu
   local selected=()
   local module_status=()
@@ -524,7 +518,7 @@ selective_install() {
   while true; do
     clear
     print_header
-    echo -e "${YELLOW}Select modules to install (press number/letter to toggle, enter to proceed, q to go back):${NC}"
+    echo -e "${YELLOW}Select modules to install (press ${RED}number/letter ${YELLOW}to toggle, ${RED}enter ${YELLOW}to proceed, ${RED}q ${YELLOW}to go back):${NC}"
     echo
 
     for i in "${!MODULE_NAMES[@]}"; do
