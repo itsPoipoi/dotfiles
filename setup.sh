@@ -86,9 +86,9 @@ install_system_deps() {
 
 install_shell_setup() {
   local skip_confirm="$1"
-  export shell_setup_exists="1"
   if [[ "$SHELL" != "/usr/bin/zsh" ]]; then
     if [[ "$skip_confirm" == "--yes" ]] || confirm_action "Change default shell to zsh?"; then
+      shell_setup_exists="1"
       echo -e "${GREEN}Making zsh the default shell.${NC}"
       if ! chsh -s "$(which zsh)"; then
         print_error "Failed to change default shell. You may need to run this manually."
@@ -121,8 +121,8 @@ install_sddm_setup() {
 
 install_layout_setup() {
   local skip_confirm="$1"
-  export limine_setup_exists="1"
   if [[ "$skip_confirm" == "--yes" ]] || confirm_action "Setup Ergo-L keyboard layout for LUKS/SDDM?"; then
+    limine_setup_exists="1"
     sudo localectl set-x11-keymap fr pc105 ergol_iso
     sudo cp ~/dotfiles/extras/ergol-boot.map /usr/share/kbd/keymaps/i386/qwerty/
     sudo cp ~/dotfiles/extras/vconsole.conf /etc/vconsole.conf
@@ -133,8 +133,8 @@ install_layout_setup() {
 
 install_remote_luks() {
   local skip_confirm="$1"
-  export limine_setup_exists="1"
   if [[ "$skip_confirm" == "--yes" ]] || confirm_action "Setup remote SSH unlock for LUKS encryption?"; then
+    limine_setup_exists="1"
     yay -S --noconfirm --needed busybox tinyssh mkinitcpio-netconf mkinitcpio-tinyssh mkinitcpio-utils
     sudo sed -i 's/".*quiet splash"/"quiet splash ip=:::::eth0:dhcp"/g' "/etc/default/limine"
     sudo sed -i 's/\(^H.*\)encrypt /\1netconf tinyssh encryptssh /g' "/etc/mkinitcpio.conf.d/omarchy_hooks.conf"
@@ -172,8 +172,8 @@ install_neovim_config() {
 
 install_limine_config() {
   local skip_confirm="$1"
-  export limine_setup_exists="1"
   if [[ "$skip_confirm" == "--yes" ]] || confirm_action "Tweak Limine config?"; then
+    limine_setup_exists="1"
     sudo sed -i 's/^#.*timeout.*$/timeout: 1/g' "/boot/limine.conf"
     sudo sed -i 's/\(branding_color: \)2/\14\ninterface_help_color: 4/g' "/boot/limine.conf"
     sudo sed -i 's/\(term_back.*d: \).*$/\1000000/g' "/boot/limine.conf"
