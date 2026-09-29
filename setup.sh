@@ -449,7 +449,7 @@ full_install() {
       [[ -d ~/.config/omarchy/themes/tokyoled ]] && skip_reason="Omarchy themes already installed"
       ;;
     "webapps_cleanup")
-      [[ -d ~/.config/omarchy/themes/tokyoled ]] && skip_reason="Webapps already cleaned up"
+      [[ ! -f  /home/poipoi/.local/share/applications/Basecamp.desktop ]] && skip_reason="Webapps already cleaned up"
       ;;
     esac
 
