@@ -248,6 +248,7 @@ install_system_deps() {
 
 install_shell_setup() {
   local skip_confirm="$1"
+  export shell_setup_exists="1"
   if [[ "$SHELL" != "/usr/bin/zsh" ]]; then
     if [[ "$skip_confirm" == "--yes" ]] || confirm_action "Change default shell to zsh?"; then
       echo -e "${GREEN}Making zsh the default shell.${NC}"
@@ -827,12 +828,14 @@ finish_install() {
   echo -e "${GREEN}Installation complete!${NC}"
   echo -e "${YELLOW}You may need to reload your shell or restart services.${NC}"
 
-  if confirm_action "Reload zsh now?" "y"; then
-    clear
-    zsh
-  else
-    echo -e "${GREEN}Please run ${RED}zsh ${GREEN}manually to apply changes.${NC}"
-    exit 0
+  if [[ -n "$shell_setup_exists" ]]; then
+    if confirm_action "Reload zsh now?" "y"; then
+      clear
+      zsh
+    else
+      echo -e "${GREEN}Please run ${RED}zsh ${GREEN}manually to apply changes.${NC}"
+      exit 0
+    fi
   fi
 }
 
