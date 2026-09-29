@@ -121,11 +121,11 @@ install_sddm_setup() {
 
 install_layout_setup() {
   local skip_confirm="$1"
+  export limine_setup_exists="1"
   if [[ "$skip_confirm" == "--yes" ]] || confirm_action "Setup Ergo-L keyboard layout for LUKS/SDDM?"; then
     sudo localectl set-x11-keymap fr pc105 ergol_iso
     sudo cp ~/dotfiles/extras/ergol-boot.map /usr/share/kbd/keymaps/i386/qwerty/
     sudo cp ~/dotfiles/extras/vconsole.conf /etc/vconsole.conf
-    sudo limine-mkinitcpio
   else
     echo -e "${GREEN}Skipping keyboard layout setup.${NC}"
   fi
@@ -133,6 +133,7 @@ install_layout_setup() {
 
 install_remote_luks() {
   local skip_confirm="$1"
+  export limine_setup_exists="1"
   if [[ "$skip_confirm" == "--yes" ]] || confirm_action "Setup remote SSH unlock for LUKS encryption?"; then
     yay -S --noconfirm --needed busybox tinyssh mkinitcpio-netconf mkinitcpio-tinyssh mkinitcpio-utils
     sudo sed -i 's/".*quiet splash"/"quiet splash ip=:::::eth0:dhcp"/g' "/etc/default/limine"
@@ -143,7 +144,6 @@ install_remote_luks() {
     sudo sh -c 'tinyssh-convert /etc/tinyssh/sshkeydir < /etc/ssh/ssh_host_ed25519_key'
     sudo chmod 700 /etc/tinyssh/sshkeydir
     sudo chmod 600 /etc/tinyssh/sshkeydir/ed25519.pk
-    sudo limine-mkinitcpio
   else
     echo -e "${GREEN}Skipping remote SSH unlock setup.${NC}"
   fi
@@ -172,6 +172,7 @@ install_neovim_config() {
 
 install_limine_config() {
   local skip_confirm="$1"
+  export limine_setup_exists="1"
   if [[ "$skip_confirm" == "--yes" ]] || confirm_action "Tweak Limine config?"; then
     sudo sed -i 's/^#.*timeout.*$/timeout: 1/g' "/boot/limine.conf"
     sudo sed -i 's/\(branding_color: \)2/\14\ninterface_help_color: 4/g' "/boot/limine.conf"
@@ -602,6 +603,13 @@ selective_install() {
 }
 
 finish_install() {
+  if [[ -n "$limine_setup_exists" ]]; then
+    echo
+    echo -e "${GREEN}Updating limine...${NC}"
+    echo
+    sudo limine-update
+  fi
+
   echo
   echo -e "${GREEN}Installation complete!${NC}"
   echo -e "${YELLOW}You may need to reload your shell or restart services.${NC}"
