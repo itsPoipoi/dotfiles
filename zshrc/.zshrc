@@ -186,6 +186,25 @@ function myip () {
   echo "External IP (IPv6): $(curl -s6 ifconfig.co)"
 }
 
+# Spicetify Fixer
+spicetify() {
+    if [[ "$1" == "reapply" ]]; then
+      ~/.spicetify/spicetify config spotify_path "/opt/spotify"
+      ~/.spicetify/spicetify config custom_apps lyrics-plus
+      \cp -f "$HOME/dotfiles/extras/keyboardShortcut.js" "$HOME/.spicetify/Extensions/"
+      \cp -f "$HOME/dotfiles/extras/spotifyBackup.js" "$HOME/.spicetify/Extensions/"
+      \cp -f "$HOME/dotfiles/extras/immersiveView.js" "$HOME/.spicetify/Extensions/"
+      \cp -f "$HOME/dotfiles/extras/youtubekeybinds.js" "$HOME/.spicetify/Extensions/"
+      ~/.spicetify/spicetify config extensions keyboardShortcut.js
+      ~/.spicetify/spicetify config extensions spotifyBackup.js
+      ~/.spicetify/spicetify config extensions immersiveView.js
+      ~/.spicetify/spicetify config extensions youtubekeybinds.js
+      ~/.spicetify/spicetify apply
+    else
+        command spicetify "$@"
+    fi
+}
+
 # Yazi
 function y() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
@@ -199,8 +218,7 @@ function y() {
 # GENERAL ALIAS'S
 #######################################################
 
-# Add an "alert" alias 
-#   sleep 10; alert
+# Add an "alert" alias
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 # cd into the old directory
