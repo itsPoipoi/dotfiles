@@ -334,6 +334,12 @@ install_plugins_setup() {
     omarchy plugin add https://github.com/BibekBhusal0/omarchy-better-menu.git --enable --yes
     omarchy plugin add https://github.com/onlyVishesh/omarchy-power-manager.git --enable --yes
     omarchy plugin add https://github.com/SirJul1337/omarchy-lock-explorer.git --enable --yes
+    sudo tee ~/.config/omarchy/hooks/post-update.d/update-plugins.hook  >/dev/null <<'EOF'
+#!/bin/bash
+omarchy plugin update --yes
+EOF
+    sudo chmod a+x ~/.config/omarchy/hooks/post-update.d/update-plugins.hook
+    print_success "Plugins will now be updated along Omarchy."
     print_success "Use omarchy-shell lock explore to configure Lockscreen!"
   else
     echo -e "${GREEN}Skipping plugins setup.${NC}"
