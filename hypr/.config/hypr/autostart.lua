@@ -1,7 +1,6 @@
 -- On Hyprland start:
 -- o.launch_on_start("my-service")
 o.launch_on_start("uwsm-app -- steam -silent")
--- o.launch_on_start("~/dotfiles/extras/bit-handle.sh")
 hl.on("hyprland.start", function()
 	-- hl.exec_cmd("my-service")
 	hl.exec_cmd(

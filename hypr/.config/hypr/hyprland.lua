@@ -146,7 +146,6 @@ hl.window_rule({
 })
 
 -- Browsers
-
 hl.window_rule({
 	match = {
 		initial_class = "[oO]pera",
@@ -255,3 +254,42 @@ hl.window_rule({
 	center = true,
 	size = "900 700",
 })
+
+-- Floorp Extensions (Bitwarden)
+hl.on("window.open", function(w)
+  if w.class ~= "floorp" then return end
+  if w.initial_title ~= "Ablaze Floorp" then return end
+
+  local floorp_windows = hl.get_windows({ class = "floorp" })
+  if #floorp_windows <= 1 then return end
+
+  hl.dispatch(hl.dsp.window.fullscreen({ action = "unset", window = w }))
+  hl.dispatch(hl.dsp.window.float({ action = "set", window = w }))
+
+  local sub
+  sub = hl.on("window.title", function(tw)
+    if tw.address ~= w.address then return end
+    if tw.title == ""
+        or tw.title == "Ablaze Floorp"
+        or tw.title == "about:blank"
+        or tw.title:match("^about:.*Ablaze Floorp$") then return end
+
+    sub:remove()
+
+    if tw.title:match("^Extension:") then
+      hl.dispatch(hl.dsp.window.resize({ x = 600, y = 700, window = tw }))
+      hl.dispatch(hl.dsp.window.center({ window = tw }))
+      hl.dispatch(hl.dsp.focus({ window = tw }))
+
+      for _, fw in ipairs(floorp_windows) do
+        if fw.address ~= w.address then
+            hl.dispatch(hl.dsp.window.fullscreen({ action = "set", window = fw }))
+            break
+        end
+      end
+    else
+        hl.dispatch(hl.dsp.window.float({ action = "unset", window = tw }))
+    end
+
+  end)
+end)
