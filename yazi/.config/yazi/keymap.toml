@@ -269,6 +269,8 @@ keymap = [
 
   { on = "<A-#>", run = "back", desc = "Back to previous directory" },
   { on = "<A-%>", run = "forward", desc = "Forward to next directory" },
+  { on = "<C-#>", run = "back", desc = "Back to previous directory" },
+  { on = "<C-%>", run = "forward", desc = "Forward to next directory" },
 
   # Toggle
   { on = "<Space>", run = [
