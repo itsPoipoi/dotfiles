@@ -43,5 +43,10 @@ use = "hankertrix/augment-command"
 rev = "561f6ec"
 hash = "38b093d444efe1386e0e959aa5be11f8"
 
+[[plugin.deps]]
+use = "Shallow-Seek/fazif"
+rev = "7f05d7b"
+hash = "cb57e2c60d374b8852451fc42e340dec"
+
 [flavor]
 deps = []
