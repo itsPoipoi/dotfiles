@@ -48,5 +48,10 @@ use = "Shallow-Seek/fazif"
 rev = "7f05d7b"
 hash = "cb57e2c60d374b8852451fc42e340dec"
 
+[[plugin.deps]]
+use = "GianniBYoung/rsync"
+rev = "b5c657a"
+hash = "72828957273094ed0ef52792e3290900"
+
 [flavor]
 deps = []
