@@ -8,9 +8,15 @@ hl.config({
 		gaps_out = 0,
 		border_size = 0,
 
+    -- Allow tearing for games
+    allow_tearing = true,
+
 		-- Change to niri-like side-scrolling layout.
 		-- layout = "scrolling",
 	},
+  misc = {
+    vrr = 3,
+  }
 })
 
 -- https://wiki.hypr.land/Configuring/Basics/Variables/#decoration
