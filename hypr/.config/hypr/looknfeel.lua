@@ -14,6 +14,9 @@ hl.config({
 		-- Change to niri-like side-scrolling layout.
 		-- layout = "scrolling",
 	},
+  render = {
+    direct_scanout = 2,
+  },
   misc = {
     vrr = 3,
   }
