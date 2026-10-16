@@ -23,7 +23,7 @@
 )
 
 (defalias
-  caps (tap-hold-press 0 200 esc lctl)
+  caps (tap-hold-press 0 1 esc lctl)
   lsft (tap-hold-press 0 250 caps lsft)
   del (tap-hold-press $tto $hto del lalt)
   esc (tap-hold-press $tto $hto esc ralt)
