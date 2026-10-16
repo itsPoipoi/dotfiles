@@ -2,6 +2,7 @@
 
 (defcfg
   process-unmapped-keys yes
+  concurrent-tap-hold yes
 )
 
 ;;-----------------------------------------------------------------------------
@@ -28,6 +29,10 @@
   lsft (tap-hold-press 0 250 caps lsft)
   del (tap-hold-press $tto $hto del lalt)
   esc (tap-hold-press $tto $hto esc ralt)
+)
+
+(defchordsv2
+  (lmet rctl) lrnx 1000 first-release ()
 )
 
 ;; Live-reload (`lrld`) the configuration with Nav+Backspace.
