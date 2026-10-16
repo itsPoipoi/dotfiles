@@ -332,6 +332,7 @@ install_plugins_setup() {
     omarchy plugin add https://github.com/BibekBhusal0/omarchy-better-menu.git --enable --yes
     omarchy plugin add https://github.com/onlyVishesh/omarchy-power-manager.git --enable --yes
     omarchy plugin add https://github.com/SirJul1337/omarchy-lock-explorer.git --enable --yes
+    \cp -r "$HOME/dotfiles/extras/poipoi.notifications/" "$HOME/.config/omarchy/plugins/"
     sudo tee ~/.config/omarchy/hooks/post-update.d/update-plugins.hook  >/dev/null <<'EOF'
 #!/bin/bash
 omarchy plugin update --yes
