@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
+
+STATE_FILE="${XDG_RUNTIME_DIR:-/tmp}/kanata-state"
+
 if systemctl --user is-active kanata.service; then
   systemctl --user stop kanata.service
   notify-send -t 1000 "💻   Kanata:  OFF"
-elif systemctl --user is-active kanata-g.service; then
-  systemctl --user stop kanata-g.service
-  notify-send -t 1000 "💻   Kanata:  OFF"
 else
   systemctl --user start kanata.service
-  notify-send -t 1000 "💻   Kanata:  ON"
+  notify-send -t 1000 "💻   Kanata:  DEFAULT"
+  printf 'default' > "$STATE_FILE"
 fi
