@@ -29,10 +29,11 @@
   lsft (tap-hold-press 0 250 caps lsft)
   del (tap-hold-press $tto $hto del lalt)
   esc (tap-hold-press $tto $hto esc ralt)
+  profile (multi lrnx M-rctl)
 )
 
 (defchordsv2
-  (lmet rctl) lrnx 1000 first-release ()
+  (lmet rctl) @profile 1000 first-release ()
 )
 
 ;; Live-reload (`lrld`) the configuration with Nav+Backspace.
