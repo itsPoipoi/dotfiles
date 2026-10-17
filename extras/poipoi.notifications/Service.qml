@@ -95,7 +95,7 @@ Item {
   // many `showHistory` can replay.
   readonly property int historyLimit: 10
 
-  readonly property int lowPopupDuration: 1500
+  readonly property int lowPopupDuration: 2000
   readonly property int normalPopupDuration: 2500
   readonly property int maxPopupDuration: 15000
 
