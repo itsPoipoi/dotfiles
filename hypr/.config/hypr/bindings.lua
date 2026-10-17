@@ -32,9 +32,9 @@ o.bind("SUPER + SHIFT + P", "Show power-manager", "omarchy-shell shell toggle on
 o.bind("SUPER + CTRL + Z", "Dismiss all notifications", "omarchy-shell notifications dismissAll")
 o.bind("SUPER + SHIFT + C", "Calendar", "omarchy-shell shell toggle omarchy.clock")
 
-o.bind("SUPER + Control_R", "Toggle Kanata Mode", "$HOME/dotfiles/extras/toggle-kanata-mode.sh")
-o.bind("SUPER + ALT + Control_R", "Toggle Kanata State", "$HOME/dotfiles/extras/toggle-kanata-state.sh")
-o.bind("SUPER + SHIFT + Control_R", "Toggle Keyboard Layout", "$HOME/dotfiles/extras/toggle-layout.sh")
+o.bind("SUPER + F1", "Toggle Kanata Mode", "$HOME/dotfiles/extras/toggle-kanata-mode.sh")
+o.bind("SUPER + F2", "Toggle Keyboard Layout", "$HOME/dotfiles/extras/toggle-layout.sh")
+o.bind("SUPER + F3", "Toggle Kanata State", "$HOME/dotfiles/extras/toggle-kanata-state.sh")
 
 -- Volume controls
 o.bind("XF86AudioRaiseVolume", "Volume up", "omarchy-audio-output-volume +1", { locked = true, repeating = true })
