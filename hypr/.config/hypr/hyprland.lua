@@ -279,16 +279,17 @@ hl.on("window.open", function(w)
     if tw.title:match("^Extension:") then
       hl.dispatch(hl.dsp.window.resize({ x = 600, y = 700, window = tw }))
       hl.dispatch(hl.dsp.window.center({ window = tw }))
-      hl.dispatch(hl.dsp.focus({ window = tw }))
 
       for _, fw in ipairs(floorp_windows) do
         if fw.address ~= w.address then
             hl.dispatch(hl.dsp.window.fullscreen({ action = "set", window = fw }))
+            hl.dispatch(hl.dsp.focus({ window = tw }))
             break
         end
       end
     else
         hl.dispatch(hl.dsp.window.float({ action = "unset", window = tw }))
+        hl.dispatch(hl.dsp.focus({ window = tw }))
     end
 
   end)
