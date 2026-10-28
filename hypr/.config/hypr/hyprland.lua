@@ -158,6 +158,8 @@ hl.window_rule({
 		initial_class = "[Ff]loorp",
 	},
 	fullscreen = true,
+  opacity = "1.0 0.985",
+  tag = "-default-opacity",
 })
 
 hl.window_rule({
