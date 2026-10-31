@@ -34,6 +34,8 @@ hl.window_rule({
 	workspace = 1,
 	content = "game",
 	immediate = true,
+  opacity = "1.0 0.985",
+  tag = "-default-opacity",
 })
 
 -- Steam
