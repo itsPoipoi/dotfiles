@@ -79,6 +79,8 @@ hl.config({
 		hl.animation({ leaf = "workspaces", enabled = false, speed = 0, bezier = "ease" }),
 
 		hl.animation({ leaf = "specialWorkspace", enabled = false, speed = 0, bezier = "default" }),
+		hl.animation({ leaf = "specialWorkspaceIn", enabled = false, speed = 0, bezier = "default" }),
+		hl.animation({ leaf = "specialWorkspaceOut", enabled = false, speed = 0, bezier = "default" }),
 	},
 })
 
