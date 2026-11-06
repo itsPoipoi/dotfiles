@@ -327,7 +327,6 @@ install_themes_setup() {
 install_plugins_setup() {
   local skip_confirm="$1"
   if [[ "$skip_confirm" == "--yes" ]] || confirm_action "Setup Omarchy plugins?"; then
-    omarchy plugin add https://github.com/SaifOmar/so.den.git --enable --yes
     omarchy plugin add https://github.com/matjam/omawall.git --enable --yes
     omarchy plugin add https://github.com/BibekBhusal0/omarchy-better-menu.git --enable --yes
     omarchy plugin add https://github.com/onlyVishesh/omarchy-power-manager.git --enable --yes
