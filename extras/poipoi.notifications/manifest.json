@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "id": "poipoi.notifications",
   "name": "My Notifications",
-  "version": "1.0.0",
-  "author": "Omarchy",
-  "description": "Notification daemon, popups, DND, and history",
+  "version": "2.0.0",
+  "author": "poipoi",
+  "description": "Notification daemon: grouped stacks, inline actions, Do Not Disturb, and history",
   "kinds": [
     "service"
   ],
