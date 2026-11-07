@@ -79,3 +79,10 @@ o.rebind("SUPER + SHIFT + BACKSPACE", "Toggle Focus Mode", function()
 		},
 	})
 end)
+
+-- Workspace cycling across all monitors' busy (open) workspaces, instead of
+-- Omarchy 4.5's per-monitor "m+1".
+o.rebind("SUPER + TAB", "Next busy workspace", hl.dsp.focus({ workspace = "e+1" }))
+o.rebind("SUPER + SHIFT + TAB", "Previous busy workspace", hl.dsp.focus({ workspace = "e-1" }))
+o.rebind("SUPER + mouse_down", "Scroll to next busy workspace", hl.dsp.focus({ workspace = "e+1" }))
+o.rebind("SUPER + mouse_up", "Scroll to previous busy workspace", hl.dsp.focus({ workspace = "e-1" }))

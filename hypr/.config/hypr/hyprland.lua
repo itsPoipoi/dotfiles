@@ -10,6 +10,10 @@ dofile((os.getenv("OMARCHY_PATH") or "/usr/share/omarchy") .. "/default/hypr/boo
 -- keeping core window-manager bindings:
 omarchy_preinstalled_bindings = false
 
+-- Revert Omarchy 4.5 per-monitor workspaces: swap its module for the classic
+-- global-workspace one before the defaults load it.
+package.preload["default.hypr.monitor-workspaces"] = function() return dofile(os.getenv("HOME") .. "/.config/hypr/classic-workspaces.lua") end
+
 -- Load Omarchy defaults.
 require("default.hypr.omarchy")
 
