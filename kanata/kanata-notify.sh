@@ -21,10 +21,10 @@ while IFS= read -r line <&3; do
   [[ -z "$new" ]] && continue
   if [[ "$new" == *-g.kbd ]]; then
     set_state game
-    notify-send -t 500 "🎮️   Kanata:  GAME"
+    notify-send -t 750 "🎮️   Kanata:  GAME"
   else
     set_state default
-    notify-send -t 500 "💻   Kanata:  DEFAULT"
+    notify-send -t 750 "💻   Kanata:  DEFAULT"
   fi
 done
 exit 1  # connection lost -> let systemd restart us
