@@ -247,8 +247,8 @@ alias rsync='rsync -avhP'
 alias sshfs='sshfs -o reconnect,ServerAliveInterval=15,ServerAliveCountMax=3,idmap=user'
 
 # General
-alias sht="omarchy-system-shutdown"
-alias rbt="omarchy-system-reboot"
+alias sht="systemctl poweroff --no-wall"
+alias rbt="systemctl reboot --no-wall"
 alias ezrc='\nvim ~/.zshrc'
 alias src="clear; source ~/.zshrc"
 
