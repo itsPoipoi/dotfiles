@@ -6,7 +6,8 @@ Documentation=https://github.com/jtroo/kanata
 Environment=PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/bin
 
 Type=simple
-ExecStart=/usr/bin/kanata --cfg /etc/kanata/kanata.kbd --cfg /etc/kanata/kanata-g.kbd
+ExecStart=/usr/bin/kanata --cfg /etc/kanata/kanata.kbd --cfg /etc/kanata/kanata-g.kbd --port 5829
+ExecStopPost=/usr/bin/rm -f %t/kanata-state
 Restart=on-failure
 RestartSec=3
 

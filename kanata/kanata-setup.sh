@@ -25,8 +25,12 @@ sudo chmod -R 755 /etc/kanata
 
 # Setup systemd daemon service
 curl -sL https://raw.githubusercontent.com/itsPoipoi/dotfiles/refs/heads/omarchy/kanata/kanata.service --create-dirs -o ~/.config/systemd/user/kanata.service
+mkdir -p ~/.local/bin
+curl -sL https://raw.githubusercontent.com/itsPoipoi/dotfiles/refs/heads/omarchy/kanata/kanata-notify.sh -o ~/.local/bin/kanata-notify
+chmod +x ~/.local/bin/kanata-notify
+curl -sL https://raw.githubusercontent.com/itsPoipoi/dotfiles/refs/heads/omarchy/kanata/kanata-notify.service --create-dirs -o ~/.config/systemd/user/kanata-notify.service
 systemctl --user daemon-reload
-systemctl --user enable kanata.service
+systemctl --user enable kanata.service kanata-notify.service
 systemctl --user start kanata.service
 
 echo "${GREEN}Kanata setup complete. ${RED}A reboot is required for Kanata to start."

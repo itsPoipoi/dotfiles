@@ -1,26 +1,10 @@
 #!/usr/bin/env bash
+# Bound to SUPER+F1. When kanata is running, its own SUPER+F1 chord already
+# reloads the next config and kanata-notify.service sends the notification.
+# This script only handles the case where kanata isn't running yet.
 
-STATE_FILE="${XDG_RUNTIME_DIR:-/tmp}/kanata-state"
-
-if hyprctl devices | grep "Ergo‑L"; then
-    if systemctl --user is-active --quiet kanata.service; then
-        if [[ "$(cat "$STATE_FILE" 2>/dev/null)" != "game" ]]; then
-            notify-send -t 500 "🎮️   Kanata:  GAME"
-            printf 'game' > "$STATE_FILE"
-        else
-            notify-send -t 500 "💻   Kanata:  DEFAULT"
-            printf 'default' > "$STATE_FILE"
-        fi
-    else
-        systemctl --user start kanata.service
-        notify-send -t 500 "💻   Kanata:  DEFAULT"
-        printf 'default' > "$STATE_FILE"
-    fi
-else
+if ! systemctl --user is-active --quiet kanata.service; then
     systemctl --user start kanata.service
     hyprctl switchxkblayout all 0
     notify-send -t 1000 "💻   Layout:  ERGO-L   |   Kanata:  DEFAULT"
-    printf 'default' > "$STATE_FILE"
 fi
-
-
