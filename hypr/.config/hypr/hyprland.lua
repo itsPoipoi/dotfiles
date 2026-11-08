@@ -238,21 +238,6 @@ hl.window_rule({
 	no_shadow = true,
 })
 
--- Tensaku
-hl.window_rule({
-	match = {
-		initial_class = "dev.tensaku.Tensaku",
-	},
-	tag = "+tensaku",
-})
-
-hl.window_rule({
-	match = {
-		tag = "tensaku",
-	},
-	size = "monitor_w monitor_h",
-})
-
 -- LocalSend
 hl.window_rule({
 	match = {
