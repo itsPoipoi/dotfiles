@@ -20,6 +20,7 @@ o.bind("SUPER + SHIFT + Z", "Show battery", "omarchy-notification-battery")
 o.bind("SUPER + SHIFT + P", "Show power-manager", "omarchy-shell shell toggle onlyvishesh.power-manager")
 o.rebind("SUPER + CTRL + Z", "Dismiss all notifications", "omarchy-shell notifications dismissAll")
 o.bind("SUPER + SHIFT + C", "Calendar", "omarchy-shell shell toggle omarchy.clock")
+o.bind("SUPER + SHIFT + Q", "Calculator", "omacalc")
 
 o.bind("SUPER + F1", "Toggle Kanata Mode", "$HOME/dotfiles/extras/toggle-kanata-mode.sh")
 o.bind("SUPER + F2", "Toggle Keyboard Layout", "$HOME/dotfiles/extras/toggle-layout.sh")
