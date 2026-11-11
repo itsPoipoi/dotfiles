@@ -1,8 +1,9 @@
 // Customized copy of the Zen design. Edit it here or with:
-//   omarchy-shell lock editDesign my-zen2
+//   omarchy-shell lock editDesign my-zen
 import QtQuick
 import QtQuick.Effects
 import qs.Commons
+import qs.Commons as Commons
 import "../plugins/io.github.sirjul1337.lock-explorer/designs"
 
 DesignBase {
@@ -43,7 +44,7 @@ DesignBase {
       Text {
         anchors.horizontalCenter: parent.horizontalCenter
         text: lock.clock("HH:mm")
-        color: Color.lock.text
+        color: Commons.Color.lock.text
         font.family: Style.font.family
         font.pixelSize: Math.round(Style.font.baseSize * 7)
         font.weight: Font.Light
@@ -54,10 +55,12 @@ DesignBase {
       Text {
         anchors.horizontalCenter: parent.horizontalCenter
         text: lock.date("dddd d MMMM").toUpperCase()
-        color: lock.withAlpha(Color.lock.text, 0.65)
+        color: lock.withAlpha(Commons.Color.lock.text, 1)
         font.family: Style.font.family
         font.pixelSize: Style.font.subtitle
         font.letterSpacing: 5
+        layer.enabled: true
+        layer.effect: MultiEffect { shadowEnabled: true; shadowColor: Qt.rgba(0, 0, 0, 0.5); shadowBlur: 0.8; shadowVerticalOffset: 2 }
       }
     }
 
@@ -72,7 +75,7 @@ DesignBase {
         visible: lock.passwordVisible && lock.dotCount > 0
         text: lock.passwordText
         textFormat: Text.PlainText
-        color: lock.errorState ? Color.lock.textError : Color.lock.text
+        color: lock.errorState ? Commons.Color.lock.textError : Commons.Color.lock.text
         font.family: Style.font.family
         font.pixelSize: Style.font.display
         font.letterSpacing: 2
@@ -86,7 +89,7 @@ DesignBase {
           model: Math.min(lock.dotCount, lock.maxDots)
           Rectangle {
             width: lock.dotSize; height: lock.dotSize; radius: lock.dotSize / 2
-            color: lock.errorState ? Color.lock.textError : Color.lock.text
+            color: lock.errorState ? Commons.Color.lock.textError : Commons.Color.lock.text
             scale: 1
             Component.onCompleted: { scale = 0.2; popIn.start() }
             NumberAnimation on scale { id: popIn; from: 0.2; to: 1; duration: 140; easing.type: Easing.OutBack; running: false }
@@ -97,7 +100,7 @@ DesignBase {
       Rectangle {
         anchors.centerIn: parent
         width: 2; height: 22
-        color: lock.withAlpha(Color.lock.text, 0.8)
+        color: lock.withAlpha(Commons.Color.lock.text, 0.8)
         visible: lock.dotCount === 0 && lock.inputEnabled && !lock.authenticatingPassword && !lock.errorState
         SequentialAnimation on opacity {
           loops: Animation.Infinite
@@ -112,7 +115,7 @@ DesignBase {
         anchors.horizontalCenter: parent.horizontalCenter
         width: parent.width
         height: 1
-        color: lock.errorState ? Color.lock.textError : (lock.authenticatingPassword ? Color.lock.borderActive : lock.withAlpha(Color.lock.text, 0.35))
+        color: lock.errorState ? Commons.Color.lock.textError : (lock.authenticatingPassword ? Commons.Color.lock.borderActive : lock.withAlpha(Commons.Color.lock.text, 0.35))
         Behavior on width { NumberAnimation { duration: 160; easing.type: Easing.OutCubic } }
       }
     }
@@ -120,7 +123,7 @@ DesignBase {
     Text {
       anchors.horizontalCenter: parent.horizontalCenter
       textFormat: Text.PlainText
-      color: lock.errorState ? Color.lock.textError : lock.withAlpha(Color.lock.text, 0.55)
+      color: lock.errorState ? Commons.Color.lock.textError : lock.withAlpha(Commons.Color.lock.text, 0.55)
       font.family: Style.font.family
       font.pixelSize: Style.font.body
       font.letterSpacing: 2
