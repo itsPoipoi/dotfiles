@@ -29,6 +29,8 @@ o.bind("SUPER + F3", "Toggle Kanata State", "$HOME/dotfiles/extras/toggle-kanata
 -- Volume controls
 o.rebind("XF86AudioRaiseVolume", "Volume up", "omarchy-audio-output-volume +1", { locked = true, repeating = true })
 o.rebind("XF86AudioLowerVolume", "Volume down", "omarchy-audio-output-volume -1", { locked = true, repeating = true })
+o.rebind("ALT + XF86AudioRaiseVolume", "Volume up", { audio = "raise" }, { locked = true, repeating = true })
+o.rebind("ALT + XF86AudioLowerVolume", "Volume down", { audio = "lower" }, { locked = true, repeating = true })
 
 -- Microphone controls
 o.bind("ALT + Equal", "Mute microphone", "omarchy-audio-input-mute; canberra-gtk-play -i device-removed -V 15", { locked = true })
