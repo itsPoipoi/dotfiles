@@ -50,6 +50,7 @@ hl.window_rule({
 	},
 	workspace = 7,
 	size = "1800 1000",
+  opacity = "1 0.02 override"
 })
 
 hl.window_rule({
@@ -58,7 +59,9 @@ hl.window_rule({
 		title = "Friends List",
 	},
 	workspace = 7,
+  float = true,
 	size = "350 800",
+  opacity = "1 0.8 override"
 })
 
 -- Path of Exile 2
