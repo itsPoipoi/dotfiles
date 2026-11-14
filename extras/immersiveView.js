@@ -5,23 +5,23 @@
 (function initStyle() {
   const style = document.createElement("style");
   style.textContent = `
-                #main.immersive-view-active.hideplaybar .Root__now-playing-bar {
+                .immersive-view-active.hideplaybar > [data-iv-area="now-playing-bar"] {
                     display: none !important;
                 }
 
-                #main.immersive-view-active.hidelibrary .Root__nav-bar {
+                .immersive-view-active.hidelibrary > [data-iv-area="left-sidebar"] {
                     display: none !important;
                 }
 
-                #main.immersive-view-active.hidetopbar .Root__top-bar {
+                .immersive-view-active.hidetopbar > [data-iv-area="global-nav"] {
                     display: none !important;
                 }
 
-                #main.immersive-view-active.hiderightpanel .Root__right-sidebar {
+                .immersive-view-active.hiderightpanel > [data-iv-area="right-sidebar"] {
                     display: none !important;
                 }
 
-                #main.immersive-view-active {
+                .immersive-view-active {
                     transition: grid-template-columns 0.3s ease, column-gap 0.3s ease, padding-bottom 0.3s ease;
                 }
 
@@ -94,11 +94,11 @@
   if (
     !(
       Spicetify.CosmosAsync &&
-      Spicetify.Platform.UpdateAPI &&
+      Spicetify.Platform &&
       Spicetify.React &&
       Spicetify.Topbar &&
       Spicetify.PopupModal &&
-      document.getElementById("main") &&
+      document.getElementById("main-view")?.parentElement &&
       Spicetify.Keyboard
     )
   ) {
@@ -128,11 +128,44 @@
   function loadSettings() {
     const storedSettings = localStorage.getItem("immersiveViewSettings");
     if (storedSettings) {
-      settings = JSON.parse(storedSettings);
+      settings = { ...settings, ...JSON.parse(storedSettings) };
     }
   }
 
   loadSettings();
+
+  // Spotify no longer has #main or stable Root__* classes. The layout root is the
+  // CSS grid containing #main-view, and its panels are identified by grid-area name.
+  const IV_AREAS = ["global-nav", "left-sidebar", "right-sidebar", "now-playing-bar"];
+  const getRoot = () => document.getElementById("main-view")?.parentElement ?? null;
+
+  function tagAreas() {
+    const root = getRoot();
+    if (!root) return;
+    for (const el of root.children) {
+      const cs = getComputedStyle(el);
+      const names = [cs.gridRowStart, cs.gridColumnStart, cs.gridRowEnd, cs.gridColumnEnd];
+      const area = IV_AREAS.find(a => names.every(n => n === a));
+      if (area) el.dataset.ivArea = area;
+      else delete el.dataset.ivArea;
+    }
+  }
+
+  // Panels get re-rendered / re-gridded (e.g. right sidebar toggling), so keep tags fresh
+  {
+    const root = getRoot();
+    new MutationObserver(tagAreas).observe(root, { childList: true, attributes: true, attributeFilter: ["class", "style"], subtree: false });
+  }
+  tagAreas();
+
+  // Spotify's titlebar client lives on one of the Platform APIs; find it defensively
+  const getUiClient = () =>
+    Spicetify.Platform.UpdateAPI?._updateUiClient ||
+    Object.values(Spicetify.Platform).find(v => v && typeof v === "object" && v._updateUiClient)?._updateUiClient;
+  const revertHeight = () => {
+    const h = parseInt(settings.customHeight, 10);
+    return Number.isFinite(h) ? h : 64;
+  };
 
   // Apply settings if enabled at startup
   if (settings.enableAtStartup || (settings.maintainStateOnRestart && settings.currentState)) {
@@ -142,8 +175,9 @@
 
   // Update classes based on current settings
   function updateClasses() {
-    const mainElement = document.getElementById("main");
+    const mainElement = getRoot();
     if (!mainElement) return;
+    tagAreas();
     settings.currentState = state;
     saveSettings();
     if (state) {
@@ -171,19 +205,19 @@
             document.head.appendChild(style);
 
             // Spotify functions >= 1.2.51
-            if (Spicetify.Platform.UpdateAPI._updateUiClient?.updateTitlebarHeight) {
-              Spicetify.Platform.UpdateAPI._updateUiClient.updateTitlebarHeight({
+            if (getUiClient()?.updateTitlebarHeight) {
+              getUiClient().updateTitlebarHeight({
                 height: 1
               });
             }
 
-            if (Spicetify.Platform.UpdateAPI._updateUiClient?.setButtonsVisibility) {
-              Spicetify.Platform.UpdateAPI._updateUiClient.setButtonsVisibility(false);
+            if (getUiClient()?.setButtonsVisibility) {
+              getUiClient().setButtonsVisibility({ showButtons: false });
             }
 
             window.addEventListener("beforeunload", () => {
-              if (Spicetify.Platform.UpdateAPI._updateUiClient?.setButtonsVisibility) {
-                Spicetify.Platform.UpdateAPI._updateUiClient.setButtonsVisibility(true);
+              if (getUiClient()?.setButtonsVisibility) {
+                getUiClient().setButtonsVisibility({ showButtons: true });
               }
             });
 
@@ -225,20 +259,20 @@
         styleElement.remove();
       });
 
-      if (Spicetify.Platform.UpdateAPI._updateUiClient?.setButtonsVisibility) {
-        Spicetify.Platform.UpdateAPI._updateUiClient.setButtonsVisibility({ showButtons: true });
+      if (getUiClient()?.setButtonsVisibility) {
+        getUiClient().setButtonsVisibility({ showButtons: true });
       }
 
-      if (Spicetify.Platform.UpdateAPI._updateUiClient?.updateTitlebarHeight) {
-        Spicetify.Platform.UpdateAPI._updateUiClient.updateTitlebarHeight({
-          height: settings.customHeight
+      if (getUiClient()?.updateTitlebarHeight) {
+        getUiClient().updateTitlebarHeight({
+          height: revertHeight()
         });
       }
 
       // Spotify functions < 1.2.51
       Spicetify.CosmosAsync.post("sp://messages/v1/container/control", {
         type: "update_titlebar",
-        height: settings.customHeight
+        height: revertHeight()
       });
     }
   }
@@ -361,7 +395,7 @@
             { className: "setting-item setting-item-special" },
             Spicetify.React.createElement("span", null, "> Revert Height"),
             Spicetify.React.createElement(TextBox, {
-              value: settings.customHeight, // Use customHeight instead of customCSS
+              value: settings.customHeight ?? "", // Use customHeight instead of customCSS
               onChange: value => {
                 settings.customHeight = value; // Update customHeight directly
                 updateClasses();
