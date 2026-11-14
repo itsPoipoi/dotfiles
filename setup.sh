@@ -275,7 +275,8 @@ install_spicetify_setup() {
       sudo chmod a+wr /opt/spotify/Apps -R
       curl -fsSL https://raw.githubusercontent.com/spicetify/cli/main/install.sh | sh
       ~/.spicetify/spicetify config spotify_path "/opt/spotify"
-      ~/.spicetify/spicetify config custom_apps lyrics-plus
+      \cp -f "$HOME/dotfiles/extras/better-local-files/" "$HOME/.config/spicetify/CustomApps"
+      ~/.spicetify/spicetify config custom_apps lyrics-plus better-local-files
       \cp -f "$HOME/dotfiles/extras/keyboardShortcut.js" "$HOME/.spicetify/Extensions/"
       \cp -f "$HOME/dotfiles/extras/immersiveView.js" "$HOME/.spicetify/Extensions/"
       \cp -f "$HOME/dotfiles/extras/youtubekeybinds.js" "$HOME/.spicetify/Extensions/"
