@@ -190,8 +190,9 @@ function myip () {
 spicetify() {
     if [[ "$1" == "reapply" ]]; then
       ~/.spicetify/spicetify config spotify_path "/opt/spotify"
-      \cp -f "$HOME/dotfiles/extras/better-local-files/" "$HOME/.config/spicetify/CustomApps"
-      ~/.spicetify/spicetify config custom_apps lyrics-plus better-local-files
+      \cp -r "$HOME/dotfiles/extras/better-local-files/" "$HOME/.config/spicetify/CustomApps"
+      ~/.spicetify/spicetify config custom_apps lyrics-plus
+      ~/.spicetify/spicetify config custom_apps better-local-files
       \cp -f "$HOME/dotfiles/extras/keyboardShortcut.js" "$HOME/.spicetify/Extensions/"
       \cp -f "$HOME/dotfiles/extras/immersiveView.js" "$HOME/.spicetify/Extensions/"
       \cp -f "$HOME/dotfiles/extras/youtubekeybinds.js" "$HOME/.spicetify/Extensions/"
