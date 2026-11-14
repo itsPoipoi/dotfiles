@@ -108,9 +108,22 @@
 
   // Functions
   function focusOnApp() {
-    return document.querySelector(
-      ".Root__main-view .os-viewport, .Root__main-view .main-view-container > .main-view-container__scroll-node:not([data-overlayscrollbars-initialize]), .Root__main-view .main-view-container__scroll-node > [data-overlayscrollbars-viewport]"
+    // Spotify no longer has .Root__main-view; the main view is #main-view and its
+    // scroller is an OverlayScrollbars viewport inside .main-view-container__scroll-node.
+    const candidates = document.querySelectorAll(
+      [
+        "#main-view .main-view-container__scroll-node [data-overlayscrollbars-viewport]",
+        "#main-view .os-viewport",
+        "#main-view .main-view-container__scroll-node:not([data-overlayscrollbars-initialize])",
+        "#main-view [data-overlayscrollbars-viewport]",
+      ].join(",")
     );
+    // Prefer the one that actually scrolls vertically
+    for (const el of candidates) {
+      const overflowY = getComputedStyle(el).overflowY;
+      if (el.scrollHeight > el.clientHeight && overflowY !== "visible" && overflowY !== "hidden") return el;
+    }
+    return candidates[0] ?? null;
   }
 
   function createScrollCallback(step) {
@@ -119,38 +132,39 @@
       const scrollInterval = setInterval(() => {
         app.scrollTop += step;
       }, 10);
-      document.addEventListener("keyup", () => {
-        clearInterval(scrollInterval);
-      });
+      document.addEventListener("keyup", () => clearInterval(scrollInterval), { once: true });
     }
   }
 
   function scrollToPosition(position) {
     const app = focusOnApp();
+    if (!app) return;
     app.scroll(0, position === 0 ? 0 : app.scrollHeight);
   }
 
+  // The old .main-yourLibraryX-* classes and #spicetify-sticky-list are gone, and the new
+  // classes are hashed, so use the left sidebar's links and match the active one by path.
+  function getSidebarItems() {
+    const sidebar = document.getElementById("Desktop_LeftSidebar_Id");
+    if (!sidebar) return [];
+    return Array.from(sidebar.querySelectorAll("a[href]")).filter(
+      (el) => el.offsetParent !== null && !el.closest("[data-skip-in-keyboard-nav]")
+    );
+  }
+
   /**
-   * @returns {number | undefined}
-   * @param {NodeListOf<Element>} allItems
+   * @returns {number}
+   * @param {Element[]} allItems
    */
   function findActiveIndex(allItems) {
-    const activeLink = document.querySelector(".main-yourLibraryX-navLinkActive");
-    const historyURI = Spicetify.Platform.History.location.pathname.replace(/^\//, "spotify:").replace(/\//g, ":");
-    const activePage = document.querySelector(`[aria-describedby="onClickHint${historyURI}"]`);
-
-    if (!activeLink && !activePage) {
-      return -1;
-    }
-
-    let index = 0;
-    for (const item of allItems) {
-      if (item === activeLink || item === activePage) {
-        return index;
+    const path = Spicetify.Platform.History.location.pathname;
+    return allItems.findIndex((item) => {
+      try {
+        return new URL(item.href, location.href).pathname === path;
+      } catch {
+        return false;
       }
-
-      index++;
-    }
+    });
   }
 
   /**
@@ -158,9 +172,8 @@
    * @param {1 | -1} direction
    */
   function rotateSidebar(direction) {
-    const allItems = document.querySelectorAll(
-      "#spicetify-sticky-list .main-yourLibraryX-navLink, .main-yourLibraryX-listItem > div:not(:has([data-skip-in-keyboard-nav])) > div:first-child"
-    );
+    const allItems = getSidebarItems();
+    if (allItems.length === 0) return;
     const maxIndex = allItems.length - 1;
 
     let index = findActiveIndex(allItems) + direction;
