@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "poipoi.omawall",
   "name": "OmaWall+",
-  "version": "1.5.1",
+  "version": "1.5.2",
   "author": "poipoi (fork of Nathan Ollerenshaw's omawall)",
   "description": "Replaces the Omarchy background service with a folder-backed one. Each display can have its own folder, shuffle through it or stay pinned to one image, and scale it to taste. Can also generate an Omarchy theme from the primary display's wallpaper, so the whole desktop tracks the picture behind it.",
   "license": "MIT",

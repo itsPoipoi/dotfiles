@@ -13,10 +13,10 @@ function qmlFunction(file, name) {
 const lookupSettings = qmlFunction('ShellSettings.qml', 'lookupSettings');
 const fromUrl = qmlFunction('LocalPath.qml', 'fromUrl');
 const versionFor = qmlFunction('ServiceVersion.qml', 'versionFor');
-const id = 'matjam.omawall';
+const id = 'poipoi.omawall';
 const entry = { id, folder: '/wallpapers', autoTheme: true };
 
-for (const section of ['left', 'center', 'right']) {
+for (const section of ['left', 'centerBegin', 'center', 'centerEnd', 'right', 'tray']) {
   test('reads wallpaper settings from the ' + section + ' bar section', () => {
     const settings = lookupSettings({ bar: { layout: { [section]: [entry] } } }, id);
     assert.equal(settings.folder, '/wallpapers');

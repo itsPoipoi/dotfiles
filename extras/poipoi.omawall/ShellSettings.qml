@@ -25,7 +25,7 @@ FileView {
 
   function lookupSettings(config, id) {
     if (!config || !id) return null
-    var sections = ["left", "center", "right"]
+    var sections = ["left", "centerBegin", "center", "centerEnd", "right", "tray"]
     if (config.bar && config.bar.layout) {
       for (var s = 0; s < sections.length; s++) {
         var list = config.bar.layout[sections[s]]

@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.2](https://github.com/poipoi/omawall-plus/compare/v1.5.1...v1.5.2) (2026-11-15)
+
+
+### Bug Fixes
+
+* find the widget's settings in every bar section (`centerBegin`, `centerEnd` and `tray` were missed, so a widget placed there ran on defaults); reported upstream as [matjam/omawall#8](https://github.com/matjam/omawall/issues/8)
+
 ## [1.5.1](https://github.com/poipoi/omawall-plus/compare/v1.5.0...v1.5.1) (2026-11-15)
 
 
