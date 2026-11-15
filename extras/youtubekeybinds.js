@@ -32,9 +32,9 @@
     seekForwardSmall: { key: "right" },          // → forward 5s
     volumeUp: { key: "up" },                     // ↑ volume +5%
     volumeDown: { key: "down" },                 // ↓ volume -5%
-    seekBackBig: { key: "j" },                   // J back 10s
-    seekForwardBig: { key: "l" },                // L forward 10s
-    togglePlay: { key: "k" },                    // K play/pause
+    seekBackBig: { key: "j", shift: true },                   // J back 10s
+    seekForwardBig: { key: "l", shift: true },                // L forward 10s
+    togglePlay: { key: "k", shift: true},                    // K play/pause
     toggleMute: { key: "m", shift: true },       // M mute/unmute
     nextTrack: { key: "n", shift: true },        // Shift+N next track
     prevTrack: { key: "p", shift: true },        // Shift+P previous track
