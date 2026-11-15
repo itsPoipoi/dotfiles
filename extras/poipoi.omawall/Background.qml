@@ -623,7 +623,7 @@ Item {
     for (var k in picks) { empty = false; break }
     if (empty) return
     applyPerScreen(picks, instant === true)
-    syncCurrentLink(picks)
+    syncCurrentLink(picks, only)
     topUpQueues(picks)
     if (autoTheme) requestTheme(primaryPick(picks))
   }
@@ -705,8 +705,12 @@ Item {
 
   // The lock screen and `omarchy theme bg current` both read the state
   // symlink, so keep it pointed at something we are actually showing.
-  function syncCurrentLink(picks) {
-    var primary = primaryPick(picks)
+  // The link is what the lock screen shows. It follows whichever display just
+  // changed (`only`, set by a staggered shuffle) rather than only the primary,
+  // so a change on any display updates it; a shuffle that changes every display
+  // at once still uses the primary's image.
+  function syncCurrentLink(picks, only) {
+    var primary = (only && picks[only]) ? String(picks[only]) : primaryPick(picks)
     if (!primary) return
     linkProc.command = ["ln", "-nsf", primary, currentBackgroundLink]
     linkProc.running = true
@@ -1172,6 +1176,82 @@ Item {
     else refreshBackground()
   }
 
+  // ------------------------------------------------------ dead-layer watchdog
+  //
+  // After a fullscreen game (gamescope with tearing and direct scanout was the
+  // reproducer) a display's background layer can be left mapped at alpha 0:
+  // nothing draws there, the desktop is black, and shuffling does not help --
+  // only recreating the surface does. Hyprland reports each layer's alpha, so
+  // poll it and unmap/remap that display's window, the same pulse
+  // ScreenMoveRemap uses. A display whose active workspace has a fullscreen
+  // window legitimately hides the layer, so those are left alone.
+  property var forceUnmap: ({})
+  property var deadStrikes: ({})
+  property var lastRemap: ({})
+
+  function pulseUnmap(name) {
+    var next = ({})
+    for (var k in forceUnmap) next[k] = forceUnmap[k]
+    next[name] = true
+    forceUnmap = next
+    unmapRelease.names = unmapRelease.names.concat([name])
+    unmapRelease.restart()
+  }
+
+  Timer {
+    id: unmapRelease
+    property var names: []
+    interval: 150
+    onTriggered: {
+      var next = ({})
+      for (var k in root.forceUnmap) next[k] = root.forceUnmap[k]
+      for (var i = 0; i < names.length; i++) delete next[names[i]]
+      names = []
+      root.forceUnmap = next
+    }
+  }
+
+  // Prints the name of every display whose background layer is at alpha 0
+  // while its active workspace has no fullscreen window.
+  Process {
+    id: layerWatch
+    command: ["bash", "-c", "L=$(hyprctl layers -j) && M=$(hyprctl monitors -j) && W=$(hyprctl workspaces -j) && " +
+      "jq -n -r --argjson l \"$L\" --argjson m \"$M\" --argjson w \"$W\" '" +
+      "$l | to_entries[] | .key as $n | select(any(.value.levels[][]; .namespace == \"omarchy-background\" and .alpha == 0)) " +
+      "| ($m[] | select(.name == $n) | .activeWorkspace.id) as $ws " +
+      "| select(([$w[] | select(.id == $ws and .hasfullscreen == true)] | length) == 0) | $n'"]
+    stdout: StdioCollector {
+      onStreamFinished: {
+        var dead = String(text || "").split("\n").filter(function(n) { return n.trim() !== "" })
+        var strikes = ({})
+        var now = Date.now()
+        for (var i = 0; i < dead.length; i++) {
+          var mon = dead[i].trim()
+          // Two consecutive dead readings, so a layer that is merely mid-map
+          // is left alone; and at most one remap a minute per display.
+          var n = (root.deadStrikes[mon] || 0) + 1
+          strikes[mon] = n
+          if (n < 2 || now - (root.lastRemap[mon] || 0) < 60000) continue
+          console.warn("OmaWall+: background layer on " + mon + " is dead (alpha 0); remapping")
+          strikes[mon] = 0
+          var lr = ({})
+          for (var k in root.lastRemap) lr[k] = root.lastRemap[k]
+          lr[mon] = now
+          root.lastRemap = lr
+          root.pulseUnmap(mon)
+        }
+        root.deadStrikes = strikes
+      }
+    }
+  }
+
+  Timer {
+    interval: 10000
+    running: true
+    repeat: true
+    onTriggered: if (!layerWatch.running) layerWatch.running = true
+  }
+
   Variants {
     model: Quickshell.screens
 
@@ -1186,7 +1266,7 @@ Item {
       readonly property string scaling: root.configFor(screenKey).scaling
 
       screen: modelData
-      visible: !remapGuard.remapping
+      visible: !remapGuard.remapping && !root.forceUnmap[screenKey]
       anchors { top: true; bottom: true; left: true; right: true }
 
       ScreenMoveRemap {

@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.5.1](https://github.com/poipoi/omawall-plus/compare/v1.5.0...v1.5.1) (2026-11-15)
+
+
+### Bug Fixes
+
+* lock screen background now follows whichever display changed last, not only the primary display
+* recover a display whose background layer is left at alpha 0 (seen after fullscreen games using tearing and direct scanout) by remapping its surface, instead of needing a shell restart
+
 ## [1.5.0](https://github.com/poipoi/omawall-plus/compare/v1.4.1...v1.5.0) (2026-11-07)
 
 Renamed to OmaWall+. Fork of [matjam/omawall](https://github.com/matjam/omawall) 1.4.1 (plugin id `poipoi.omawall`).
