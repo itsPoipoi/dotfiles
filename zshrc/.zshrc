@@ -207,6 +207,11 @@ spicetify() {
     fi
 }
 
+# LFSG-VK VLC
+vlcfg() {
+  LSFGVK_PROFILE='mpv' vlc --vout placebo $1
+}
+
 # Yazi
 function y() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
