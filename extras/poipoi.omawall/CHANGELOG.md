@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.5.3](https://github.com/poipoi/omawall-plus/compare/v1.5.2...v1.5.3) (2026-11-21)
+
+
+### Features
+
+* a display restored by the dead-layer watchdog now fades its wallpaper back in instead of popping on
+
+### Bug Fixes
+
+* check for dead background layers every 2.5 seconds (was 10), so a blank display recovers in about 5 seconds
+
 ## [1.5.2](https://github.com/poipoi/omawall-plus/compare/v1.5.1...v1.5.2) (2026-11-15)
 
 

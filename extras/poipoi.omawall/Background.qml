@@ -1188,12 +1188,24 @@ Item {
   property var forceUnmap: ({})
   property var deadStrikes: ({})
   property var lastRemap: ({})
+  // Displays whose window was just remapped by the watchdog; the window fades
+  // back in instead of popping on.
+  property var fadeRestore: ({})
+  function clearRestore(name) {
+    var next = ({})
+    for (var k in fadeRestore) if (k !== name) next[k] = fadeRestore[k]
+    fadeRestore = next
+  }
 
   function pulseUnmap(name) {
     var next = ({})
     for (var k in forceUnmap) next[k] = forceUnmap[k]
     next[name] = true
     forceUnmap = next
+    var fr = ({})
+    for (var f in fadeRestore) fr[f] = fadeRestore[f]
+    fr[name] = true
+    fadeRestore = fr
     unmapRelease.names = unmapRelease.names.concat([name])
     unmapRelease.restart()
   }
@@ -1246,7 +1258,7 @@ Item {
   }
 
   Timer {
-    interval: 10000
+    interval: 2500
     running: true
     repeat: true
     onTriggered: if (!layerWatch.running) layerWatch.running = true
@@ -1267,6 +1279,26 @@ Item {
 
       screen: modelData
       visible: !remapGuard.remapping && !root.forceUnmap[screenKey]
+
+      // Fade the whole surface in after the watchdog restores it.
+      property real fadeLevel: 1
+      Binding { target: panel.contentItem; property: "opacity"; value: panel.fadeLevel }
+      NumberAnimation {
+        id: restoreFade
+        target: panel
+        property: "fadeLevel"
+        from: 0
+        to: 1
+        duration: Style.duration(800)
+        easing.type: Easing.InOutQuad
+      }
+      onVisibleChanged: {
+        if (visible && root.fadeRestore[screenKey]) {
+          root.clearRestore(screenKey)
+          fadeLevel = 0
+          restoreFade.restart()
+        }
+      }
       anchors { top: true; bottom: true; left: true; right: true }
 
       ScreenMoveRemap {
